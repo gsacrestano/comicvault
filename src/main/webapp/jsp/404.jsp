@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styleError.css">
+    <link rel="stylesheet" href="../css/styleError.css">
     <title>Osps, problema?</title>
 
 </head>
@@ -22,7 +22,7 @@
 
 <nav>
     <ul class="selected">
-        <li> <img alt="logo" src="Images/logo.jpeg" width="10%" height="10px"></li>
+        <li> <img alt="logo" src="../Images/logo.jpeg" width="10%" height="10px"></li>
         <li><a>Comic Vault </a></li>
         <li><a id="ricerca" style="float:right; margin-right: .5%;">Carrello</a></li>
         <li><a style= " float:right; margin-right: .5%;">Accedi</a></li>
@@ -34,17 +34,17 @@
 <div id="container">
     <h1> Purtroppo la pagina che cerchi non è in questo fumetto</h1>
 
-    <p> <img alt="Personaggio che legge 404" src="Images/Error.jpg" width="400" height="300"></p>
+    <p> <img alt="Personaggio che legge 404" src="../Images/Error.jpg" width="400" height="300"></p>
 
     <p>Nel mentre vedi quali sono le ultime novità nel nostro sito, clicca per tornare alla home.</p>
-    <a href="index.jsp"> <button id="button"> Home </button>
+    <a href="../index.jsp"> <button id="button"> Home </button>
     </a>
 
 </div>
 
 
 <footer>
-    <img alt="logo" src="Images/logo.jpeg">
+    <img alt="logo" src="../Images/logo.jpeg">
     <h2>Comic Vault</h2>
     <ul>
         <li> Manga</li>
