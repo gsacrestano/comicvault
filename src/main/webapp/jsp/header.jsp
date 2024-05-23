@@ -1,30 +1,97 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: giulio
-  Date: 23/05/24
-  Time: 14:11
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
-    <link rel="stylesheet" href="../css/styleError.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {box-sizing: border-box;}
+
+        body {
+            margin: 0;
+            font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #D93D3D;
+            color: white;
+            font-weight: bold;
+            padding: 1% 1% 1% 0;
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+
+
+        .topnav .search-container {
+            float: right;
+        }
+
+        .topnav input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+
+        .topnav .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .topnav .search-container button:hover {
+            background: #ccc;
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav .search-container {
+                float: none;
+            }
+            .topnav a, .topnav input[type=text], .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-    <nav>
-        <ul class="selected">
-            <li> <img alt="logo" src="../Images/logo.jpeg" width="10%" height="10px"></li>
-            <li><a>Comic Vault </a></li>
-            <li><a id="ricerca" style="float:right; margin-right: .5%;">Carrello</a></li>
-            <li><a style= " float:right; margin-right: .5%;">Accedi</a></li>
-            <li><button style="float:right; margin-right: .5%;">Cerca</button></li>
-            <li><input type="text" placeholder="Cosa cerchi?" style=" float:right; margin-right: .5%;"></li>
-        </ul>
 
-    </nav>
-</header>
+<div class="topnav">
 
+    <a href="#home">Comic Vault</a>
+    <a href="#about">Accedi</a>
+    <a href="#contact">Carrello</a>
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
