@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html {
+    font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 150%;
+}
+
+.viewer {
+    margin: .5% 1%;
+    border: solid black;
+    border-left: 0;
+    border-right: 0;
+    gap: 1.5%; /* Space between the cards */
+}
+
+.card {
+    background-color: white;
+    width: 15%;
+    margin: 2.5%;
+    padding: 2.5%;
+    border-radius: 10%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: inline-block;
+
+}
+
+.card img {
+    width: 60%;
+    margin: 5% auto;
+    padding: 2%;
+    border: #0d0d0d solid;
+}
+
+.card p{
+    margin: 10px 0;
+}
+
+.card button {
+    width: 100%;
+    font-size: 100%;
+    text-align: center;
+    padding: 10%;
+    margin: 1%;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.card button:hover {
+    background-color: #45a049;
+}
+@media only screen and (max-width: 900px){
+    .card {
+        background-color: white;
+        width: 30%;
+        margin: 2.5%;
+        padding: 2.5%;
+        border-radius: 10%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        display: inline-block;
+
+    }
+}
+@media only screen and (max-width: 480px){
+    .card {
+        background-color: white;
+        width: 50%;
+        margin: 2.5%;
+        padding: 2.5%;
+        border-radius: 10%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        display: inline-block;
+
+    }
+}
