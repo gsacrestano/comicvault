@@ -20,17 +20,8 @@
 
 <body>
 
-<nav>
-    <ul class="selected">
-        <li> <img alt="logo" src="../Images/logo.jpeg" width="10%" height="10px"></li>
-        <li><a>Comic Vault </a></li>
-        <li><a id="ricerca" style="float:right; margin-right: .5%;">Carrello</a></li>
-        <li><a style= " float:right; margin-right: .5%;">Accedi</a></li>
-        <li><button style="float:right; margin-right: .5%;">Cerca</button></li>
-        <li><input type="text" placeholder="Cosa cerchi?" style=" float:right; margin-right: .5%;"></li>
-    </ul>
+<jsp:include page="header.jsp"/>
 
-</nav>
 <div id="container">
     <h1> Purtroppo la pagina che cerchi non è in questo fumetto</h1>
 
@@ -39,20 +30,10 @@
     <p>Nel mentre vedi quali sono le ultime novità nel nostro sito, clicca per tornare alla home.</p>
     <a href="../index.jsp"> <button id="button"> Home </button>
     </a>
-
 </div>
 
 
-<footer>
-    <img alt="logo" src="../Images/logo.jpeg">
-    <h2>Comic Vault</h2>
-    <ul>
-        <li> Manga</li>
-        <li> Comics</li>
-        <li> Chi siamo</li>
-    </ul>
-</footer>
-
+<jsp:include page="footer.jsp"/>
 
 
 
