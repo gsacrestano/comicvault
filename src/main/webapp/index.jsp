@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="jsp/header.jsp"/>
-<jsp:include page="jsp/carousel.jsp"/>
+
 
 <h1>Novità</h1>
 <div class="viewer">
