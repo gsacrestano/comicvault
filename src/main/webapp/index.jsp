@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="jsp/header.jsp"/>
-
+<p><img  style="width: 100%" src="Images/banner.webp" alt="Banner"></p>
 
 <h1>Novità</h1>
 <div class="viewer">
