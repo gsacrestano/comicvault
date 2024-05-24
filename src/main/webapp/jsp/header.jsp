@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <title> T </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         * {box-sizing: border-box;}
@@ -83,12 +85,14 @@
 
 <div class="topnav">
 
-    <a href="#home">Comic Vault</a>
-    <a href="#about">Accedi</a>
-    <a href="#contact">Carrello</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">Comic Vault</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">Accedi</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">Carrello</a>
     <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
+        <form action="">
+            <label>
+                <input type="text" placeholder="Search.." name="search">
+            </label>
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
