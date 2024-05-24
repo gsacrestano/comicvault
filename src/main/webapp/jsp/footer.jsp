@@ -13,13 +13,17 @@
 </head>
 <body>
 <footer>
-    <img alt="logo" src="../Images/logo.jpeg">
+    <div style="margin-left: 1%">
+<img style= "margin-right:10px" alt="logo" src="../Images/logo.jpeg">
     <h2>Comic Vault</h2>
+
     <ul>
-        <li> Manga</li>
-        <li> Comics</li>
-        <li> Chi siamo</li>
+        <li style="margin-top: 10px"> Manga</li>
+        <li style="margin-top: 10px"> Comics</li>
+        <li style="margin-top: 10px"> Chi siamo</li>
+        <li style="margin-top: 10px">&#169 ComicVault </li>
     </ul>
+    </div>
 </footer>
 </body>
 </html>
