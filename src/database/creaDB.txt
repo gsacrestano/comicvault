@@ -1,0 +1,136 @@
+drop database if exists comicvault;
+
+create database comicvault;
+
+use comicvault;
+
+drop table if exists Utenti;
+
+create table Utenti (
+	id int not null auto_increment,
+	Nome varchar(64) not null,
+	Cognome varchar(64) not null,
+	Email varchar(256) not null unique,
+	Password varchar(256) not null,
+	Telefono varchar(25),
+	isAdmin int not null DEFAULT 0,
+	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP,
+	PRIMARY KEY (id)
+);
+
+drop table if exists Indirizzi;
+
+create table Indirizzi (
+	id int not null auto_increment,
+	Via varchar(128) not null,
+	Citta varchar(64) not null,
+	Provincia varchar(64) not null unique,
+	Cap varchar(5) not null,
+	Nazione varchar(64) not null,
+	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP,
+	PRIMARY KEY (id)
+);
+
+drop table if exists Utenti_Indirizzi;
+
+create table Utenti_Indirizzi (
+    idUtente int not null,
+    idIndirizzo int not null,
+    isDefault int not null,
+    PRIMARY KEY (idUtente, idIndirizzo),
+	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idIndirizzo) REFERENCES Indirizzi (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+drop table if exists Carrelli;
+
+create table Carrelli (
+	id int not null auto_increment,
+	idUtente int not null,
+	PRIMARY KEY (id),
+	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+drop table if exists Ordini;
+
+create table Ordini (
+	id int not null auto_increment,
+	idUtente int not null,
+	idIndirizzo int not null,
+	Data DATE not null,
+	Totale FLOAT not null,
+	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP,
+	PRIMARY KEY (id),
+	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idIndirizzo) REFERENCES Indirizzi (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+drop table if exists Prodotti;
+
+create table Prodotti (
+	id int not null auto_increment,
+	Nome varchar(128) not null,
+	Descrizione varchar(256) not null,
+	Isbn varchar(32) not null,
+	Prezzo FLOAT(10,2) not null,
+	Quantita int not null,
+	image_path varchar(256) not null,
+	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP,
+	PRIMARY KEY (id)
+);
+
+drop table if exists Prodotti_Ordini;
+
+create table Prodotti_Ordini (
+	id int not null auto_increment,
+	idOrdine int not null,
+	idProdotto int not null,
+	Prezzo FLOAT(10,2) not null,
+	Quantita int not null,
+	PRIMARY KEY (id),
+	FOREIGN KEY (idOrdine) REFERENCES Ordini (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idProdotto) REFERENCES Prodotti (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+drop table if exists Prodotti_Carrelli;
+
+create table Prodotti_Carrelli (
+	id int not null auto_increment,
+	idCarrello int not null,
+	idProdotto int not null,
+	Prezzo FLOAT(10,2) not null,
+	Quantità int not null,
+	PRIMARY KEY (id),
+	FOREIGN KEY (idCarrello) REFERENCES Carrelli (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idProdotto) REFERENCES Prodotti (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+drop table if exists Categorie;
+
+create table Categorie (
+	id int not null auto_increment,
+	Nome varchar(128) not null,
+	Descrizione varchar(256) not null,
+	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP,
+	PRIMARY KEY(id)
+);
+
+drop table if exists Prodotti_Categorie;
+
+create table Prodotti_Categorie(
+    idProdotto int not null,
+    idCategoria int not null,
+    PRIMARY KEY (idProdotto, idCategoria),
+    FOREIGN KEY (idProdotto) REFERENCES Prodotti (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (idCategoria) REFERENCES Categorie (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
