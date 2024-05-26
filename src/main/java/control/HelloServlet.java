@@ -1,4 +1,4 @@
-package it.unisa.comicvault;
+package control;
 
 import java.io.*;
 import javax.servlet.http.*;
