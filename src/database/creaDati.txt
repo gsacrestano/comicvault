@@ -1,0 +1,41 @@
+use comicvault;
+
+DELETE FROM Utenti;
+
+ALTER TABLE Utenti AUTO_INCREMENT = 1;
+
+INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("Admin", "Amministratore", "admin@admin.com", "Password", 1);
+INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("Mario", "Rossi", "mrossi@email.com", "Password", 0);
+
+DELETE FROM Indirizzi;
+
+ALTER TABLE Indirizzi AUTO_INCREMENT = 1;
+
+INSERT INTO Indirizzi (Via, Citta, Provincia, Cap, Nazione) VALUES ("Via Dante Alighieri", "Napoli", "NA", "80144", "Italia");
+
+DELETE FROM Utenti_Indirizzi;
+
+INSERT INTO Utenti_Indirizzi (idUtente, idIndirizzo, isDefault) VALUES (2, 1, 1);
+
+DELETE FROM Prodotti;
+
+ALTER TABLE Prodotti AUTO_INCREMENT = 1;
+
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Berserk deluxe (Vol. 1)", "L’edizione definitiva in dodici lussuosi volumi.", "978-8828749752", 50, 10, "percorso");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Chainsaw Man (Vol. 15)", "Volume 15 dell'opera", "978-8828777984", 5.20, 10, "percorso");
+
+DELETE FROM Categorie;
+
+ALTER TABLE Categorie AUTO_INCREMENT = 1;
+
+INSERT INTO Categorie (Nome, Descrizione) VALUES ("Azione", "Descrizione categoria");
+INSERT INTO Categorie (Nome, Descrizione) VALUES ("Avventura", "Descrizione categoria");
+INSERT INTO Categorie (Nome, Descrizione) VALUES ("Horror", "Descrizione categoria");
+INSERT INTO Categorie (Nome, Descrizione) VALUES ("Fantasy", "Descrizione categoria");
+
+DELETE FROM Prodotti_Categorie;
+
+INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (1, 1);
+INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (1, 2);
+INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (2, 1);
+INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (2, 3);
