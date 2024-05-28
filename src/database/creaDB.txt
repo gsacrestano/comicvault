@@ -40,7 +40,7 @@ drop table if exists Utenti_Indirizzi;
 create table Utenti_Indirizzi (
     idUtente int not null,
     idIndirizzo int not null,
-    isDefault int not null,
+isDefault int not null DEFAULT 0,
     PRIMARY KEY (idUtente, idIndirizzo),
 	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idIndirizzo) REFERENCES Indirizzi (id) ON UPDATE CASCADE ON DELETE CASCADE
