@@ -58,7 +58,7 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
         int result = 0;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idUtente = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idUtente = ?;";
 
         try
         {
@@ -92,7 +92,7 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
         CarrelloBean bean = new CarrelloBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?;";
 
         try
         {
@@ -132,7 +132,7 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
         Collection<CarrelloBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME + ";";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
