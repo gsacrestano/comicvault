@@ -1,6 +1,5 @@
 package model.dao;
 
-import model.bean.ProdottoBean;
 import model.bean.ProdottoCarrelloBean;
 
 import javax.sql.DataSource;
@@ -10,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
 
@@ -54,7 +52,6 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
                     conn.close();
             }
         }
-
     }
 
     @Override

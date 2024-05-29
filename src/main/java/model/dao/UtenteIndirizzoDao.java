@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.bean.OrdineBean;
+import model.bean.UtenteIndirizzoBean;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,32 +10,30 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
 
-public class OrdineDao implements IBeanDAO<OrdineBean> {
-
-    private static final String TABLE_NAME = "Ordini";
+    private static final String TABLE_NAME = "Prodotti";
     private DataSource ds;
 
-    public OrdineDao(DataSource ds) {
+    public UtenteIndirizzoDao(DataSource ds) {
         this.ds = ds;
     }
 
     @Override
-    public synchronized void doSave(OrdineBean bean) throws SQLException {
+    public void doSave(UtenteIndirizzoBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?);";
+        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, isDefault) VALUES (?, ?, ?);";
 
         try
         {
             conn = ds.getConnection();
-
             ps = conn.prepareStatement(sql);
 
             ps.setInt(1, bean.getIdUtente());
             ps.setInt(2, bean.getIdIndirizzo());
-            ps.setDouble(3, bean.getTotale());
+            ps.setInt(3, bean.getIsDefault());
 
             ps.executeUpdate();
         }
@@ -54,21 +52,21 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
         }
     }
 
-    @Override
-    public synchronized boolean doDelete(int id) throws SQLException {
+    public boolean doDelete(UtenteIndirizzoBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
         int result = 0;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?;";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idUtente = ? AND idIndirizzo = ?;";
 
         try
         {
             conn = ds.getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, id);
+            ps.setInt(1, bean.getIdUtente());
+            ps.setInt(2, bean.getIdIndirizzo());
 
             result = ps.executeUpdate();
         }
@@ -89,56 +87,24 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized OrdineBean doRetrieveByKey(int id) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-
-        OrdineBean bean = new OrdineBean();
-
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
-
-        try
-        {
-            conn = ds.getConnection();
-            ps = conn.prepareStatement(sql);
-
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-                bean.setId(rs.getInt("id"));
-                bean.setIdUtente(rs.getInt("idUtente"));
-                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
-            }
-        }
-        finally
-        {
-            try
-            {
-                if (ps != null)
-                    ps.close();
-            }
-            finally
-            {
-                if (conn != null)
-                    conn.close();
-            }
-        }
-        return bean;
+    public boolean doDelete(int id) throws SQLException {
+        System.err.println("ATTENZIONE: Richiamare il metodo doDelete(ProdottoCategoriaBean bean)");
+        return false;
     }
 
     @Override
-    public synchronized Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
+    public UtenteIndirizzoBean doRetrieveByKey(int id) throws SQLException {
+        System.err.println("ATTENZIONE: Richiamare il metodo doRetrieveAll(int idUtente, String order)");
+        return null;
+    }
+
+    public Collection<UtenteIndirizzoBean> doRetrieveAll(int idUtente, String order) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        Collection<OrdineBean> beans = new LinkedList<>();
+        Collection<UtenteIndirizzoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?;";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
@@ -148,19 +114,19 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
             conn = ds.getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, order);
+            ps.setInt(1, idUtente);
+            ps.setString(2, order);
+
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next())
             {
-                OrdineBean bean = new OrdineBean();
+                UtenteIndirizzoBean bean = new UtenteIndirizzoBean();
 
-                bean.setId(rs.getInt("id"));
                 bean.setIdUtente(rs.getInt("idUtente"));
                 bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
+                bean.setIsDefault(rs.getInt("isDefault"));
 
                 beans.add(bean);
             }
@@ -179,5 +145,12 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
             }
         }
         return beans;
+    }
+
+
+    @Override
+    public Collection<UtenteIndirizzoBean> doRetrieveAll(String order) throws SQLException {
+        System.err.println("ATTENZIONE: Richiamare il metodo doRetrieveAll(int idUtente, String order)");
+        return null;
     }
 }
