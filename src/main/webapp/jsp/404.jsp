@@ -24,7 +24,7 @@
 
 <div id="container">
     <h1> Purtroppo la pagina che cerchi non è in questo fumetto</h1>
-    <p> <img alt="Personaggio che legge 404" src="../Images/Error.jpg" width="400" height="300"></p>
+    <p> <img id ="imgError" alt="Personaggio che legge 404" src="../Images/Error.jpg" width="400" height="300"></p>
     <p>Nel mentre vedi quali sono le ultime novità nel nostro sito, clicca per tornare alla home.</p>
     <a href="../index.jsp"> <button id="button"> Home </button></a>
 </div>

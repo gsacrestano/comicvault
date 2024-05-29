@@ -15,7 +15,7 @@
   <div class="card">
     <p> <img src="Images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productView.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
     <p> <img src="Images/logo.jpeg"></p>

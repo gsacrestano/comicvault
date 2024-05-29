@@ -56,6 +56,17 @@ img{
 .card button:hover {
     background-color: #D93D3D;
 }
+
+.productView {
+    width: 80%;
+    margin: 5%;
+    padding: 5%;
+    text-align: left;
+}
+.productView img{
+
+    width: 25%;
+}
 @media only screen and (max-width: 900px){
     .card {
         background-color: white;
