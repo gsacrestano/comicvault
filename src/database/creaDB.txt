@@ -16,7 +16,7 @@ create table Utenti (
 	isAdmin int not null DEFAULT 0,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
 	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP null DEFAULT null,
 	PRIMARY KEY (id)
 );
 
@@ -31,7 +31,7 @@ create table Indirizzi (
 	Nazione varchar(64) not null,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
 	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP null DEFAULT null,
 	PRIMARY KEY (id)
 );
 
@@ -40,8 +40,7 @@ drop table if exists Utenti_Indirizzi;
 create table Utenti_Indirizzi (
     idUtente int not null,
     idIndirizzo int not null,
-isDefault int not null DEFAULT 0,
-
+    isDefault int not null,
     PRIMARY KEY (idUtente, idIndirizzo),
 	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idIndirizzo) REFERENCES Indirizzi (id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -66,7 +65,7 @@ create table Ordini (
 	Totale FLOAT not null,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
 	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP null DEFAULT null,
 	PRIMARY KEY (id),
 	FOREIGN KEY (idUtente) REFERENCES Utenti (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idIndirizzo) REFERENCES Indirizzi (id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -84,7 +83,7 @@ create table Prodotti (
 	image_path varchar(256) not null,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
 	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP null DEFAULT null,
 	PRIMARY KEY (id)
 );
 
@@ -122,7 +121,7 @@ create table Categorie (
 	Descrizione varchar(256) not null,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
 	modified_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deleted_at TIMESTAMP,
+	deleted_at TIMESTAMP null DEFAULT null,
 	PRIMARY KEY(id)
 );
 
