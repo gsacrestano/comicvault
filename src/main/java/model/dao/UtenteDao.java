@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.bean.OrdineBean;
+import model.bean.UtenteBean;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,32 +10,33 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+public class UtenteDao implements IBeanDAO<UtenteBean> {
 
-public class OrdineDao implements IBeanDAO<OrdineBean> {
-
-    private static final String TABLE_NAME = "Ordini";
+    private static final String TABLE_NAME = "Utenti";
     private DataSource ds;
 
-    public OrdineDao(DataSource ds) {
+    public UtenteDao(DataSource ds) {
         this.ds = ds;
     }
 
     @Override
-    public synchronized void doSave(OrdineBean bean) throws SQLException {
+    public void doSave(UtenteBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?);";
+        String sql = "INSERT INTO " + TABLE_NAME + " (Nome, Cognome, Email, Password, Telefono, isAdmin) VALUES (?, ?, ?, ?, ?, ?);";
 
         try
         {
             conn = ds.getConnection();
-
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, bean.getIdUtente());
-            ps.setInt(2, bean.getIdIndirizzo());
-            ps.setDouble(3, bean.getTotale());
+            ps.setString(1, bean.getNome());
+            ps.setString(2, bean.getCognome());
+            ps.setString(3, bean.getEmail());
+            ps.setString(4, bean.getPassword());
+            ps.setString(5, bean.getTelefono());
+            ps.setInt(6, bean.getIsAdmin());
 
             ps.executeUpdate();
         }
@@ -55,7 +56,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized boolean doDelete(int id) throws SQLException {
+    public boolean doDelete(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -89,11 +90,11 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized OrdineBean doRetrieveByKey(int id) throws SQLException {
+    public UtenteBean doRetrieveByKey(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        OrdineBean bean = new OrdineBean();
+        UtenteBean bean = new UtenteBean();
 
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
 
@@ -108,11 +109,13 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
             while (rs.next())
             {
-                bean.setId(rs.getInt("id"));
-                bean.setIdUtente(rs.getInt("idUtente"));
-                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
+                bean.setId(id);
+                bean.setNome(rs.getString("Nome"));
+                bean.setCognome(rs.getString("Cognome"));
+                bean.setEmail(rs.getString("Email"));
+                bean.setPassword(rs.getString("Password"));
+                bean.setTelefono(rs.getString("Telefono"));
+                bean.setIsAdmin(rs.getInt("isAdmin"));
             }
         }
         finally
@@ -132,11 +135,11 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
+    public Collection<UtenteBean> doRetrieveAll(String order) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        Collection<OrdineBean> beans = new LinkedList<>();
+        Collection<UtenteBean> beans = new LinkedList<>();
 
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
 
@@ -154,13 +157,15 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
             while (rs.next())
             {
-                OrdineBean bean = new OrdineBean();
+                UtenteBean bean = new UtenteBean();
 
                 bean.setId(rs.getInt("id"));
-                bean.setIdUtente(rs.getInt("idUtente"));
-                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
+                bean.setNome(rs.getString("Nome"));
+                bean.setCognome(rs.getString("Cognome"));
+                bean.setEmail(rs.getString("Email"));
+                bean.setPassword(rs.getString("Password"));
+                bean.setTelefono(rs.getString("Telefono"));
+                bean.setIsAdmin(rs.getInt("isAdmin"));
 
                 beans.add(bean);
             }

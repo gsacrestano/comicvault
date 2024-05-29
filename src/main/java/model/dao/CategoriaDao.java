@@ -80,7 +80,6 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
                     conn.close();
             }
         }
-
         return (result != 0);
     }
 

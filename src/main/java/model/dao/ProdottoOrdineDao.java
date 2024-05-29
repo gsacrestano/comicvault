@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.bean.OrdineBean;
+import model.bean.ProdottoOrdineBean;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,22 +10,21 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+public class ProdottoOrdineDao implements IBeanDAO<ProdottoOrdineBean> {
 
-public class OrdineDao implements IBeanDAO<OrdineBean> {
-
-    private static final String TABLE_NAME = "Ordini";
+    private static final String TABLE_NAME = "Prodotti_Ordini";
     private DataSource ds;
 
-    public OrdineDao(DataSource ds) {
+    public ProdottoOrdineDao(DataSource ds) {
         this.ds = ds;
     }
 
     @Override
-    public synchronized void doSave(OrdineBean bean) throws SQLException {
+    public void doSave(ProdottoOrdineBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?);";
+        String sql = "INSERT INTO " + TABLE_NAME + " (idOrdine, idProdotto, Prezzo, Quantita) VALUES (?, ?, ?, ?);";
 
         try
         {
@@ -33,9 +32,10 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, bean.getIdUtente());
-            ps.setInt(2, bean.getIdIndirizzo());
-            ps.setDouble(3, bean.getTotale());
+            ps.setInt(1, bean.getIdOrdine());
+            ps.setInt(2, bean.getIdProdotto());
+            ps.setFloat(3, bean.getPrezzo());
+            ps.setInt(4, bean.getQuantita());
 
             ps.executeUpdate();
         }
@@ -55,13 +55,13 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized boolean doDelete(int id) throws SQLException {
+    public boolean doDelete(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
         int result = 0;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?;";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?;";
 
         try
         {
@@ -89,13 +89,13 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized OrdineBean doRetrieveByKey(int id) throws SQLException {
+    public ProdottoOrdineBean doRetrieveByKey(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        OrdineBean bean = new OrdineBean();
+        ProdottoOrdineBean bean = new ProdottoOrdineBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?;";
 
         try
         {
@@ -109,10 +109,10 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
             while (rs.next())
             {
                 bean.setId(rs.getInt("id"));
-                bean.setIdUtente(rs.getInt("idUtente"));
-                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
+                bean.setIdOrdine(rs.getInt("idOrdine"));
+                bean.setIdProdotto(rs.getInt("idProdotto"));
+                bean.setPrezzo(rs.getFloat("prezzo"));
+                bean.setQuantita(rs.getInt("quantita"));
             }
         }
         finally
@@ -132,11 +132,11 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
     }
 
     @Override
-    public synchronized Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
+    public Collection<ProdottoOrdineBean> doRetrieveAll(String order) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        Collection<OrdineBean> beans = new LinkedList<>();
+        Collection<ProdottoOrdineBean> beans = new LinkedList<>();
 
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
 
@@ -154,13 +154,13 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
             while (rs.next())
             {
-                OrdineBean bean = new OrdineBean();
+                ProdottoOrdineBean bean = new ProdottoOrdineBean();
 
                 bean.setId(rs.getInt("id"));
-                bean.setIdUtente(rs.getInt("idUtente"));
-                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
-                bean.setData(rs.getString("Data"));
-                bean.setTotale(rs.getFloat("Totale"));
+                bean.setIdOrdine(rs.getInt("idOrdine"));
+                bean.setIdProdotto(rs.getInt("idProdotto"));
+                bean.setPrezzo(rs.getFloat("prezzo"));
+                bean.setQuantita(rs.getInt("quantita"));
 
                 beans.add(bean);
             }
