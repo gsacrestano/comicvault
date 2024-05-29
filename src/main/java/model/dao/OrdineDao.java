@@ -1,6 +1,8 @@
 package model.dao;
 
 import model.bean.CarrelloBean;
+import model.bean.IndirizzoBean;
+import model.bean.OrdineBean;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -9,22 +11,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
-public class CarrelloDao implements IBeanDAO<CarrelloBean> {
+public class OrdineDao implements IBeanDAO<OrdineBean> {
 
-    private static final String TABLE_NAME = "Carrelli";
+    private static final String TABLE_NAME = "Ordini";
     private DataSource ds;
 
-    public CarrelloDao(DataSource ds) {
+    public OrdineDao(DataSource ds) {
         this.ds = ds;
     }
 
     @Override
-    public synchronized void doSave(CarrelloBean bean) throws SQLException {
+    public synchronized void doSave(OrdineBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente) VALUES (?);";
+        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?)";
 
         try
         {
@@ -32,7 +35,9 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, bean.getIdUtente());
+           ps.setInt(1, bean.getIdUtente());
+           ps.setInt(2, bean.getIdIndirizzo());
+           ps.setDouble(3, bean.getTotale());
 
             ps.executeUpdate();
         }
@@ -58,7 +63,7 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
         int result = 0;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idUtente = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?";
 
         try
         {
@@ -86,13 +91,13 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
     }
 
     @Override
-    public synchronized CarrelloBean doRetrieveByKey(int id) throws SQLException {
+    public synchronized OrdineBean doRetrieveByKey(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        CarrelloBean bean = new CarrelloBean();
+        OrdineBean bean = new OrdineBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL";
 
         try
         {
@@ -107,6 +112,9 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
             {
                 bean.setId(rs.getInt("id"));
                 bean.setIdUtente(rs.getInt("idUtente"));
+                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+                bean.setData(rs.getString("Data"));
+                bean.setTotale(rs.getFloat("Totale"));
             }
         }
         finally
@@ -126,13 +134,13 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
     }
 
     @Override
-    public synchronized Collection<CarrelloBean> doRetrieveAll(String order) throws SQLException {
+    public synchronized Collection<OrdineBean> doRetrieveAll(String order) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        Collection<CarrelloBean> beans = new LinkedList<>();
+        Collection<OrdineBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
@@ -148,10 +156,13 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
 
             while (rs.next())
             {
-                CarrelloBean bean = new CarrelloBean();
+                OrdineBean bean = new OrdineBean();
 
                 bean.setId(rs.getInt("id"));
                 bean.setIdUtente(rs.getInt("idUtente"));
+                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+                bean.setData(rs.getString("Data"));
+                bean.setTotale(rs.getFloat("Totale"));
 
                 beans.add(bean);
             }
@@ -169,7 +180,6 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
                     conn.close();
             }
         }
-
         return beans;
     }
 }
