@@ -1,6 +1,7 @@
 package model.dao;
 
-import model.bean.IndirizzoBean;
+import model.bean.ProdottoBean;
+import model.bean.ProdottoCarrelloBean;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -9,22 +10,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
-public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
+public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
 
-    private static final String TABLE_NAME = "Indirizzi";
+    private static final String TABLE_NAME = "Prodotti_Carrelli";
     private DataSource ds;
 
-    public IndirizzoDao(DataSource ds) {
+    public ProdottoCarrelloDao(DataSource ds) {
         this.ds = ds;
     }
 
     @Override
-    public synchronized void doSave(IndirizzoBean bean) throws SQLException {
+    public synchronized void doSave(ProdottoCarrelloBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (Via, Citta, Provincia, Cap, Nazione) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO " + TABLE_NAME + " (idCarrello, idProdotto, Prezzo, Quantita) VALUES (?, ?, ?, ?);";
 
         try
         {
@@ -32,11 +34,10 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
 
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, bean.getVia());
-            ps.setString(2, bean.getCitta());
-            ps.setString(3, bean.getProvincia());
-            ps.setString(4, bean.getCap());
-            ps.setString(5, bean.getNazione());
+            ps.setInt(1, bean.getIdCarrello());
+            ps.setInt(2, bean.getIdProdotto());
+            ps.setDouble(3, bean.getPrezzo());
+            ps.setDouble(4, bean.getQuantita());
 
             ps.executeUpdate();
         }
@@ -53,6 +54,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
                     conn.close();
             }
         }
+
     }
 
     @Override
@@ -62,7 +64,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
 
         int result = 0;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?;";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?;";
 
         try
         {
@@ -86,18 +88,17 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
                     conn.close();
             }
         }
-
         return (result != 0);
     }
 
     @Override
-    public synchronized IndirizzoBean doRetrieveByKey(int id) throws SQLException {
+    public synchronized ProdottoCarrelloBean doRetrieveByKey(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        IndirizzoBean bean = new IndirizzoBean();
+        ProdottoCarrelloBean bean = new ProdottoCarrelloBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?;";
 
         try
         {
@@ -111,11 +112,10 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
             while (rs.next())
             {
                 bean.setId(id);
-                bean.setVia(rs.getString("Via"));
-                bean.setCitta(rs.getString("Citta"));
-                bean.setProvincia(rs.getString("Provincia"));
-                bean.setCap(rs.getString("Cap"));
-                bean.setNazione(rs.getString("Nazione"));
+                bean.setIdCarrello(rs.getInt("idCarrello"));
+                bean.setIdProdotto(rs.getInt("idProdotto"));
+                bean.setPrezzo(rs.getFloat("Prezzo"));
+                bean.setQuantita(rs.getInt("Quantita"));
             }
         }
         finally
@@ -135,11 +135,11 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
     }
 
     @Override
-    public synchronized Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException {
+    public synchronized Collection<ProdottoCarrelloBean> doRetrieveAll(String order) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        Collection<IndirizzoBean> beans = new LinkedList<>();
+        Collection<ProdottoCarrelloBean> beans = new LinkedList<>();
 
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
 
@@ -157,14 +157,13 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
 
             while (rs.next())
             {
-                IndirizzoBean bean = new IndirizzoBean();
+                ProdottoCarrelloBean bean = new ProdottoCarrelloBean();
 
                 bean.setId(rs.getInt("id"));
-                bean.setVia(rs.getString("Via"));
-                bean.setCitta(rs.getString("Citta"));
-                bean.setProvincia(rs.getString("Provincia"));
-                bean.setCap(rs.getString("Cap"));
-                bean.setNazione(rs.getString("Nazione"));
+                bean.setIdCarrello(rs.getInt("idCarrello"));
+                bean.setIdProdotto(rs.getInt("idProdotto"));
+                bean.setPrezzo(rs.getFloat("Prezzo"));
+                bean.setQuantita(rs.getInt("Quantita"));
 
                 beans.add(bean);
             }

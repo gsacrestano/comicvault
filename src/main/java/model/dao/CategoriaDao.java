@@ -1,13 +1,11 @@
 package model.dao;
 
-import model.bean.CarrelloBean;
 import model.bean.CategoriaBean;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 public class CategoriaDao implements IBeanDAO<CategoriaBean> {
 
@@ -58,7 +56,7 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
 
         int result = 0;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?;";
 
         try
         {
@@ -93,7 +91,7 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
 
         CategoriaBean bean = new CategoriaBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
 
         try
         {
@@ -134,7 +132,7 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
 
         Collection<CategoriaBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";

@@ -1,7 +1,5 @@
 package model.dao;
 
-import model.bean.CarrelloBean;
-import model.bean.IndirizzoBean;
 import model.bean.OrdineBean;
 
 import javax.sql.DataSource;
@@ -11,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
+
 
 public class OrdineDao implements IBeanDAO<OrdineBean> {
 
@@ -27,7 +25,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?);";
 
         try
         {
@@ -63,7 +61,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
         int result = 0;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET deleted_at = NOW() WHERE id = ?;";
 
         try
         {
@@ -97,7 +95,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
         OrdineBean bean = new OrdineBean();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ? AND deleted_at IS NULL;";
 
         try
         {
@@ -140,7 +138,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
         Collection<OrdineBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
