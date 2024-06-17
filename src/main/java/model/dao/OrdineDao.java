@@ -138,7 +138,7 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
 
         Collection<OrdineBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
