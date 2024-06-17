@@ -86,7 +86,7 @@
 <div class="topnav">
 
     <a href="${pageContext.request.contextPath}/index.jsp">Comic Vault</a>
-    <a href="${pageContext.request.contextPath}/index.jsp">Accedi</a>
+    <a href="${pageContext.request.contextPath}/common/login.jsp">Accedi</a>
     <a href="${pageContext.request.contextPath}/index.jsp">Carrello</a>
     <div class="search-container">
         <form action="">
