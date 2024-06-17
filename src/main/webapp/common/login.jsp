@@ -63,7 +63,7 @@
 <body>
 <div class="container">
     <h2>Login</h2>
-    <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/Images/logo.jpeg" alt="Logo">
+    <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
     <form action="${pageContext.request.contextPath}/common/Login" method="post">
         <div class="form-group">
             <label for="email">Email:</label>
