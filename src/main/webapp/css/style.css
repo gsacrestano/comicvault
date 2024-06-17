@@ -34,6 +34,7 @@ img{
     margin: 5% auto;
     padding: 2%;
     border: #0d0d0d solid;
+    border-radius: 10%;
 }
 
 .card p{
@@ -41,16 +42,16 @@ img{
 }
 
 .card button {
-    width: 100%;
-    font-size: 100%;
+    width: 75%;
+    font-size: 1rem;
     text-align: center;
-    padding: 10%;
-    margin: 1%;
-    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
     background-color: #F23A29;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border: none;
+
 }
 
 .card button:hover {
@@ -58,10 +59,13 @@ img{
 }
 
 .productView {
-    width: 80%;
-    margin: 5%;
+    width: 60%;
+    margin: 0 15%;
     padding: 5%;
+    display:flex;
     text-align: left;
+    background-color: white;
+    border-radius: 10%;
 }
 .productView img{
 

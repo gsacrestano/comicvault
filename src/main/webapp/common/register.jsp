@@ -66,6 +66,14 @@
     <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
     <form action="${pageContext.request.contextPath}/common/Login" method="post">
         <div class="form-group">
+            <div class="form-group">
+                <label for="nome">Email:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="cognome">Email:</label>
+                <input type="text" id="cognome" name="cognome" required>
+            </div>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required>
         </div>
@@ -76,7 +84,6 @@
         <div class="form-group">
             <button type="submit">Login</button>
         </div>
-        <a  style="text-align: center" href="register.jsp"> Registrati </a>
     </form>
     <div id="errorMessages">
         <%
