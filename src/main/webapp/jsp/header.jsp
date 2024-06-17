@@ -106,7 +106,7 @@
 
 <div class="topnav">
     <a href="index.jsp">
-        <img src="Images/logo.jpeg" alt="Logo">
+        <img src="images/logo.jpeg" alt="Logo">
     </a>
 
     <a href="${pageContext.request.contextPath}/index.jsp">Comic Vault</a>

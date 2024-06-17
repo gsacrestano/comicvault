@@ -13,56 +13,52 @@
 <h1>Novità</h1>
 <div class="viewer">
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
     <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
-</div>
 <h1>Più venduti </h1>
-<div class="viewer">
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
+    <p> <img src="images/logo.jpeg"></p>
     <p> Gioco </p>
-    <button> Compra</button>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
-</div>
 <h1> Prossime Uscite </h1>
-<div class="viewer">
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
+<div class="card">
+  <p> <img src="images/logo.jpeg"></p>
+  <p> Gioco </p>
+  <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
+</div>
+<div class="card">
+  <p> <img src="images/logo.jpeg"></p>
+  <p> Gioco </p>
+  <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
+</div>
+<div class="card">
+  <p> <img src="images/logo.jpeg"></p>
+  <p> Gioco </p>
+  <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
+</div>
 </div>
 
 
