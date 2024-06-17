@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebFilter(filterName = "/filters/AccessControlFilter", urlPatterns = "/*")
-public class AccessControlFilter extends HttpFilter implements Filter {
-
-    private static final long serialVersionUID = 1L;
+public class AccessControlFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -42,6 +40,19 @@ public class AccessControlFilter extends HttpFilter implements Filter {
 
         String path = httpServletRequest.getServletPath();
 
+        // Reindirizza a IndexServlet se la richiesta è per index.jsp
+        if (path.equals("/index.jsp")) {
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/common/IndexServlet");
+            return;
+        }
+
+        // Percorsi pubblici accessibili senza autenticazione
+        if (path.equals("/common/productDetails.jsp") || path.equals("/common/ProductDetailsServlet") || path.equals("/common/IndexServlet")) {
+            chain.doFilter(request, response);
+            return ;
+        }
+
+        // Gestione accesso alla pagina di login
         if (path.equals("/common/login.jsp") || path.equals("/common/Login")) {
             if (isLoggedIn != null && isLoggedIn) {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
@@ -52,6 +63,7 @@ public class AccessControlFilter extends HttpFilter implements Filter {
             }
         }
 
+        // Accesso per utenti loggati e amministratori
         if (path.contains("/common/") && (isAdmin==null)) {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/common/login.jsp");
             return ;
