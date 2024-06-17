@@ -22,7 +22,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            width: 100%;
+            width: 80%;
         }
         .container h2 {
             margin-top: 0;
@@ -44,7 +44,7 @@
         .form-group button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #F23A29;
             border: none;
             border-radius: 4px;
             color: white;
@@ -52,7 +52,7 @@
             cursor: pointer;
         }
         .form-group button:hover {
-            background-color: #0056b3;
+            background-color: #D93D3D;
         }
         .error-message {
             color: red;
@@ -63,6 +63,7 @@
 <body>
 <div class="container">
     <h2>Login</h2>
+    <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/Images/logo.jpeg" alt="Logo">
     <form action="${pageContext.request.contextPath}/common/Login" method="post">
         <div class="form-group">
             <label for="email">Email:</label>

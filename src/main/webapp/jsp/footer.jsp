@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleError.css">
+
     <style>
         body {
             margin: 0;
@@ -74,7 +75,7 @@
 <footer>
     <div class="footer-container">
         <div class="footer-logo">
-            <img src="${pageContext.request.contextPath}/Images/logo.jpeg" alt="Logo">
+            <img src="Images/logo.jpeg" alt="Logo">
             <h2>Comic Vault</h2>
         </div>
         <ul class="footer-nav">
