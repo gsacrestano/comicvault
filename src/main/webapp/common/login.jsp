@@ -58,6 +58,9 @@
             color: red;
             margin-bottom: 10px;
         }
+        a:visited , a:link{
+            color: #0d0d0d;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +79,7 @@
         <div class="form-group">
             <button type="submit">Login</button>
         </div>
+        <a style="text-align: center" href="../index.jsp">Home</a>
         <a  style="text-align: center" href="register.jsp"> Registrati </a>
     </form>
     <div id="errorMessages">

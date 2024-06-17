@@ -67,11 +67,11 @@
     <form action="${pageContext.request.contextPath}/common/Login" method="post">
         <div class="form-group">
             <div class="form-group">
-                <label for="nome">Email:</label>
+                <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required>
             </div>
             <div class="form-group">
-                <label for="cognome">Email:</label>
+                <label for="cognome">Cognome:</label>
                 <input type="text" id="cognome" name="cognome" required>
             </div>
             <label for="email">Email:</label>
