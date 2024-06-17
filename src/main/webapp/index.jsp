@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="common/errors/404.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="errors/404.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
   <div class="card">
     <p> <img src="Images/logo.jpeg"></p>
     <p> Gioco </p>
-    <a href="jsp/productView.jsp"> <button> Compra</button></a>
+    <a href="jsp/productDetails.jsp"> <button> Compra</button></a>
   </div>
   <div class="card">
     <p> <img src="Images/logo.jpeg"></p>

@@ -14,11 +14,12 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
-<div class="productView">
-    <h1 style="display: inline">Titolo</h1>
-<img src="${pageContext.request.contextPath}/Images/copertina.webp">
-
+<h1>Titolo</h1>
+<div class="productView" style=" display:flex; width: 80%">
+<img style="width:50%; display: inline" src="Images/copertina.webp"/>
+<div style="width: 50%; display: inline;">
+    <p></p>
+</div>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>
