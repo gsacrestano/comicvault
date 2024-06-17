@@ -134,6 +134,50 @@ public class UtenteDao implements IBeanDAO<UtenteBean> {
         return bean;
     }
 
+    public UtenteBean doRetrieveByEmail(String email) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        UtenteBean bean = new UtenteBean();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE email = ? AND deleted_at IS NULL;";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                bean.setId(rs.getInt("Id"));
+                bean.setNome(rs.getString("Nome"));
+                bean.setCognome(rs.getString("Cognome"));
+                bean.setEmail(rs.getString("Email"));
+                bean.setPassword(rs.getString("Password"));
+                bean.setTelefono(rs.getString("Telefono"));
+                bean.setIsAdmin(rs.getInt("isAdmin"));
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+        return bean;
+    }
+
     @Override
     public Collection<UtenteBean> doRetrieveAll(String order) throws SQLException {
         Connection conn = null;

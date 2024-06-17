@@ -18,13 +18,38 @@ public class AccessControlFilter extends HttpFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-        Boolean isAdmin = (Boolean) httpServletRequest.getSession().getAttribute("isAdmin");
+        Boolean isAdmin = null;
+        Boolean isLoggedIn = null;
+
+        try {
+            Object isAdminObj = httpServletRequest.getSession().getAttribute("isAdmin");
+            Object isLoggedInObj = httpServletRequest.getSession().getAttribute("isLoggedIn");
+
+            if (isAdminObj instanceof Boolean) {
+                isAdmin = (Boolean) isAdminObj;
+            } else if (isAdminObj instanceof Integer) {
+                isAdmin = ((Integer) isAdminObj) != 0;
+            }
+
+            if (isLoggedInObj instanceof Boolean) {
+                isLoggedIn = (Boolean) isLoggedInObj;
+            } else if (isLoggedInObj instanceof Integer) {
+                isLoggedIn = ((Integer) isLoggedInObj) != 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         String path = httpServletRequest.getServletPath();
 
-        //Consentire accesso alla pagina di login.jsp ed alla servlet Login
         if (path.equals("/common/login.jsp") || path.equals("/common/Login")) {
-            chain.doFilter(request, response);
-            return;
+            if (isLoggedIn != null && isLoggedIn) {
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
+                return ;
+            } else {
+                chain.doFilter(request, response);
+                return ;
+            }
         }
 
         if (path.contains("/common/") && (isAdmin==null)) {
