@@ -10,11 +10,18 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <!-- Configurazione per JNDI - Data Source -->
     <resource-ref>
         <description>Riferimento JNDI per Data Source</description>
         <res-ref-name>jdbc/comicvault</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <!-- Configurazione delle pagine di errore -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errors/404.jsp</location>
+    </error-page>
 
 </web-app>

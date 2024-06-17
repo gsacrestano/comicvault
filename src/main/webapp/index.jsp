@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="jsp/404.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="common/errors/404.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
