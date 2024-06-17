@@ -74,7 +74,7 @@
 <footer>
     <div class="footer-container">
         <div class="footer-logo">
-            <img src="${pageContext.request.contextPath}/Images/logo.jpeg" alt="Logo">
+            <img src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
             <h2>Comic Vault</h2>
         </div>
         <ul class="footer-nav">

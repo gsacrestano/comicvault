@@ -4,8 +4,8 @@ DELETE FROM Utenti;
 
 ALTER TABLE Utenti AUTO_INCREMENT = 1;
 
-INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("Admin", "Amministratore", "admin@admin.com", "ee33429c9cf42536c60b539488a1e4bdd5b162a69f57cf11cd38b2b9e1e069d5392f9d5329145179889a98483d379f0f6c03708538376e2f54f48afd22973c8c", 1);
-INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("Mario", "Rossi", "mrossi@email.com", "88ba325658610a3d6e200eb01d6cf71390d5dab8abd46d309f306a3082489fea9e5817fe9a54dd91775a09ce71bc2d5aa7ebbd18ea2c5e33cf797f56a4256b06", 0);
+INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("Admin", "Amministratore", "admin@email.com", "ee33429c9cf42536c60b539488a1e4bdd5b162a69f57cf11cd38b2b9e1e069d5392f9d5329145179889a98483d379f0f6c03708538376e2f54f48afd22973c8c", 1);
+INSERT INTO Utenti (Nome, Cognome, Email, Password, isAdmin) VALUES ("User", "Utente", "user@email.com", "88ba325658610a3d6e200eb01d6cf71390d5dab8abd46d309f306a3082489fea9e5817fe9a54dd91775a09ce71bc2d5aa7ebbd18ea2c5e33cf797f56a4256b06", 0);
 
 DELETE FROM Indirizzi;
 
@@ -21,8 +21,11 @@ DELETE FROM Prodotti;
 
 ALTER TABLE Prodotti AUTO_INCREMENT = 1;
 
-INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Berserk deluxe (Vol. 1)", "L’edizione definitiva in dodici lussuosi volumi.", "978-8828749752", 50, 10, "percorso");
-INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Chainsaw Man (Vol. 15)", "Volume 15 dell'opera", "978-8828777984", 5.20, 10, "percorso");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Berserk deluxe (Vol. 1)", "L’edizione definitiva in dodici lussuosi volumi.", "978-8828749752", 50, 10, "berserk_deluxe_vol1_cover.webp");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Chainsaw Man (Vol. 15)", "Volume 15 dell'opera", "978-8828777984", 5.20, 10, "chainsaw_man_vol15_cover.webp");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Jujutsu Kaisen – Sorcery Fight 25", "Volume 25 dell'opera", "978-8828789505 ", 5.20, 10, "jjk_vol25_cover.webp");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Berserk Collection 42", "Volume 42 speciale dell'opera", "978-8828787440", 7.00, 10, "berserk_variant_vol42_cover.webp");
+INSERT INTO Prodotti (Nome, Descrizione, Isbn, Prezzo, Quantita, image_path) VALUES ("Berserk Deluxe 7", "Volume 7 (versione deluxe) dell'opera", "978-8828778844", 50.00, 10, "berserk_deluxe_vol7_cover.webp");
 
 DELETE FROM Categorie;
 
@@ -39,3 +42,17 @@ INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (1, 1);
 INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (1, 2);
 INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (2, 1);
 INSERT INTO Prodotti_Categorie (idProdotto, idCategoria) VALUES (2, 3);
+
+DELETE FROM Ordini;
+
+ALTER TABLE Ordini AUTO_INCREMENT = 1;
+
+INSERT INTO Ordini (idUtente, idIndirizzo, Data, Totale) VALUES (2, 1, NOW(), 17.40);
+
+DELETE FROM Prodotti_Ordini;
+
+ALTER TABLE Prodotti_Ordini AUTO_INCREMENT = 1;
+
+INSERT INTO Prodotti_Ordini (idOrdine, idProdotto, Prezzo, Quantita) VALUES (1, 2, 5.20, 1);
+INSERT INTO Prodotti_Ordini (idOrdine, idProdotto, Prezzo, Quantita) VALUES (1, 3, 5.20, 1);
+INSERT INTO Prodotti_Ordini (idOrdine, idProdotto, Prezzo, Quantita) VALUES (1, 4, 7.00, 1);

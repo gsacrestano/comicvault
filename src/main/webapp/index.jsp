@@ -1,70 +1,49 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="common/errors/404.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="errors/404.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="css/style.css">
-  <title>JSP - Hello World</title>
+  <title>Index</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <jsp:include page="jsp/header.jsp"/>
-<p><img  style="width: 100%" src="Images/banner.webp" alt="Banner"></p>
+<p><img  style="width: 100%" src="images/banner.webp" alt="Banner"></p>
 
 <h1>Novità</h1>
 <div class="viewer">
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <a href="jsp/productView.jsp"> <button> Compra</button></a>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-</div>
-<h1>Più venduti </h1>
-<div class="viewer">
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-</div>
-<h1> Prossime Uscite </h1>
-<div class="viewer">
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
-  <div class="card">
-    <p> <img src="Images/logo.jpeg"></p>
-    <p> Gioco </p>
-    <button> Compra</button>
-  </div>
+  <c:forEach var="product" items="${latestProducts}">
+    <div class="card">
+      <p> <img src="${pageContext.request.contextPath}/images/products/${product.image_path}"></p>
+      <p>${product.nome}</p>
+      <a href="${pageContext.request.contextPath}/common/ProductDetailsServlet?id=${product.id}"> <button>Dettaglio</button></a>
+    </div>
+  </c:forEach>
 </div>
 
+<h1>Più venduti </h1>
+<div class="viewer">
+  <c:forEach var="product" items="${bestSellingProducts}">
+    <div class="card">
+      <p> <img src="${pageContext.request.contextPath}/images/products/${product.image_path}"></p>
+      <p>${product.nome}</p>
+      <button>Compra</button>
+    </div>
+  </c:forEach>
+</div>
+
+<h1> Prossime Uscite </h1>
+<div class="viewer">
+  <c:forEach var="product" items="${upcomingProducts}">
+    <div class="card">
+      <p> <img src="${pageContext.request.contextPath}/images/products/${product.image_path}"></p>
+      <p>${product.nome}</p>
+      <button>Compra</button>
+    </div>
+  </c:forEach>
+</div>
 
 
 <jsp:include page="jsp/footer.jsp"/>

@@ -186,4 +186,125 @@ public class ProdottoDao implements IBeanDAO<ProdottoBean> {
         }
         return beans;
     }
+
+    public synchronized Collection<ProdottoBean> doRetrieveLatest(int limit) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        Collection<ProdottoBean> beans = new LinkedList<>();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ?;";
+
+        if (limit <= 0)
+            limit = 1;
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, limit);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                ProdottoBean bean = new ProdottoBean();
+
+                bean.setId(rs.getInt("id"));
+                bean.setNome(rs.getString("Nome"));
+                bean.setDescrizione(rs.getString("Descrizione"));
+                bean.setIsbn(rs.getString("Isbn"));
+                bean.setPrezzo(rs.getFloat("Prezzo"));
+                bean.setQuantita(rs.getInt("Quantita"));
+                bean.setImage_path(rs.getString("image_path"));
+
+                beans.add(bean);
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+        return beans;
+    }
+
+    public synchronized Collection<ProdottoBean> doRetrieveBestSelling(int limit) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        Collection<ProdottoBean> beans = new LinkedList<>();
+
+        String sql = "SELECT \n" +
+                        "    p.id,\n" +
+                        "    p.Nome,\n" +
+                        "    p.Descrizione,\n" +
+                        "    p.Isbn,\n" +
+                        "    p.Prezzo,\n" +
+                        "    p.Quantita,\n" +
+                        "    p.image_path,\n" +
+                        "    SUM(po.Quantita) AS QuantitaVenduta\n" +
+                        "FROM \n" +
+                        "    Prodotti p\n" +
+                        "INNER JOIN \n" +
+                        "    Prodotti_Ordini po ON p.id = po.idProdotto\n" +
+                        "WHERE \n" +
+                        "    p.deleted_at IS NULL\n" +
+                        "GROUP BY \n" +
+                        "    p.id, p.Nome, p.Descrizione, p.Isbn, p.Prezzo, p.Quantita, p.image_path\n" +
+                        "ORDER BY \n" +
+                        "    QuantitaVenduta DESC\n" +
+                        "LIMIT ?;\n";
+
+        if (limit <= 0)
+            limit = 1;
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, limit);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                ProdottoBean bean = new ProdottoBean();
+
+                bean.setId(rs.getInt("id"));
+                bean.setNome(rs.getString("Nome"));
+                bean.setDescrizione(rs.getString("Descrizione"));
+                bean.setIsbn(rs.getString("Isbn"));
+                bean.setPrezzo(rs.getFloat("Prezzo"));
+                bean.setQuantita(rs.getInt("Quantita"));
+                bean.setImage_path(rs.getString("image_path"));
+
+                beans.add(bean);
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+        return beans;
+    }
 }
