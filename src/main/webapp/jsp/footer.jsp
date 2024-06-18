@@ -11,7 +11,7 @@
 
         footer {
             padding: 20px 0;
-            text-align: center;
+            text-align: left;
         }
 
         .footer-container {
@@ -24,6 +24,7 @@
         }
 
         .footer-logo img {
+            border-radius: 55%;
             width: 100px;
             height: auto;
             margin-right: 20px;
@@ -63,6 +64,7 @@
         }
 
         .footer-copyright {
+            text-align: center;
             margin-top: 20px;
             font-size: 14px;
             opacity: 0.8;
@@ -75,15 +77,17 @@
     <div class="footer-container">
         <div class="footer-logo">
             <img src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
-            <h2>Comic Vault</h2>
+            <h2 style="display: inline">Comic Vault</h2>
         </div>
         <ul class="footer-nav">
             <li><a href="#">Manga</a></li>
             <li><a href="#">Comics</a></li>
             <li><a href="#">Chi siamo</a></li>
         </ul>
+
     </div>
     <p class="footer-copyright">&#169; ComicVault</p>
+
 </footer>
 </body>
 </html>
