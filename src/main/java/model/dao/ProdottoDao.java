@@ -142,7 +142,7 @@ public class ProdottoDao implements IBeanDAO<ProdottoBean> {
 
         Collection<ProdottoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
