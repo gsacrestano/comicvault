@@ -4,63 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Gestione Prodotti</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        form {
-            margin: 20px 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #F23A29;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #D93D3D;
-        }
-    </style>
 </head>
 
 <body>
+<jsp:include page="/jsp/header.jsp"/>
 
 <h1>Gestione dei Prodotti</h1>
 
 <!--Collegamento per aggiungere un nuovo prodotto -->
-<h2>Aggiungi Nuovo Prodotto</h2>
-<button onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
+
+<button class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
 
 
 <!-- Tabella per visualizzare, aggiornare e cancellare prodotti esistenti -->
@@ -111,6 +68,7 @@
 
 <br>
 <a href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
+<jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
 
