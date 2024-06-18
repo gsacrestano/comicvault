@@ -82,6 +82,69 @@ img{
 
     width: 25%;
 }
+.checkbox-inline {
+    display: inline-block;
+    margin-right: 10px;
+}
+#catologButton {
+    background-color: #D93D3D; /* Colore principale del bottone */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#catologButton:hover {
+    background-color: #7ba6a6; /* Colore al passaggio del mouse */
+}
+#price-range {
+    width: 80%;
+    margin: 20px auto;
+}
+#price-range input[type="range"] {
+    width: 100%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ccc;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.15s ease-in-out;
+    border-radius: 10px;
+}
+#price-range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #D93D3D;
+    cursor: pointer;
+    border-radius: 50%;
+}
+#price-range input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #D93D3D;
+    cursor: pointer;
+    border-radius: 50%;
+}
+#price-output {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
+@media (max-width: 600px) {
+    .checkbox-inline {
+        display: block;
+        margin-bottom: 10px;
+    }
+    #catologButton  {
+        width: 100%;
+        padding: 15px;
+    }
+}
 @media only screen and (max-width: 900px){
     .card {
         background-color: white;

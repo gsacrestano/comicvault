@@ -12,8 +12,34 @@
 <jsp:include page="../jsp/header.jsp"/>
 <p><img  style="width: 100%" src="images/banner.webp" alt="Banner"></p>
 
-<h1>PRODOTTI</h1>
 
+<h1>PRODOTTI</h1>
+<form action="/filtra_prodotti" method="GET">
+    <div id="price-range">
+        <input type="range" min="0" max="100" value="50" class="slider" id="priceSlider">
+        <div id="price-output">$0 - $50</div>
+    </div>
+    <button id="catologButton" type="submit">Filtra</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const priceSlider = document.getElementById('priceSlider');
+        const priceOutput = document.getElementById('price-output');
+
+        // Funzione per aggiornare il testo del prezzo
+        function updatePriceOutput() {
+            const value = priceSlider.value;
+            priceOutput.innerHTML =  "$0-"+"$"+value;
+        }
+
+        // Aggiornare il testo del prezzo quando l'utente interagisce con lo slider
+        priceSlider.addEventListener('input', updatePriceOutput);
+
+        // Impostare il testo iniziale del prezzo
+        updatePriceOutput();
+    });
+</script>
 <!-- Aggiungi il pulsante per l'aggiunta di un prodotto se l'utente è un amministratore -->
 <c:if test="${isAdmin == 1}">
     <form action="${pageContext.request.contextPath}/admin/addProduct.jsp" method="get">

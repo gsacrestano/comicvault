@@ -53,7 +53,7 @@ public class AccessControlFilter implements Filter {
         }
 
         //Consentire sempre accesso alle pagine del footer
-        if (path.equals("/common/mangapage.jsp") || path.equals("/common/info.jsp")) {
+        if (path.equals("/common/catalog.jsp") || path.equals("/common/info.jsp")) {
             chain.doFilter(request, response);
             return ;
         }
