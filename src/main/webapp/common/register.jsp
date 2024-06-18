@@ -58,21 +58,28 @@
             color: red;
             margin-bottom: 10px;
         }
-        a:visited , a:link{
-            color: #0d0d0d;
-        }
-
     </style>
-
+    <script src="../scripts/validate.js"></script>
 </head>
 <body>
 <div class="container">
     <h2>Login</h2>
     <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
-    <form action="${pageContext.request.contextPath}/common/Login" method="post">
+    <form id="regForm" action="${pageContext.request.contextPath}/common/Login" method="post" onsubmit="validate()">
         <div class="form-group">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <span id="errorName"></span>
+            </div>
+            <div class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" name="cognome" required>
+                <span id="errorLastname"></span>
+            </div>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required>
+            <span id="errorEmail"></span>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
@@ -81,8 +88,6 @@
         <div class="form-group">
             <button type="submit">Login</button>
         </div>
-        <a style="text-align: center" href="../index.jsp">Home</a>
-        <a  style="text-align: center" href="register.jsp"> Registrati </a>
     </form>
     <div id="errorMessages">
         <%
