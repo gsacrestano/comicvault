@@ -53,7 +53,7 @@ public class AccessControlFilter implements Filter {
         }
 
         // Gestione accesso alla pagina di login e registrazione
-        if (path.equals("/common/login.jsp") || path.equals("/common/Login") || path.equals("/common/register.jsp")) {
+        if (path.equals("/common/login.jsp") || path.equals("/common/Login") || path.equals("/common/signup.jsp")) {
             if (isLoggedIn != null && isLoggedIn) {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
                 return ;
