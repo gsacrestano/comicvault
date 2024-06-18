@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/common/RetrieveProductsServlet")
+@WebServlet("/admin/RetrieveProductsServlet")
 public class RetrieveProductsServlet extends HttpServlet {
 
     private ProdottoDao prodottoDao;

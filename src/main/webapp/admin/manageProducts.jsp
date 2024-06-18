@@ -16,7 +16,8 @@
 <h1>Gestione dei Prodotti</h1>
 
 <!--Collegamento per aggiungere un nuovo prodotto -->
-<button style="display: inline" class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Aggiungi prodotto</button>
+
+<button class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
 
 
 <!-- Tabella per visualizzare, aggiornare e cancellare prodotti esistenti -->
@@ -42,13 +43,27 @@
             <td>${product.descrizione}</td>
             <td>${product.isbn}</td>
             <td>${product.quantita}</td>
-            <td>${product.image_path}</td>
-            <td> <button type="submit">Aggiorna</button> </td>
-            <td> <button type="submit">Modifica</button> </td>
-            <td> <button type="submit">Cancella</button> </td>
+            <td><img src="${pageContext.request.contextPath}/images/products/${product.image_path}" width="50" height="50"> (${product.image_path})</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/admin/updateProduct.jsp" method="post">
+                    <input type="hidden" name="id" value="${product.id}" />
+                    <input type="hidden" name="nome" value="${product.nome}" />
+                    <input type="hidden" name="descrizione" value="${product.descrizione}" />
+                    <input type="hidden" name="isbn" value="${product.isbn}" />
+                    <input type="hidden" name="prezzo" value="${product.prezzo}" />
+                    <input type="hidden" name="quantita" value="${product.quantita}" />
+                    <input type="hidden" name="image_path" value="${product.image_path}" />
+                    <button type="submit">Modifica</button>
+                </form>
+            </td>
+            <td>
+                <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post" onsubmit="return confirm('Sei sicuro di voler cancellare questo prodotto?');">
+                    <input type="hidden" name="id" value="${product.id}" />
+                    <button type="submit">Cancella</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
-    </tbody>
 </table>
 
 <br>

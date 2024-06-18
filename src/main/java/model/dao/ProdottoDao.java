@@ -307,4 +307,35 @@ public class ProdottoDao implements IBeanDAO<ProdottoBean> {
         }
         return beans;
     }
+
+    public synchronized void doUpdate(ProdottoBean updatedProduct) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE " + TABLE_NAME + " SET Nome=?, Descrizione=?, Isbn=?, Prezzo=?, Quantita=?, image_path=? WHERE id=?";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, updatedProduct.getNome());
+            ps.setString(2, updatedProduct.getDescrizione());
+            ps.setString(3, updatedProduct.getIsbn());
+            ps.setFloat(4, updatedProduct.getPrezzo());
+            ps.setInt(5, updatedProduct.getQuantita());
+            ps.setString(6, updatedProduct.getImage_path());
+            ps.setInt(7, updatedProduct.getId());
+
+            ps.executeUpdate();
+        } finally
+        {
+            if (ps != null)
+                ps.close();
+
+            if (conn != null)
+                conn.close();
+        }
+    }
+
 }

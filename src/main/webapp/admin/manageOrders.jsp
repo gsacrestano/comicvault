@@ -21,6 +21,7 @@
             <th>Indirizzo</th>
             <th>Data</th>
             <th>Totale</th>
+            <th>Dettaglio</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
                 <td>${order.indirizzo}</td>
                 <td>${order.data}</td>
                 <td>${order.totale}</td>
+                <td>Pulsante dettaglio</td>
             </tr>
         </c:forEach>
     </tbody>
