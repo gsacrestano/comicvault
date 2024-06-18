@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Registrazione</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,33 +63,33 @@
 </head>
 <body>
 <div class="container">
-    <h2>Register</h2>
+    <h2>Registrazione</h2>
     <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
-    <form id="regForm" action="${pageContext.request.contextPath}/common/Login" method="post" onsubmit="validate()">
+    <form id="regForm" action="${pageContext.request.contextPath}/common/RegistrationServlet" method="post" onsubmit="validate()">
         <div class="form-group">
             <div class="form-group">
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" required>
                 <span id="errorName"></span>
             </div>
             <div class="form-group">
-                <label for="cognome">Cognome:</label>
+                <label for="cognome">Cognome</label>
                 <input type="text" id="cognome" name="cognome" required>
                 <span id="errorLastname"></span>
             </div>
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <input type="text" id="email" name="email" required>
             <span id="errorEmail"></span>
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
-            <button type="submit">Login</button>
+            <button type="submit">Continua</button>
         </div>
         <a style="text-align: center" href="../index.jsp">Home</a>
-        <a  style="text-align: center" href="login.jsp"> Loggati </a>
+        <a  style="text-align: center" href="login.jsp">Login</a>
     </form>
     <div id="errorMessages">
         <%

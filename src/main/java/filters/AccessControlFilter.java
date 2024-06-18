@@ -2,7 +2,6 @@ package filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -70,8 +69,19 @@ public class AccessControlFilter implements Filter {
             return ;
         }
 
-        //Gestione accesso alla pagina di login e registrazione
-        if (path.equals("/common/login.jsp") || path.equals("/common/Login") || path.equals("/common/signup.jsp")) {
+        //Gestione accesso alla pagina di registrazione
+        if (path.equals("/common/registration.jsp") || path.equals("/common/RegistrationServlet")) {
+            if (isLoggedIn != null && isLoggedIn) {
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
+                return ;
+            } else {
+                chain.doFilter(request, response);
+                return ;
+            }
+        }
+
+        //Gestione accesso alla pagina di login
+        if (path.equals("/common/login.jsp") || path.equals("/common/Login")) {
             if (isLoggedIn != null && isLoggedIn) {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
                 return ;
