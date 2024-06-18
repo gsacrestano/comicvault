@@ -38,7 +38,7 @@
 <h1>Benvenuto, Admin!</h1>
 <div style="width: 70%; margin: 0 15%">
     <a href="<%=request.getContextPath()%>/admin/ManageOrdersServlet" class="button">Lista Ordini</a>
-    <a href="<%=request.getContextPath()%>/common/RetrieveProductsServlet" class="button">Gestisci Prodotti</a>
+    <a href="<%=request.getContextPath()%>/admin/RetrieveProductsServlet" class="button">Gestisci Prodotti</a>
     <a href="<%=request.getContextPath()%>/admin/ManageUsersServlet" class="button">Lista Utenti</a>
     <a href="<%=request.getContextPath()%>/common/Logout" class="button">Logout</a>
 </div>
