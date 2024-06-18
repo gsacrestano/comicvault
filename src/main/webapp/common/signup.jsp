@@ -63,7 +63,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Login</h2>
+    <h2>Register</h2>
     <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
     <form id="regForm" action="${pageContext.request.contextPath}/common/Login" method="post" onsubmit="validate()">
         <div class="form-group">
@@ -88,6 +88,8 @@
         <div class="form-group">
             <button type="submit">Login</button>
         </div>
+        <a style="text-align: center" href="../index.jsp">Home</a>
+        <a  style="text-align: center" href="login.jsp"> Loggati </a>
     </form>
     <div id="errorMessages">
         <%
