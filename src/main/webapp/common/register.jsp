@@ -59,23 +59,27 @@
             margin-bottom: 10px;
         }
     </style>
+    <script src="../scripts/validate.js"></script>
 </head>
 <body>
 <div class="container">
     <h2>Login</h2>
     <img style="width: 70%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
-    <form action="${pageContext.request.contextPath}/common/Login" method="post">
+    <form id="regForm" action="${pageContext.request.contextPath}/common/Login" method="post" onsubmit="validate()">
         <div class="form-group">
             <div class="form-group">
-                <label for="nome">Email:</label>
+                <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required>
+                <span id="errorName"></span>
             </div>
             <div class="form-group">
-                <label for="cognome">Email:</label>
+                <label for="cognome">Cognome:</label>
                 <input type="text" id="cognome" name="cognome" required>
+                <span id="errorLastname"></span>
             </div>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required>
+            <span id="errorEmail"></span>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
