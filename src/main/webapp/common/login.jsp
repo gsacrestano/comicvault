@@ -82,7 +82,7 @@
             <button type="submit">Login</button>
         </div>
         <a style="text-align: center" href="../index.jsp">Home</a>
-        <a  style="text-align: center" href="register.jsp"> Registrati </a>
+        <a  style="text-align: center" href="signup.jsp"> Registrati </a>
     </form>
     <div id="errorMessages">
         <%
