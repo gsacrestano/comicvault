@@ -38,7 +38,7 @@
 <div>
     <a href="<%=request.getContextPath()%>/admin/ManageOrdersServlet" class="button">Gestisci Ordini</a>
     <a href="gestisci_prodotti.jsp" class="button">Gestisci Prodotti</a>
-    <a href="gestisci_utenti.jsp" class="button">Gestisci Utenti</a>
+    <a href="<%=request.getContextPath()%>/admin/ManageUsersServlet" class="button">Gestisci Utenti</a>
     <a href="<%=request.getContextPath()%>/common/Logout" class="button">Logout</a>
 </div>
 </body>

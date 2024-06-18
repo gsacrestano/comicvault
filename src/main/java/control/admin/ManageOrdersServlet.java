@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +23,6 @@ import java.util.List;
 public class ManageOrdersServlet extends HttpServlet {
 
     private OrdineDao ordineDao;
-
 
     @Override
     public void init() throws ServletException {
@@ -52,14 +50,11 @@ public class ManageOrdersServlet extends HttpServlet {
                 UtenteBean userBean = userDao.doRetrieveByKey(ordine.getIdUtente());
                 IndirizzoBean indirizzoBean = indirizzoDao.doRetrieveByKey(ordine.getIdIndirizzo());
 
-
                 ordineBean.setId(ordine.getId());
                 ordineBean.setEmailUtente(userBean.getEmail());
                 ordineBean.setIndirizzo(indirizzoBean.getVia() + ", " + indirizzoBean.getCitta() + " (" + indirizzoBean.getCap() + ")");
                 ordineBean.setData(ordine.getData());
                 ordineBean.setTotale(ordine.getTotale());
-
-                System.out.println(ordineBean);
 
                 ordiniCompleti.add(ordineBean);
             }
@@ -72,7 +67,4 @@ public class ManageOrdersServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante il recupero degli ordini dal database");
         }
     }
-
-
-
 }

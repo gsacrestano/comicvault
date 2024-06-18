@@ -80,9 +80,9 @@
             <h2 style="display: inline">Comic Vault</h2>
         </div>
         <ul class="footer-nav">
-            <li><a href="#">Manga</a></li>
-            <li><a href="/common/info.jsp">Comics</a></li>
-            <li><a href="#">Chi siamo</a></li>
+            <li><a href="common/mangapage.jsp">Manga</a></li>
+            <li><a href="">Comics</a></li>
+            <li><a href="common/info.jsp">Chi siamo</a></li>
         </ul>
 
     </div>
