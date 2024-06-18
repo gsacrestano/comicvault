@@ -47,7 +47,7 @@ public class AccessControlFilter implements Filter {
         }
 
         // Percorsi pubblici accessibili senza autenticazione
-        if (path.equals("/common/productDetails.jsp") || path.equals("/common/ProductDetailsServlet") || path.equals("/common/IndexServlet")) {
+        if (path.equals("/common/mangapage.jsp") || path.equals("/common/info.jsp") || path.equals("/common/productDetails.jsp") || path.equals("/common/ProductDetailsServlet") || path.equals("/common/IndexServlet")) {
             chain.doFilter(request, response);
             return ;
         }
