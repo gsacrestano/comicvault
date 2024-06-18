@@ -81,7 +81,7 @@
         </div>
         <ul class="footer-nav">
             <li><a href="#">Manga</a></li>
-            <li><a href="#">Comics</a></li>
+            <li><a href="/common/info.jsp">Comics</a></li>
             <li><a href="#">Chi siamo</a></li>
         </ul>
 
