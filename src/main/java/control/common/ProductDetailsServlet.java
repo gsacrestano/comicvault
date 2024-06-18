@@ -27,7 +27,17 @@ public class ProductDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("id"));
+
+        int productId = 1;
+
+        try
+        {
+            productId = Integer.parseInt(request.getParameter("id"));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
         try {
 
