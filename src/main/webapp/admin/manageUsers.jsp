@@ -39,6 +39,6 @@
 </table>
 
 <br>
-<a href="<%=request.getContextPath()%>/admin/homepage.jsp">Torna alla Homepage Admin</a>
+<a href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
 </body>
 </html>
