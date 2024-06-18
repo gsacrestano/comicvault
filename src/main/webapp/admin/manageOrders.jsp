@@ -3,15 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Gestione Ordini</title>
 </head>
 
 <body>
+<jsp:include page="/jsp/header.jsp"/>
 
 <h1>Gestione degli Ordini</h1>
 
-<table border="1">
+<table>
     <thead>
         <tr>
             <th>id</th>
@@ -36,5 +38,6 @@
 
 <br>
 <a href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
+<jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
