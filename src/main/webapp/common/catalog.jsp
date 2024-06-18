@@ -14,9 +14,9 @@
 
 
 <h1>PRODOTTI</h1>
-<form action="/filtra_prodotti" method="GET">
+<form action="${pageContext.request.contextPath}/common/CatalogServlet" method="GET">
     <div id="price-range">
-        <input type="range" min="0" max="100" value="50" class="slider" id="priceSlider">
+        <input type="range" min="0" max="100" value="${maxPrice}" class="slider" id="priceSlider" name="maxPrice">
         <div id="price-output">$0 - $50</div>
     </div>
     <button id="catologButton" type="submit">Filtra</button>
@@ -40,12 +40,6 @@
         updatePriceOutput();
     });
 </script>
-<!-- Aggiungi il pulsante per l'aggiunta di un prodotto se l'utente è un amministratore -->
-<c:if test="${isAdmin == 1}">
-    <form action="${pageContext.request.contextPath}/admin/addProduct.jsp" method="get">
-        <button type="submit">Aggiungi Prodotto</button>
-    </form>
-</c:if>
 
 <div class="viewer">
     <c:forEach var="product" items="${products}">

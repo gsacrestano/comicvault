@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/common/CatalogServlet")
 public class CatalogServlet extends HttpServlet {
@@ -31,6 +32,24 @@ public class CatalogServlet extends HttpServlet {
         try {
             // Recupera tutti i prodotti
             List<ProdottoBean> products = (List<ProdottoBean>) prodottoDao.doRetrieveAll("id");
+            int priceAttribute = Integer.MAX_VALUE;
+
+            try
+            {
+                priceAttribute = Integer.parseInt(request.getParameter("maxPrice"));
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            if (priceAttribute <= 0)
+                priceAttribute = Integer.MAX_VALUE;
+
+            final int  maxPrice = priceAttribute;
+
+            //Filtrare i prodotti da mostrare
+            products = products.stream().filter(product -> product.getPrezzo() <= maxPrice).collect(Collectors.toList());
 
             // Passa i dati recuperati come attributi alla richiesta
             request.setAttribute("products", products);
