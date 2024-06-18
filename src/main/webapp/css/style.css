@@ -42,21 +42,32 @@ img{
 }
 
 .card button {
-    width: 75%;
+    width: 60%; /* Riduce la larghezza del bottone */
     font-size: 1rem;
     text-align: center;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem; /* Aumenta l'altezza del bottone */
     margin: 0 auto;
     background-color: #F23A29;
     color: white;
     cursor: pointer;
     border: none;
-
+    border-radius: 0.25rem; /* Angoli arrotondati */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione per l'hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .card button:hover {
     background-color: #D93D3D;
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
 }
+
+/* Migliora l'accessibilità con uno stile per il focus */
+.card button:focus {
+    outline: 2px solid #005fcc; /* Bordo blu per il focus */
+    outline-offset: 2px; /* Sposta leggermente il bordo verso l'esterno */
+}
+
+
 
 .productView {
     width: 60%;
