@@ -46,13 +46,31 @@ public class AccessControlFilter implements Filter {
             return;
         }
 
-        // Percorsi pubblici accessibili senza autenticazione
-        if (path.equals("/common/mangapage.jsp") || path.equals("/common/info.jsp") || path.equals("/common/productDetails.jsp") || path.equals("/common/ProductDetailsServlet") || path.equals("/common/IndexServlet")) {
+        //Consentire sempre accesso al catalogo
+        if (path.equals("/common/catalog.jsp") || path.equals("/common/CatalogServlet")) {
             chain.doFilter(request, response);
             return ;
         }
 
-        // Gestione accesso alla pagina di login e registrazione
+        //Consentire sempre accesso alle pagine del footer
+        if (path.equals("/common/mangapage.jsp") || path.equals("/common/info.jsp")) {
+            chain.doFilter(request, response);
+            return ;
+        }
+
+        //Consentire sempre accesso alla pagina di dettaglio del prodotto
+        if (path.equals("/common/productDetails.jsp") || path.equals("/common/ProductDetailsServlet")) {
+            chain.doFilter(request, response);
+            return ;
+        }
+
+        //Consentire sempre accesso alla pagina index
+        if (path.equals("/common/IndexServlet")) {
+            chain.doFilter(request, response);
+            return ;
+        }
+
+        //Gestione accesso alla pagina di login e registrazione
         if (path.equals("/common/login.jsp") || path.equals("/common/Login") || path.equals("/common/signup.jsp")) {
             if (isLoggedIn != null && isLoggedIn) {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");
@@ -63,7 +81,7 @@ public class AccessControlFilter implements Filter {
             }
         }
 
-        // Accesso per utenti loggati e amministratori
+        //Gestione permessi generale per utenti loggati
         if (path.contains("/common/") && (isAdmin==null)) {
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/common/login.jsp");
             return ;
