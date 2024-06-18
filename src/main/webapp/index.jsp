@@ -45,6 +45,7 @@
   </c:forEach>
 </div>
 
+<a href="${pageContext.request.contextPath}/common/CatalogServlet">Vedi tutti i prodotti</a>
 
 <jsp:include page="jsp/footer.jsp"/>
 </body>
