@@ -35,6 +35,7 @@
             height: 75px;
             width: 75px;
             margin-right: 10px;
+            border-radius: 55%;
         }
 
         .topnav .links {
