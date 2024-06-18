@@ -10,6 +10,13 @@ img{
     border-radius: 0;
 
 }
+a{
+    color: #0d0d0d;
+}
+a:visited{
+    color: #0d0d0d;
+    text-decoration: none;
+}
 .viewer {
     margin: .5% 1%;
     border-top: 0;
@@ -40,6 +47,25 @@ img{
 .card p{
     margin: 10px 0;
 }
+.btn {
+    width: 60%; /* Riduce la larghezza del bottone */
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.75rem 1rem; /* Aumenta l'altezza del bottone */
+    margin: 0 auto;
+    background-color: #F23A29;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.25rem; /* Angoli arrotondati */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione per l'hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.btn:hover {
+    background-color: #D93D3D;
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+}
 
 .card button {
     width: 60%; /* Riduce la larghezza del bottone */
@@ -66,10 +92,29 @@ img{
     outline: 2px solid #005fcc; /* Bordo blu per il focus */
     outline-offset: 2px; /* Sposta leggermente il bordo verso l'esterno */
 }
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+th, td {
+    border: 1px solid #000000; /* Colore nero per i bordi */
+    padding: 10px;
+    text-align: left;
+
+}
+th {
+    background-color: #D93D3D; /* Colore rosso scuro per l'intestazione */
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Colore di sfondo grigio chiaro per righe pari */
+}
 
 
-
-.productView {
+    .productView {
     width: 60%;
     margin: 0 15%;
     padding: 5%;
@@ -155,6 +200,13 @@ img{
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         display: inline-block;
 
+    }
+    table {
+        max-width: 355px;
+        margin: 10px 0;
+    }
+    th, td {
+        font-size: 14px;
     }
 }
 @media only screen and (max-width: 480px){

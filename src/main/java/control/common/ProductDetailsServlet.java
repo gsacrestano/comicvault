@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 @WebServlet("/common/ProductDetailsServlet")
 public class ProductDetailsServlet extends HttpServlet {
@@ -28,7 +29,7 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int productId = 1;
+        int productId = -1;
 
         try
         {
@@ -42,8 +43,9 @@ public class ProductDetailsServlet extends HttpServlet {
         try {
 
             ProdottoBean product = prodottoDao.doRetrieveByKey(productId);
+            LinkedList<ProdottoBean> latestProducts = (LinkedList<ProdottoBean>) prodottoDao.doRetrieveAll("id");
 
-            if (product == null) {
+            if (product == null || (productId <= 0) || (productId > latestProducts.getLast().getId())) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Prodotto non trovato con ID: " + productId);
                 return ;
             }

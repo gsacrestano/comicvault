@@ -45,7 +45,12 @@
   </c:forEach>
 </div>
 
-<a href="${pageContext.request.contextPath}/common/CatalogServlet">Vedi tutti i prodotti</a>
+
+<div class="card">
+  <button onclick="location.href='${pageContext.request.contextPath}/common/CatalogServlet'">Tutti i prodotti</button>
+</div>
+
+
 
 <jsp:include page="jsp/footer.jsp"/>
 </body>

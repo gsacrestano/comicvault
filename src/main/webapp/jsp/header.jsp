@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -28,7 +30,7 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 150%;
         }
 
         .topnav img {
@@ -123,7 +125,21 @@
     </div>
 
     <div class="links">
-        <a href="${pageContext.request.contextPath}/common/login.jsp">Accedi</a>
+
+        <!-- Scelta pulsante a seconda se loggato (e tipo di permessi)-->
+        <c:choose>
+            <c:when test="${isAdmin == 1}"> <!-- Accesso effettuato come admin -->
+                <a href="${pageContext.request.contextPath}/admin/homepage.jsp">Profilo</a>
+            </c:when>
+            <c:when test="${isAdmin == 0}"> <!-- Accesso effettuato come user -->
+                <a href="${pageContext.request.contextPath}/common/homepage.jsp">Profilo</a>
+
+            </c:when>
+            <c:otherwise> <!-- Non ancora effettuato l'accesso -->
+                <a href="${pageContext.request.contextPath}/common/login.jsp">Accedi</a>
+            </c:otherwise>
+        </c:choose>
+
         <a href="${pageContext.request.contextPath}/index.jsp">Carrello</a>
     </div>
 </div>
