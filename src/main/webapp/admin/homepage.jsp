@@ -9,7 +9,8 @@
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
-<h1>Benvenuto, Admin!</h1>
+<h1>Benvenuto, ${account.nome}!</h1>
+
 <div style="width: 70%; margin: 0 15%">
     <a href="<%=request.getContextPath()%>/admin/ManageOrdersServlet" class="aAdminPage">Lista Ordini</a>
     <a href="<%=request.getContextPath()%>/admin/RetrieveProductsServlet" class="aAdminPage">Gestisci Prodotti</a>
