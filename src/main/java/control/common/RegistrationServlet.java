@@ -22,59 +22,84 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
-
         DataSource ds = (DataSource) this.getServletContext().getAttribute("DataSource");
         utenteDao = new UtenteDao(ds);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<String> errors = validateInput(request);
+
+        if (!errors.isEmpty())
+        {
+            forwardToRegistrationPageWithErrors(request, response, errors);
+            return ;
+        }
+
+        UtenteBean newUser = createUserBeanFromRequest(request);
+
+        try
+        {
+            utenteDao.doSave(newUser);
+
+            setSessionAttributes(request, newUser);
+
+            response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
+        }
+        catch (SQLException e)
+        {
+            throw new ServletException("Errore durante il salvataggio dei dati", e);
+        }
+    }
+
+    private List<String> validateInput(HttpServletRequest request) {
+        List<String> errors = new ArrayList<>();
+
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String telefono = request.getParameter("telefono");
 
-        List<String> errors = new ArrayList<>();
+        if (isNullOrEmpty(nome)) errors.add("Il nome è obbligatorio.");
+        if (isNullOrEmpty(cognome)) errors.add("Il cognome è obbligatorio.");
+        if (isInvalidEmail(email)) errors.add("L'email non è valida.");
+        if (isNullOrEmpty(password)) errors.add("La password è obbligatoria.");
 
-        if (nome == null || nome.isEmpty()) {
-            errors.add("Il nome è obbligatorio.");
-        }
-        if (cognome == null || cognome.isEmpty()) {
-            errors.add("Il cognome è obbligatorio.");
-        }
-        if (email == null || email.isEmpty() || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            errors.add("L'email non è valida.");
-        }
-        if (password == null || password.isEmpty()) {
-            errors.add("La password è obbligatoria.");
-        }
+        return errors;
+    }
 
-        if (!errors.isEmpty()) {
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("/common/registration.jsp").forward(request, response);
-            return ;
-        }
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 
+    private boolean isInvalidEmail(String email) {
+        return isNullOrEmpty(email) || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+    }
+
+    private void forwardToRegistrationPageWithErrors(HttpServletRequest request, HttpServletResponse response, List<String> errors)
+            throws ServletException, IOException {
+        request.setAttribute("errors", errors);
+        request.getRequestDispatcher("/common/registration.jsp").forward(request, response);
+    }
+
+    private UtenteBean createUserBeanFromRequest(HttpServletRequest request) {
         UtenteBean newUser = new UtenteBean();
-        newUser.setNome(nome);
-        newUser.setCognome(cognome);
-        newUser.setEmail(email);
-        newUser.setPassword(toHash(password));
-        newUser.setTelefono(telefono);
+
+        newUser.setNome(request.getParameter("nome"));
+        newUser.setCognome(request.getParameter("cognome"));
+        newUser.setEmail(request.getParameter("email"));
+        newUser.setPassword(toHash(request.getParameter("password")));
+        newUser.setTelefono(request.getParameter("telefono"));
         newUser.setIsAdmin(0); // Imposta come non admin per default
 
-        try {
-            utenteDao.doSave(newUser);
-        } catch (SQLException e) {
-            throw new ServletException("Errore durante il salvataggio dei dati", e);
-        }
+        return newUser;
+    }
 
+    private void setSessionAttributes(HttpServletRequest request, UtenteBean newUser) {
+        request.getSession().setAttribute("account", newUser);
         request.getSession().setAttribute("isAdmin", newUser.getIsAdmin());
-        request.getSession().setAttribute("isLoggedIn", Boolean.TRUE);
-
-        response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
+        request.getSession().setAttribute("isLoggedIn", Boolean.FALSE);
+        request.getSession().setAttribute("userId", newUser.getId());
     }
 
     private String toHash(String str) {
@@ -99,4 +124,3 @@ public class RegistrationServlet extends HttpServlet {
         return hashString.toString();
     }
 }
-
