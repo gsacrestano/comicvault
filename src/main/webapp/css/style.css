@@ -311,8 +311,10 @@ input[type="file"] {
 .container a , .container a:visited{
     color: black;
 }
+
 .form-group {
-    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 .form-group label {
     display: block;
@@ -354,6 +356,7 @@ input[type="file"] {
         padding: 15px;
     }
 }
+
 @media only screen and (max-width: 900px){
     .card {
         background-color: white;
