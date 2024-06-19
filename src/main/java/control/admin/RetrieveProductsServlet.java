@@ -21,24 +21,27 @@ public class RetrieveProductsServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-
         DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
         prodottoDao = new ProdottoDao(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Recupera tutti i prodotti
-            List<ProdottoBean> products = (List<ProdottoBean>) prodottoDao.doRetrieveAll("id");
+        try
+        {
+            List<ProdottoBean> products = retrieveAllProducts();
 
-            // Passa i dati recuperati come attributi alla richiesta
             request.setAttribute("products", products);
 
-            // Inoltra la richiesta alla JSP
             request.getRequestDispatcher("/admin/manageProducts.jsp").forward(request, response);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new ServletException("Errore durante il recupero dei dati dal database", e);
         }
+    }
+
+    private List<ProdottoBean> retrieveAllProducts() throws SQLException {
+        return (List<ProdottoBean>) prodottoDao.doRetrieveAll("id");
     }
 }
