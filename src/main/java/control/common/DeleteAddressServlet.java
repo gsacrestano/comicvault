@@ -26,37 +26,49 @@ public class DeleteAddressServlet extends HttpServlet {
         utenteIndirizzoDao = new UtenteIndirizzoDao(ds);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer addressId = Integer.parseInt(request.getParameter("id"));
+        Integer addressId = parseAddressId(request, response);
 
-        if (addressId == null )
-        {
-            response.sendRedirect(request.getContextPath() + "/common/manageAddresses.jsp?error=deletionFailed");
-            return ;
-        }
+        if (addressId == null)
+            redirectToErrorPage(response, "deletionFailed");
 
         try
         {
-            int id = addressId;
+            if (!deleteAddress(addressId))
+                redirectToErrorPage(response, "deletionFailed");
 
-            boolean deleted1 = utenteIndirizzoDao.doDelete(id);
-            boolean deleted2 = indirizzoDao.doDelete(id);
-
-            if (!deleted1 || !deleted2)
-            {
-                response.sendRedirect(request.getContextPath() + "/common/manageAddresses.jsp?error=deletionFailed");
-                return ;
-            }
-
-            response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountAddresses");
-        } catch (NumberFormatException e)
-        {
-            response.sendRedirect(request.getContextPath() + "/common/manageAddresses.jsp?error=deletionFailed");
-        } catch (SQLException e)
+            redirectToPage(response, "/common/RetrieveAccountAddresses");
+        }
+        catch (SQLException e)
         {
             throw new ServletException(e);
         }
     }
+
+    private Integer parseAddressId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try
+        {
+            return Integer.parseInt(request.getParameter("id"));
+        }
+        catch (NumberFormatException e)
+        {
+            redirectToErrorPage(response, "deletionFailed");
+            return null;
+        }
+    }
+
+    private boolean deleteAddress(int addressId) throws SQLException {
+        boolean userAddressDeleted = utenteIndirizzoDao.doDelete(addressId);
+        boolean addressDeleted = indirizzoDao.doDelete(addressId);
+        return userAddressDeleted && addressDeleted;
+    }
+
+    private void redirectToErrorPage(HttpServletResponse response, String errorMessage) throws IOException {
+        response.sendRedirect(getServletContext().getContextPath() + "/common/manageAddresses.jsp?error=" + errorMessage);
+    }
+
+    private void redirectToPage(HttpServletResponse response, String path) throws IOException {
+        response.sendRedirect(getServletContext().getContextPath() + path);
+    }
 }
-
-
