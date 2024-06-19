@@ -141,7 +141,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
 
         Collection<IndirizzoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL";
+        String sql = "SELECT * FROM " + TABLE_NAME;
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";

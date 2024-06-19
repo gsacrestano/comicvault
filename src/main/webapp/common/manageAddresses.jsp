@@ -40,6 +40,13 @@
                 </form>
             </div>
 
+            <div>
+                <form action="${pageContext.request.contextPath}/common/DeleteAddressServlet" method="post" onsubmit="return confirm('Sei sicuro di voler cancellare questo prodotto?');">
+                    <input type="hidden" name="id" value="${address.id}" />
+                    <button type="submit">Cancella</button>
+                </form>
+            </div>
+
         </div>
     </c:forEach>
 </div>

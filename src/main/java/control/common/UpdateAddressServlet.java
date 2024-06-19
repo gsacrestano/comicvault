@@ -19,7 +19,6 @@ import java.sql.SQLException;
 public class UpdateAddressServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
 
         int addressId = Integer.parseInt(request.getParameter("id"));
 
