@@ -31,14 +31,14 @@ public class DeleteAddressServlet extends HttpServlet {
         Integer addressId = parseAddressId(request, response);
 
         if (addressId == null)
-            redirectToErrorPage(response, "deletionFailed");
+            redirectToErrorPage(response, "addressId is null");
 
         try
         {
             if (!deleteAddress(addressId))
                 redirectToErrorPage(response, "deletionFailed");
 
-            redirectToPage(response, "/common/RetrieveAccountAddresses");
+            response.sendRedirect(getServletContext().getContextPath() + "/common/RetrieveAccountAddresses");
         }
         catch (SQLException e)
         {
@@ -66,9 +66,5 @@ public class DeleteAddressServlet extends HttpServlet {
 
     private void redirectToErrorPage(HttpServletResponse response, String errorMessage) throws IOException {
         response.sendRedirect(getServletContext().getContextPath() + "/common/manageAddresses.jsp?error=" + errorMessage);
-    }
-
-    private void redirectToPage(HttpServletResponse response, String path) throws IOException {
-        response.sendRedirect(getServletContext().getContextPath() + path);
     }
 }
