@@ -10,6 +10,65 @@ img{
     border-radius: 0;
 
 }
+.topnav {
+    overflow: hidden;
+    background-color: #D93D3D;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
+.topnav a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 150%;
+}
+.topnav a:visited{
+    color: white;
+}
+
+.topnav img {
+    height: 75px;
+    width: 75px;
+    margin-right: 10px;
+    border-radius: 55%;
+}
+
+.topnav .links {
+    display: flex;
+    align-items: center;
+}
+
+.topnav .links a {
+    margin-left: 10px;
+}
+
+.topnav .search-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    font-size: 17px;
+    border: none;
+}
+
+.topnav .search-container button {
+    padding: 6px 10px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
 a{
     color: #0d0d0d;
 }
@@ -180,6 +239,111 @@ tr:nth-child(even) {
     font-size: 18px;
     margin-top: 10px;
 }
+#addProductForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 70%;
+    margin: 1% auto;
+}
+#addProductLabel {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: black;
+}
+.addProductInput, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="file"] {
+    padding: 3px;
+}
+#addProductButton {
+    background-color: #F23A29;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#addProductButton:hover {
+    background-color: #F23A29;
+}
+.aAdminPage {
+    text-align: center;
+    font-size: 100%;
+    width: 100%;
+    display: block;
+    padding: 1%;
+    background-color: #F23A29;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 1%;
+}
+.aAdminPage:hover {
+    background-color: #bd2130;
+}
+.aAdminPage:visited {
+    color: white;
+}
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    margin: 1% auto;
+}
+.container h2 {
+    margin-top: 0;
+}
+.container a , .container a:visited{
+    color: black;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 70%;
+    padding: 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 auto 5px;
+}
+.form-group button {
+    width: 70%;
+    padding: 10px;
+    background-color: #F23A29;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #D93D3D;
+}
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 600px) {
     .checkbox-inline {
         display: block;
@@ -219,5 +383,40 @@ tr:nth-child(even) {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         display: inline-block;
 
+    }
+
+}
+@media (max-width: 768px) {
+    .topnav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topnav .search-container {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .topnav .search-container form {
+        width: 100%;
+        display: flex;
+    }
+
+    .topnav input[type=text] {
+        flex: 1;
+    }
+
+    .topnav .links {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .topnav .links a {
+        margin-left: 0;
+    }
+    .container{
+        width: 70%;
     }
 }
