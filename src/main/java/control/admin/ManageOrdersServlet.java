@@ -27,44 +27,59 @@ public class ManageOrdersServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-
         DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
         ordineDao = new OrdineDao(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            List<OrdineBean> ordini = (List<OrdineBean>) ordineDao.doRetrieveAll("id");
-
-            //Recupero dati completi
-            List<OrdineCompletoBean> ordiniCompleti = new LinkedList<>();
-
-            for (OrdineBean ordine : ordini) {
-
-                OrdineCompletoBean ordineBean = new OrdineCompletoBean();
-
-                UtenteDao userDao = new UtenteDao((DataSource) getServletContext().getAttribute("DataSource"));
-                IndirizzoDao indirizzoDao = new IndirizzoDao((DataSource) getServletContext().getAttribute("DataSource"));
-
-                UtenteBean userBean = userDao.doRetrieveByKey(ordine.getIdUtente());
-                IndirizzoBean indirizzoBean = indirizzoDao.doRetrieveByKey(ordine.getIdIndirizzo());
-
-                ordineBean.setId(ordine.getId());
-                ordineBean.setEmailUtente(userBean.getEmail());
-                ordineBean.setIndirizzo(indirizzoBean.getVia() + ", " + indirizzoBean.getCitta() + " (" + indirizzoBean.getCap() + ")");
-                ordineBean.setData(ordine.getData());
-                ordineBean.setTotale(ordine.getTotale());
-
-                ordiniCompleti.add(ordineBean);
-            }
+        try
+        {
+            List<OrdineCompletoBean> ordiniCompleti = retrieveCompleteOrders();
 
             request.setAttribute("orders", ordiniCompleti);
 
             request.getRequestDispatcher("/admin/manageOrders.jsp").forward(request, response);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore durante il recupero degli ordini dal database");
         }
+    }
+
+    private List<OrdineCompletoBean> retrieveCompleteOrders() throws SQLException {
+        List<OrdineBean> ordini = (List<OrdineBean>) ordineDao.doRetrieveAll("id");
+
+        List<OrdineCompletoBean> ordiniCompleti = new LinkedList<>();
+
+        for (OrdineBean ordine : ordini) {
+            UtenteBean utente = retrieveUser(ordine.getIdUtente());
+            IndirizzoBean indirizzo = retrieveAddress(ordine.getIdIndirizzo());
+
+            OrdineCompletoBean ordineCompleto = new OrdineCompletoBean();
+
+            ordineCompleto.setId(ordine.getId());
+            ordineCompleto.setEmailUtente(utente.getEmail());
+            ordineCompleto.setIndirizzo(indirizzo.getVia() + ", " + indirizzo.getCitta() + " (" + indirizzo.getCap() + ")");
+            ordineCompleto.setData(ordine.getData());
+            ordineCompleto.setTotale(ordine.getTotale());
+
+            ordiniCompleti.add(ordineCompleto);
+        }
+
+        return ordiniCompleti;
+    }
+
+    private UtenteBean retrieveUser(int userId) throws SQLException {
+        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+        UtenteDao userDao = new UtenteDao(dataSource);
+        return userDao.doRetrieveByKey(userId);
+    }
+
+    private IndirizzoBean retrieveAddress(int addressId) throws SQLException {
+        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+        IndirizzoDao indirizzoDao = new IndirizzoDao(dataSource);
+        return indirizzoDao.doRetrieveByKey(addressId);
     }
 }
