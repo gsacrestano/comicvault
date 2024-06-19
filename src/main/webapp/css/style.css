@@ -277,6 +277,26 @@ input[type="file"] {
 #addProductButton:hover {
     background-color: #F23A29;
 }
+.aAdminPage {
+    text-align: center;
+    font-size: 100%;
+    width: 100%;
+    display: block;
+    padding: 1%;
+    background-color: #F23A29;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 1%;
+}
+.aAdminPage:hover {
+    background-color: #bd2130;
+}
+.aAdminPage:visited {
+    color: white;
+}
 @media (max-width: 600px) {
     .checkbox-inline {
         display: block;
