@@ -9,9 +9,10 @@
 </head>
 <body>
 <jsp:include page="/jsp/header.jsp"/>
-<h1>Benvenuto, User!</h1>
+<h1>Benvenuto, ${account.nome}!</h1>
+
 <div style="width: 70%; margin: 0 15%">
-    <a href="<%=request.getContextPath()%>/common/manageAccountDetails.jsp" class="aAdminPage">Dati Personali</a>
+    <a href="<%=request.getContextPath()%>/common/updateAccountDetails.jsp" class="aAdminPage">Dati Personali</a>
     <a href="<%=request.getContextPath()%>/common/manageAddresses.jsp" class="aAdminPage">Gestione Indirizzi</a>
     <a href="<%=request.getContextPath()%>/common/ordersHistory.jsp" class="aAdminPage">Cronologia Ordini</a>
     <a href="<%=request.getContextPath()%>/common/Logout" class="aAdminPage">Logout</a>

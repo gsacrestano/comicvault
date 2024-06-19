@@ -229,4 +229,32 @@ public class UtenteDao implements IBeanDAO<UtenteBean> {
         }
         return beans;
     }
+
+    public synchronized void doUpdate(UtenteBean updatedUser) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE " + TABLE_NAME + " SET Nome = ?, Cognome = ?, Telefono = ? WHERE id = ?";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, updatedUser.getNome());
+            ps.setString(2, updatedUser.getCognome());
+            ps.setString(3, updatedUser.getTelefono());
+            ps.setInt(4, updatedUser.getId());
+
+            ps.executeUpdate();
+        } finally
+        {
+            if (ps != null)
+                ps.close();
+
+            if (conn != null)
+                conn.close();
+        }
+    }
 }
