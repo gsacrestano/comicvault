@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 
 <head>
@@ -26,6 +27,19 @@
             <p>Provincia: ${address.provincia}</p>
             <p>Cap: ${address.cap}</p>
             <p>Nazione: ${address.nazione}</p>
+
+            <div>
+                <form action="${pageContext.request.contextPath}/common/updateAddress.jsp" method="post">
+                    <input type="hidden" name="id" value="${address.id}" />
+                    <input type="hidden" name="via" value="${address.via}" />
+                    <input type="hidden" name="citta" value="${address.citta}" />
+                    <input type="hidden" name="provincia" value="${address.provincia}" />
+                    <input type="hidden" name="cap" value="${address.cap}" />
+                    <input type="hidden" name="nazione" value="${address.nazione}" />
+                    <button type="submit">Modifica</button>
+                </form>
+            </div>
+
         </div>
     </c:forEach>
 </div>
