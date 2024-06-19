@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
@@ -36,29 +33,47 @@ public class AddProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Estrai i parametri della richiesta
+        try
+        {
+            String fileName = uploadFile(request);
+
+            ProdottoBean prodotto = createProdottoBean(request, fileName);
+
+            prodottoDao.doSave(prodotto);
+
+            redirectToCatalogPage(request, response);
+        }
+        catch (SQLException e)
+        {
+            throw new ServletException("ERROR IN 'AddProductServlet.java': PRODUCT CREATION FAILED", e);
+        }
+    }
+
+    private String uploadFile(HttpServletRequest request) throws IOException, ServletException {
+        Part filePart = request.getPart("image_path");
+
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); //Sanitizzare il nome del file
+        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+
+        //Controllo esistenza directory di salvataggio
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        File file = new File(uploadDir, fileName);
+        filePart.write(file.getAbsolutePath());
+
+        return fileName;
+    }
+
+    private ProdottoBean createProdottoBean(HttpServletRequest request, String fileName) {
         String nome = request.getParameter("nome");
         String descrizione = request.getParameter("descrizione");
         String isbn = request.getParameter("isbn");
         float prezzo = Float.parseFloat(request.getParameter("prezzo"));
         int quantita = Integer.parseInt(request.getParameter("quantita"));
 
-        // Gestisci il caricamento del file
-        Part filePart = request.getPart("image_path");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // Sanitize the file name
-        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-
-        // Crea la cartella se non esiste
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
-
-        // Salva il file
-        File file = new File(uploadDir, fileName);
-        filePart.write(file.getAbsolutePath());
-
-        // Crea un nuovo ProdottoBean
         ProdottoBean prodotto = new ProdottoBean();
         prodotto.setNome(nome);
         prodotto.setDescrizione(descrizione);
@@ -67,14 +82,10 @@ public class AddProductServlet extends HttpServlet {
         prodotto.setQuantita(quantita);
         prodotto.setImage_path(fileName);
 
-        try {
-            // Salva il prodotto usando il DAO
-            prodottoDao.doSave(prodotto);
-            // Reindirizza a una pagina di successo o mostra un messaggio di successo
-            request.getRequestDispatcher("/common/catalog.jsp").forward(request, response);
-        } catch (SQLException e) {
-            throw new ServletException("Database error during product insertion", e);
-        }
+        return prodotto;
+    }
+
+    private void redirectToCatalogPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/common/catalog.jsp").forward(request, response);
     }
 }
-
