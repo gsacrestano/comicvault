@@ -1,12 +1,9 @@
 package control.common;
 
 import model.bean.IndirizzoBean;
-import model.bean.ProdottoBean;
 import model.bean.UtenteIndirizzoBean;
 import model.dao.IndirizzoDao;
-import model.dao.ProdottoDao;
 import model.dao.UtenteIndirizzoDao;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,59 +30,58 @@ public class AddAddressServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try
+        {
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
 
-        //Prelevare id dell'account
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
+            IndirizzoBean indirizzoBean = extractAddressFromRequest(request);
 
-        // Estrai i parametri della richiesta
+            int newAddressId = findNextAddressId();
+
+            indirizzoBean.setId(newAddressId);
+
+            saveAddressAndUserLink(indirizzoBean, userId);
+
+            response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountAddresses");
+        }
+        catch (SQLException e)
+        {
+            throw new ServletException("Database error during address insertion", e);
+        }
+    }
+
+    private IndirizzoBean extractAddressFromRequest(HttpServletRequest request) {
         String via = request.getParameter("via");
         String citta = request.getParameter("citta");
         String provincia = request.getParameter("provincia");
         String cap = request.getParameter("cap");
         String nazione = request.getParameter("nazione");
 
-
-        // Crea un nuovo IndirizzoBean
         IndirizzoBean indirizzoBean = new IndirizzoBean();
+
         indirizzoBean.setVia(via);
         indirizzoBean.setCitta(citta);
         indirizzoBean.setProvincia(provincia);
         indirizzoBean.setCap(cap);
         indirizzoBean.setNazione(nazione);
 
-        //Trovare id disponibile
-        LinkedList<IndirizzoBean> latestAddresses = new LinkedList<>();
+        return indirizzoBean;
+    }
 
-        try
-        {
-            latestAddresses= (LinkedList<IndirizzoBean>) indirizzoDao.doRetrieveAll("id");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private int findNextAddressId() throws SQLException {
+        LinkedList<IndirizzoBean> latestAddresses = (LinkedList<IndirizzoBean>) indirizzoDao.doRetrieveAll("id");
+        return latestAddresses.getLast().getId() + 1;
+    }
 
-        indirizzoBean.setId(latestAddresses.getLast().getId() + 1);
+    private void saveAddressAndUserLink(IndirizzoBean indirizzoBean, Integer userId) throws SQLException {
+        indirizzoDao.doSave(indirizzoBean);
 
-        System.out.println(indirizzoBean.toString());
+        UtenteIndirizzoBean utenteIndirizzoBean = new UtenteIndirizzoBean();
 
-        try
-        {
-            // Salva il prodotto usando il DAO
-            indirizzoDao.doSave(indirizzoBean);
+        utenteIndirizzoBean.setIdIndirizzo(indirizzoBean.getId());
+        utenteIndirizzoBean.setIdUtente(userId);
+        utenteIndirizzoBean.setIsDefault(0);
 
-            UtenteIndirizzoBean utenteIndirizzoBean = new UtenteIndirizzoBean();
-
-            utenteIndirizzoBean.setIdIndirizzo(indirizzoBean.getId());
-            utenteIndirizzoBean.setIdUtente(userId);
-            utenteIndirizzoBean.setIsDefault(0);
-
-            utenteIndirizzoDao.doSave(utenteIndirizzoBean);
-        } catch (SQLException e) {
-            throw new ServletException("Database error during product insertion", e);
-        }
-
-        //SUCCESSO: Reindirizzare alla pagina per visualizzare gli indirizzi
-        response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountAddresses");
+        utenteIndirizzoDao.doSave(utenteIndirizzoBean);
     }
 }
-
-
