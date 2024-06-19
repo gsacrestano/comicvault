@@ -20,40 +20,62 @@ public class ProductDetailsServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
-
         DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
         prodottoDao = new ProdottoDao(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int productId = -1;
+        int productId = parseProductId(request.getParameter("id"));
 
         try
         {
-            productId = Integer.parseInt(request.getParameter("id"));
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
 
-        try {
+            if (!checkProductIdValidity(productId))
+            {
+                redirectToPageWithError(request, response,"Id del prodotto non valido");
+                return ;
+            }
 
             ProdottoBean product = prodottoDao.doRetrieveByKey(productId);
-            LinkedList<ProdottoBean> latestProducts = (LinkedList<ProdottoBean>) prodottoDao.doRetrieveAll("id");
 
-            if (product == null || (productId <= 0) || (productId > latestProducts.getLast().getId())) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Prodotto non trovato con ID: " + productId);
+            if (product == null)
+            {
+                redirectToPageWithError(request, response,"Prodotto non trovato");
                 return ;
             }
 
             request.setAttribute("product", product);
+
             request.getRequestDispatcher("/common/productDetails.jsp").forward(request, response);
-        } catch (NumberFormatException | SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new ServletException("Errore durante il recupero del prodotto", e);
         }
+    }
+
+    private int parseProductId(String idParam) {
+        try
+        {
+            return Integer.parseInt(idParam);
+        }
+        catch (NumberFormatException e)
+        {
+            return -1;
+        }
+    }
+
+    private Boolean checkProductIdValidity(int productId) throws SQLException {
+        LinkedList<ProdottoBean> latestProducts = (LinkedList<ProdottoBean>) prodottoDao.doRetrieveAll("id");
+
+        if ((productId <= 0) || (productId > latestProducts.getLast().getId()))
+            return Boolean.FALSE;
+
+        return Boolean.TRUE;
+    }
+
+    private void redirectToPageWithError(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, error);
     }
 }
