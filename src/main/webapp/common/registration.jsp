@@ -12,25 +12,28 @@
 <div class="container">
     <h2>Registrazione</h2>
     <img style="width: 30%; margin: 0 15%;" src="${pageContext.request.contextPath}/images/logo.jpeg" alt="Logo">
-    <form id="regForm" action="${pageContext.request.contextPath}/common/RegistrationServlet" method="post" onsubmit="validate()">
+    <form id="regForm" action="${pageContext.request.contextPath}/common/RegistrationServlet" method="post">
         <div class="form-group">
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required>
-                <span id="errorName"></span>
+                <input type="text" id="nome" name="nome" required  onblur="validateNome()">
+
             </div>
+            <span id="errorName">1</span>
             <div class="form-group">
                 <label for="cognome">Cognome</label>
-                <input type="text" id="cognome" name="cognome" required>
-                <span id="errorLastname"></span>
+                <input type="text" id="cognome" name="cognome" required onblur="validateCognome()">
+
             </div>
+            <span id="errorLastname">1</span>
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" required>
-            <span id="errorEmail"></span>
+            <input type="text" id="email" name="email" required onblur="validateMail()">
+
         </div>
+        <span id="errorEmail">1</span>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required onfocus="validate()">
         </div>
         <div class="form-group">
             <button type="submit">Continua</button>

@@ -65,8 +65,10 @@ public class LoginServlet extends HttpServlet {
 
         if (utenteBean != null && utenteBean.getPassword().equals(password)) {
 
+            request.getSession().setAttribute("account", utenteBean);
             request.getSession().setAttribute("isAdmin", utenteBean.getIsAdmin());
             request.getSession().setAttribute("isLoggedIn", Boolean.TRUE);
+            request.getSession().setAttribute("userId", utenteBean.getId());
 
             if (utenteBean.getIsAdmin() == 1)
                 response.sendRedirect(request.getContextPath() + "/admin/homepage.jsp");

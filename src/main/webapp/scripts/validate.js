@@ -21,18 +21,34 @@ function validateFormElem(formElem, pattern, span, message) {
     return false;
 }
 
-function validate() {
+function validateNome() {
     let valid = true;
     let form = document.getElementById("regForm");
 
     let spanName = document.getElementById("errorName");
-    if(!validateFormElem(form.nome, nameOrLastnamePattern, spanName, nameErrorMessage)){
+    if (!validateFormElem(form.nome, nameOrLastnamePattern, spanName, nameErrorMessage)) {
         valid = false;
+
+        return valid;
     }
+}
+function validateCognome() {
+    let valid = true;
+    let form = document.getElementById("regForm");
+
     let spanLastname = document.getElementById("errorLastname");
-    if (!validateFormElem(form.cognome, nameOrLastnamePattern, spanLastname, lastnameErrorMessage)){
+    if (!validateFormElem(form.cognome, nameOrLastnamePattern, spanLastname, lastnameErrorMessage)) {
         valid = false;
     }
+
+
+
+    return valid;
+}
+function validateMail() {
+    let valid = true;
+    let form = document.getElementById("regForm");
+
     let spanEmail = document.getElementById("errorEmail");
     if (!validateFormElem(form.email, emailPattern, spanEmail, emailErrorMessage)){
         valid = false;
@@ -40,6 +56,7 @@ function validate() {
 
     return valid;
 }
+
 function removeSpecial (){
     document.getElementById("nome").value = escapeHtml(   document.getElementById("nome").value );
     document.getElementById("descrizione").value = escapeHtml(   document.getElementById("descrizione").value );
