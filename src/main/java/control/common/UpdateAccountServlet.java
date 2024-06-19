@@ -3,11 +3,11 @@ package control.common;
 import model.bean.UtenteBean;
 import model.dao.UtenteDao;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,60 +15,71 @@ import java.sql.SQLException;
 @WebServlet("/common/UpdateAccountServlet")
 public class UpdateAccountServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        Integer userId = (Integer) session.getAttribute("userId");
+    private UtenteDao utenteDao;
 
-        // Controllo se utente è autenticato
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+        utenteDao = new UtenteDao(dataSource);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+
         if (userId == null)
         {
-            response.sendRedirect(request.getContextPath() + "/common/login.jsp");
+            redirectToLogin(response, request);
             return ;
         }
 
-        UtenteDao utenteDao = new UtenteDao((DataSource) getServletContext().getAttribute("DataSource"));
-        UtenteBean utente;
+        UtenteBean utente = retrieveUserById(userId);
+
+        if (utente == null)
+        {
+            redirectToLogin(response, request);
+            return;
+        }
+
+        updateUserData(request, utente);
 
         try
         {
-            utente = utenteDao.doRetrieveByKey(userId);
-        } catch (SQLException e)
+            utenteDao.doUpdate(utente);
+        }
+        catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            throw new ServletException("Errore durante l'aggiornamento dell'utente", e);
         }
 
-        //Controllo se l'utente esiste
-        if (utente == null)
-        {
-            response.sendRedirect(request.getContextPath() + "/common/login.jsp");
-            return ;
-        }
+        request.getSession().setAttribute("account", utente);
 
-        // Recupera i nuovi dati dal form
+        response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
+    }
+
+    private UtenteBean retrieveUserById(int userId) throws ServletException {
+        try
+        {
+            return utenteDao.doRetrieveByKey(userId);
+        }
+        catch (SQLException e)
+        {
+            throw new ServletException("Errore durante il recupero dell'utente", e);
+        }
+    }
+
+    private void updateUserData(HttpServletRequest request, UtenteBean utente) {
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String telefono = request.getParameter("telefono");
 
-        // Aggiorna l'oggetto utente con i nuovi dati
         utente.setNome(nome);
         utente.setCognome(cognome);
         utente.setTelefono(telefono);
+    }
 
-        // Aggiorna il database
-        try
-        {
-            utenteDao.doUpdate(utente);
-        } catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
-
-        // Aggiorna l'oggetto utente nella sessione
-        session.setAttribute("account", utente);
-
-        // Successo: Reindirizza alla homepage
-        response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
-
-
+    private void redirectToLogin(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/common/login.jsp");
     }
 }
