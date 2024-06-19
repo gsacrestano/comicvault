@@ -31,25 +31,9 @@
     </div>
     <button id="catologButton" type="submit">Filtra</button>
 </form>
+<script src="scripts/slider.js"> </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const priceSlider = document.getElementById('priceSlider');
-        const priceOutput = document.getElementById('price-output');
 
-        // Funzione per aggiornare il testo del prezzo
-        function updatePriceOutput() {
-            const value = priceSlider.value;
-            priceOutput.innerHTML =  "$0-"+"$"+value;
-        }
-
-        // Aggiornare il testo del prezzo quando l'utente interagisce con lo slider
-        priceSlider.addEventListener('input', updatePriceOutput);
-
-        // Impostare il testo iniziale del prezzo
-        updatePriceOutput();
-    });
-</script>
 
 <div class="viewer">
     <c:forEach var="product" items="${products}">
