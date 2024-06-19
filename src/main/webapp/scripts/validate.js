@@ -40,3 +40,28 @@ function validate() {
 
     return valid;
 }
+function removeSpecial (){
+    document.getElementById("nome").value = escapeHtml(   document.getElementById("nome").value );
+    document.getElementById("descrizione").value = escapeHtml(   document.getElementById("descrizione").value );
+    document.getElementById("isbn").value = escapeHtml(   document.getElementById("isbn").value );
+    document.getElementById("prezzo").value = escapeHtml(   document.getElementById("prezzo").value );
+    document.getElementById("quantita").value = escapeHtml(   document.getElementById("quantita").value );
+
+}
+function escapeHtml(str) {
+    const entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
+    };
+
+    return String(str).replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+

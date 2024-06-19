@@ -8,8 +8,8 @@
 </head>
 <body>
 <jsp:include page="/jsp/header.jsp"/>
-
-<form id="addProductForm" action="${pageContext.request.contextPath}/admin/AddProductServlet" method="post" enctype="multipart/form-data">
+<script src="scripts/validate.js"></script>
+<form id="addProductForm" action="${pageContext.request.contextPath}/admin/AddProductServlet" method="post" enctype="multipart/form-data" onsubmit="removeSpecial()">
     <h1>Aggiungi Prodotto</h1>
     <label id="addProductLabel" for="nome">Nome:</label>
     <input class="addProductInput" type="text" id="nome" name="nome" required>
