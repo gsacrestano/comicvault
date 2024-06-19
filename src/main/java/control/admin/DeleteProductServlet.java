@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/DeleteProductServlet")
+@WebServlet("/admin/DeleteProductServlet")
 public class DeleteProductServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

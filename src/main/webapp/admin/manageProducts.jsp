@@ -57,7 +57,7 @@
                 </form>
             </td>
             <td>
-                <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="post" onsubmit="return confirm('Sei sicuro di voler cancellare questo prodotto?');">
+                <form action="${pageContext.request.contextPath}/admin/DeleteProductServlet" method="post" onsubmit="return confirm('Sei sicuro di voler cancellare questo prodotto?');">
                     <input type="hidden" name="id" value="${product.id}" />
                     <button type="submit">Cancella</button>
                 </form>
