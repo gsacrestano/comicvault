@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
 
-    private static final String TABLE_NAME = "Prodotti";
+    private static final String TABLE_NAME = "Utenti_Indirizzi";
     private DataSource ds;
 
     public UtenteIndirizzoDao(DataSource ds) {
@@ -104,7 +104,7 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
 
         Collection<UtenteIndirizzoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
