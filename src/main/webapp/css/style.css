@@ -343,6 +343,7 @@ input[type="file"] {
     color: red;
     margin-bottom: 10px;
 }
+
 @media (max-width: 600px) {
     .checkbox-inline {
         display: block;

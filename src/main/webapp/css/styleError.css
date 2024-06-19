@@ -36,64 +36,7 @@ a:hover {
     color: #0d0d0d;
 }
 
-nav {
 
-    color: #0d0d0d;
-    background-color: #D93D3D;
-    border: 1px solid black;
-    margin-bottom: 1%;
-    text-align: left;
-}
-
-nav ul {
-    text-decoration: double;
-    list-style-type: none;
-    padding: .5% 0;
-}
-
-nav ul li {
-    display: inline;
-    padding: .5%;
-}
-
-nav img {
-
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 3%;
-    height: 3%;
-    border-radius: 50%;
-
-}
-
-nav span {
-    padding: .5%;
-    margin: .5%;
-    vertical-align: middle;
-}
-
-footer {
-    clear: left;
-    margin-top: 10%;
-    text-align: left;
-    background-color: #7ba6a6;
-    color: white;
-    padding: .5% 1%;
-
-
-}
-footer img {
-    width: 20%;
-}
-
-footer ul,
-li {
-
-    list-style-type: none;
-    padding: 0;
-
-}
 
 #container {
     width: 65%;
@@ -128,6 +71,98 @@ li {
     cursor: pointer;
 
 }
+footer {
+    padding: 20px 0;
+    background-color: #7ba6a6; /* Aggiunta di un background per visibilità */
+    color: #fff; /* Testo bianco per contrasto */
+    margin-top: 20%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Per gestire meglio il layout su schermi piccoli */
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo img {
+    border-radius: 50%; /* Forma circolare più uniforme */
+    width: 60px; /* Dimensioni fisse per coerenza */
+    height: 60px;
+    margin-right: 15px;
+}
+
+.footer-logo h2 {
+    margin: 0;
+    font-size: 24px; /* Dimensione ridotta per adattarsi meglio */
+}
+
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Utilizzo di flex per allineamento orizzontale */
+    gap: 20px; /* Spaziatura uniforme */
+}
+
+.footer-nav li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px; /* Dimensione ridotta per adattabilità */
+}
+
+.footer-nav li a:hover {
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+    width: 100%; /* Assicura che prenda tutta la larghezza disponibile */
+}
+
+/* Media Queries per adattabilità */
+@media (max-width: 768px) {
+    .footer-logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .footer-logo h2 {
+        font-size: 20px;
+    }
+
+    .footer-nav li a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin-bottom: 15px;
+    }
+
+    .footer-nav {
+        justify-content: center;
+    }
+}
+
+
 
 @media only screen and (max-width: 480px) {
 
