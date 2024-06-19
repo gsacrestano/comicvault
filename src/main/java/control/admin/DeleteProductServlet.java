@@ -27,26 +27,44 @@ public class DeleteProductServlet extends HttpServlet {
         String idParam = request.getParameter("id");
 
         if (idParam == null || idParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "productList.jsp?error=missingId");
+            handleMissingIdError(request, response);
             return ;
         }
 
         try
         {
             int id = Integer.parseInt(idParam);
-            boolean deleted = prodottoDao.doDelete(id);
+            boolean deleted = deleteProduct(id);
 
             if (!deleted)
-                response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet?error=deletionFailed");
+                redirectToProductsPageWithError(request, response, "deletionFailed");
 
-            response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet");
-        } catch (NumberFormatException e)
+            redirectToProductsPage(request, response);
+
+        }
+        catch (NumberFormatException e)
         {
-            response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet?error=deletionFailed");
-        } catch (SQLException e)
+            redirectToProductsPageWithError(request, response, "deletionFailed");
+        }
+        catch (SQLException e)
         {
-            throw new ServletException(e);
+            throw new ServletException("Database error during product deletion", e);
         }
     }
-}
 
+    private void handleMissingIdError(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/admin/productList.jsp?error=missingId");
+    }
+
+    private boolean deleteProduct(int id) throws SQLException {
+        return prodottoDao.doDelete(id);
+    }
+
+    private void redirectToProductsPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet");
+    }
+
+    private void redirectToProductsPageWithError(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet?error=" + error);
+    }
+}
