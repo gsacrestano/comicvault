@@ -30,7 +30,7 @@
                 <c:otherwise>
                     <form action="${pageContext.request.contextPath}/carrello" method="post">
                         <input type="hidden" name="productId" value="${product.id}">
-                        <button type="submit">Aggiungi al carrello</button>
+                        <button class="btn" type="submit">Aggiungi al carrello</button>
                     </form>
                 </c:otherwise>
             </c:choose>
