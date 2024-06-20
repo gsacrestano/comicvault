@@ -67,7 +67,7 @@
 </table>
 
 <br>
-<a href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
+<a class="aManage" href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
 <jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>

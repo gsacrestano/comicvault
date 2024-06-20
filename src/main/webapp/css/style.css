@@ -352,6 +352,13 @@ input[type="file"] {
     margin-bottom: 10px;
 }
 
+.aManage{
+    color: black;
+}
+.aManage:hover{
+    font-weight: bold;
+    color: #D93D3D;
+}
 @media (max-width: 600px) {
     .checkbox-inline {
         display: block;
