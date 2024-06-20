@@ -16,18 +16,18 @@
         <div class="form-group">
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required  onblur="validateNome()">
+                <input type="text" id="nome" name="nome" required  onblur="validateNome('regForm')">
 
             </div>
             <span id="errorName"></span>
             <div class="form-group">
                 <label for="cognome">Cognome</label>
-                <input type="text" id="cognome" name="cognome" required onblur="validateCognome()">
+                <input type="text" id="cognome" name="cognome" required onblur="validateCognome('regForm')">
 
             </div>
             <span id="errorLastname"></span>
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" required onblur="validateMail()">
+            <input type="text" id="email" name="email" required onblur="validateMail('regForm')">
 
         </div>
         <span id="errorEmail"></span>

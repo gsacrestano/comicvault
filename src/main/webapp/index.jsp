@@ -29,7 +29,7 @@
     <div class="card">
       <p> <img src="${pageContext.request.contextPath}/images/products/${product.image_path}"></p>
       <p>${product.nome}</p>
-      <button>Compra</button>
+      <a href="${pageContext.request.contextPath}/common/ProductDetailsServlet?id=${product.id}"> <button>Dettaglio</button></a>
     </div>
   </c:forEach>
 </div>
@@ -40,7 +40,7 @@
     <div class="card">
       <p> <img src="${pageContext.request.contextPath}/images/products/${product.image_path}"></p>
       <p>${product.nome}</p>
-      <button>Compra</button>
+      <a href="${pageContext.request.contextPath}/common/ProductDetailsServlet?id=${product.id}"> <button>Dettaglio</button></a>
     </div>
   </c:forEach>
 </div>
