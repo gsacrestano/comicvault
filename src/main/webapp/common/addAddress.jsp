@@ -9,8 +9,9 @@
 <body>
 <jsp:include page="/jsp/header.jsp"/>
 
+<div id="updateProduct">
 <form id="addAddressForm" action="${pageContext.request.contextPath}/common/AddAddressServlet" method="post">
-    <h1>Aggiungi Indirizzo</h1>
+    <h1 style="color: #0d0d0d">Aggiungi Indirizzo</h1>
     <label id="addAddressLabel" for="via">Via:</label>
     <input class="addAddressInput" type="text" id="via" name="via" required>
 
@@ -28,6 +29,8 @@
 
     <button id="addProductButton" type="submit">Aggiungi Indirizzo</button>
 </form>
+    </div>
+
 <jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
