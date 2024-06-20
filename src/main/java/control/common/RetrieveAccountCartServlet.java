@@ -37,16 +37,19 @@ public class RetrieveAccountCartServlet extends HttpServlet {
         try {
             List<ProdottoCarrelloBean> prodottiCarrello = prodottoCarrelloDao.doRetrieveAllByCartKey(cartId);
             List<ProdottoBean> prodotti = new LinkedList<>();
+            float totale = 0;
 
             // Aggiungi le informazioni dettagliate di ciascun prodotto
             for (ProdottoCarrelloBean prodottoCarrello : prodottiCarrello) {
                 ProdottoBean prodotto = prodottoDao.doRetrieveByKey(prodottoCarrello.getIdProdotto());
                 prodotti.add(prodotto);
+                totale += prodottoCarrello.getQuantita() * prodottoCarrello.getPrezzo();
             }
-
 
             request.setAttribute("prodottiCarrello", prodottiCarrello);
             request.setAttribute("items", prodotti);
+            request.setAttribute("total", totale);
+
         } catch (SQLException e) {
             throw new ServletException(e);
         }

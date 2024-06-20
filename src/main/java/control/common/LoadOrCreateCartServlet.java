@@ -40,20 +40,24 @@ public class LoadOrCreateCartServlet extends HttpServlet {
             // Controlla se l'utente ha già un carrello nel database
             CarrelloBean carrello = carrelloDao.doRetrieveByKey(utente.getId());
 
+            System.out.println("Carrello query:\t" + carrello.toString());
+
             if (carrello == null || carrello.getId() == -1) {
                 // Se non esiste, crea un nuovo carrello
                 carrello = new CarrelloBean();
                 carrello.setIdUtente(utente.getId());
-                carrelloDao.doSave(carrello);
+                int idCarrello = carrelloDao.doSave(carrello);
+                carrello.setId(idCarrello);
             }
 
             // Salva il carrello nella sessione
             request.getSession().setAttribute("cart", carrello);
             request.getSession().setAttribute("cartId", carrello.getId());
 
+            System.out.println("Carrello post controllo:\t" + carrello.toString());
+
             // Redirect alla homepage dopo aver caricato/creato il carrello
             response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
-
         }
         catch (SQLException e)
         {

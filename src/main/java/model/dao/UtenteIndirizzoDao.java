@@ -20,7 +20,7 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
     }
 
     @Override
-    public void doSave(UtenteIndirizzoBean bean) throws SQLException {
+    public int doSave(UtenteIndirizzoBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -50,6 +50,7 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     public boolean doDelete(int idIndirizzo) throws SQLException {

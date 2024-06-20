@@ -21,7 +21,7 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
     }
 
     @Override
-    public synchronized void doSave(ProdottoCarrelloBean bean) throws SQLException {
+    public synchronized int doSave(ProdottoCarrelloBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -53,6 +53,7 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     @Override
@@ -75,6 +76,39 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
 
             ps.setInt(1, idCarrello);
             ps.setInt(2, idProdotto);
+
+            result = ps.executeUpdate();
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+        return (result != 0);
+    }
+
+    public synchronized boolean doDeleteProductsByCartId(int idCarrello) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        int result = 0;
+
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idCarrello = ?;";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, idCarrello);
 
             result = ps.executeUpdate();
         }

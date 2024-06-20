@@ -42,9 +42,7 @@ public class RegistrationServlet extends HttpServlet {
         {
             utenteDao.doSave(newUser);
 
-            setSessionAttributes(request, newUser);
-
-            response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
+            response.sendRedirect(request.getContextPath() + "/common/login.jsp");
         }
         catch (SQLException e)
         {
@@ -93,13 +91,6 @@ public class RegistrationServlet extends HttpServlet {
         newUser.setIsAdmin(0); // Imposta come non admin per default
 
         return newUser;
-    }
-
-    private void setSessionAttributes(HttpServletRequest request, UtenteBean newUser) {
-        request.getSession().setAttribute("account", newUser);
-        request.getSession().setAttribute("isAdmin", newUser.getIsAdmin());
-        request.getSession().setAttribute("isLoggedIn", Boolean.FALSE);
-        request.getSession().setAttribute("userId", newUser.getId());
     }
 
     private String toHash(String str) {

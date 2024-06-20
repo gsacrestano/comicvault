@@ -3,10 +3,7 @@ package model.dao;
 import model.bean.OrdineBean;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -20,10 +17,10 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
         this.ds = ds;
     }
 
-    @Override
-    public synchronized void doSave(OrdineBean bean) throws SQLException {
+    public synchronized int doSave(OrdineBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + " (idUtente, idIndirizzo, Data, Totale) VALUES (?, ?, NOW(), ?);";
 
@@ -31,13 +28,26 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
         {
             conn = ds.getConnection();
 
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, bean.getIdUtente());
             ps.setInt(2, bean.getIdIndirizzo());
             ps.setDouble(3, bean.getTotale());
 
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating order failed, no rows affected.");
+            }
+
+            generatedKeys = ps.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating order failed, no ID obtained.");
+            }
+
         }
         finally
         {
@@ -50,6 +60,9 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
             {
                 if (conn != null)
                     conn.close();
+
+                if (generatedKeys != null)
+                    generatedKeys.close();
             }
         }
     }

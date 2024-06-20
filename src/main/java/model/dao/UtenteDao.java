@@ -20,7 +20,7 @@ public class UtenteDao implements IBeanDAO<UtenteBean> {
     }
 
     @Override
-    public void doSave(UtenteBean bean) throws SQLException {
+    public int doSave(UtenteBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -53,6 +53,7 @@ public class UtenteDao implements IBeanDAO<UtenteBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     @Override

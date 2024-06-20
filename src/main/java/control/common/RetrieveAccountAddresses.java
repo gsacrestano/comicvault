@@ -45,6 +45,17 @@ public class RetrieveAccountAddresses extends HttpServlet {
             LinkedList<IndirizzoBean> completeAddresses = getCompleteAddresses(userAddresses);
             request.getSession().setAttribute("addresses", completeAddresses);
 
+            String fromCart = request.getParameter("fromCart");
+
+            if (fromCart != null && fromCart.equals("true")) {
+                String total = request.getParameter("total");
+
+                request.setAttribute("total", total);
+
+                request.getRequestDispatcher("/common/selectAddress.jsp").forward(request, response);
+                return ;
+            }
+
             response.sendRedirect(request.getContextPath() + "/common/manageAddresses.jsp");
         }
         catch (SQLException e)

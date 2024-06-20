@@ -56,12 +56,17 @@ public class AddToCartServlet extends HttpServlet {
             // Recupera il carrello dell'utente dalla sessione
             CarrelloBean carrello = (CarrelloBean) request.getSession().getAttribute("cart");
 
+            System.out.println(carrello.toString());
+
             if (carrello == null || carrello.getId() == -1) {
-                // Se il carrello non esiste, crea un nuovo carrello per l'utente
                 carrello = new CarrelloBean();
                 carrello.setIdUtente((int) request.getSession().getAttribute("userId"));
-                carrelloDao.doSave(carrello);
-                request.getSession().setAttribute("carrello", carrello);
+                int idCarrello = carrelloDao.doSave(carrello);
+                carrello.setId(idCarrello);
+
+                // Salva il carrello nella sessione
+                request.getSession().setAttribute("cart", carrello);
+                request.getSession().setAttribute("cartId", carrello.getId());
             }
 
             // Verifica se il prodotto è già nel carrello

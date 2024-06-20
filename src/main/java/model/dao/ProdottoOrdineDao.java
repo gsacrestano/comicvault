@@ -22,7 +22,7 @@ public class ProdottoOrdineDao implements IBeanDAO<ProdottoOrdineBean> {
     }
 
     @Override
-    public void doSave(ProdottoOrdineBean bean) throws SQLException {
+    public int doSave(ProdottoOrdineBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -54,6 +54,7 @@ public class ProdottoOrdineDao implements IBeanDAO<ProdottoOrdineBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     @Override
