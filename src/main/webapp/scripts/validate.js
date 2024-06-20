@@ -1,10 +1,19 @@
 const nameOrLastnamePattern = /^[A-Za-z]+$/;
 const emailPattern = /^\S+@\S+\.\S+$/;
 const phonePattern = /^([0-9]{10})$/;
+const addressPattern = /^(Via|Corso|Piazza|Viale|Largo|Borgo)\s+[A-Za-zàèéìòùÀÈÉÌÒÙ]+\s*([A-Za-zàèéìòùÀÈÉÌÒÙ]*\s*)*$/;
+const capPattern = /^([0-9]{5})$/
+const provPattern = /^[A-Z]{2}$/
+
 const nameErrorMessage = "Il nome deve avere solo lettere";
 const lastnameErrorMessage = "Il cognome deve avere solo lettere";
+const cittaError = "La città deve avere solo lettere"
+const nazioneError = "La nazione deve avere solo lettere"
 const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext";
 const numberErrorMessage = "Un numero valido ha 10 cifre";
+const addressError = "Indirizzo non valido deve Iniziare con Via/Corso... ";
+const capError = "Un cap è fatto solo di 5 cifre";
+const provError = "Un provincia è formata solo da due lettere maiuscole come NA"
 let count = 1;
 
 
@@ -71,6 +80,61 @@ function validatePhone(str) {
     }
 
     return valid;
+}
+function validateAddress(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+    let spanName = document.getElementById("errorAddress");
+    if (!validateFormElem(form.via, addressPattern, spanName, addressError)) {
+        valid = false;
+
+        return valid;
+    }
+}
+function validateCitta(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+    let spanName = document.getElementById("errorCitta");
+    if (!validateFormElem(form.citta, nameOrLastnamePattern, spanName, cittaError)) {
+        valid = false;
+
+        return valid;
+    }
+}
+function validateProv(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+    let spanName = document.getElementById("errorProv");
+    if (!validateFormElem(form.provincia, provPattern, spanName, provError)) {
+        valid = false;
+
+        return valid;
+    }
+}
+function validateCap(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+    let spanName = document.getElementById("errorCap");
+    if (!validateFormElem(form.cap, capPattern, spanName, capError)) {
+        valid = false;
+
+        return valid;
+    }
+}
+function validateNaz(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+    let spanName = document.getElementById("errorNaz");
+    if (!validateFormElem(form.nazione, nameOrLastnamePattern, spanName, nazioneError)) {
+        valid = false;
+
+        return valid;
+    }
 }
 
 
