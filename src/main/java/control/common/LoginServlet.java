@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
         if (utenteBean.getIsAdmin() == 1)
             response.sendRedirect(request.getContextPath() + "/admin/homepage.jsp");
         else
-            response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
+            response.sendRedirect(request.getContextPath() + "/common/LoadOrCreateCartServlet");
     }
 
     private String toHash(String str) {
