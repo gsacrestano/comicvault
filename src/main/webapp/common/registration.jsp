@@ -19,18 +19,18 @@
                 <input type="text" id="nome" name="nome" required  onblur="validateNome()">
 
             </div>
-            <span id="errorName">1</span>
+            <span id="errorName"></span>
             <div class="form-group">
                 <label for="cognome">Cognome</label>
                 <input type="text" id="cognome" name="cognome" required onblur="validateCognome()">
 
             </div>
-            <span id="errorLastname">1</span>
+            <span id="errorLastname"></span>
             <label for="email">Email</label>
             <input type="text" id="email" name="email" required onblur="validateMail()">
 
         </div>
-        <span id="errorEmail">1</span>
+        <span id="errorEmail"></span>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required onfocus="validate()">
@@ -38,8 +38,8 @@
         <div class="form-group">
             <button type="submit">Continua</button>
         </div>
-        <a style="text-align: center" href="index.jsp">Home</a>
-        <a  style="text-align: center" href="common/login.jsp">Login</a>
+        <a  href="index.jsp">Home</a>
+        <a  style="margin-right: 0" href="common/login.jsp">Login</a>
     </form>
     <div id="errorMessages">
         <%

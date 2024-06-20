@@ -310,11 +310,17 @@ input[type="file"] {
 }
 .container a , .container a:visited{
     color: black;
+    margin: 1% 25% 0 0;
+
+}
+.container a:hover{
+    color: #D93D3D;
+    font-weight: bold;
 }
 
 .form-group {
     margin-top: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .form-group label {
     display: block;
