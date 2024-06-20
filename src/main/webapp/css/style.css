@@ -107,10 +107,10 @@ a:visited{
     margin: 10px 0;
 }
 .btn {
-    width: 60%; /* Riduce la larghezza del bottone */
-    font-size: 1rem;
+    width: 100%; /* Riduce la larghezza del bottone */
+    font-size: 100%;
     text-align: center;
-    padding: 0.75rem 1rem; /* Aumenta l'altezza del bottone */
+    padding: 0.75rem 1rem .75rem; /* Aumenta l'altezza del bottone */
     margin: 0 auto;
     background-color: #F23A29;
     color: white;

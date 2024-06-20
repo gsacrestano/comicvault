@@ -17,7 +17,7 @@
 
 <!--Collegamento per aggiungere un nuovo prodotto -->
 
-<button class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
+<button class="btn" style="width: 20%" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
 
 
 <div style="overflow-x: auto">
@@ -53,13 +53,13 @@
                     <input type="hidden" name="prezzo" value="${product.prezzo}" />
                     <input type="hidden" name="quantita" value="${product.quantita}" />
                     <input type="hidden" name="image_path" value="${product.image_path}" />
-                    <button type="submit">Modifica</button>
+                    <button class="btn" type="submit">Modifica</button>
                 </form>
             </td>
             <td>
                 <form action="${pageContext.request.contextPath}/admin/DeleteProductServlet" method="post" onsubmit="return confirm('Sei sicuro di voler cancellare questo prodotto?');">
                     <input type="hidden" name="id" value="${product.id}" />
-                    <button type="submit">Cancella</button>
+                    <button class="btn" type="submit">Cancella</button>
                 </form>
             </td>
         </tr>
