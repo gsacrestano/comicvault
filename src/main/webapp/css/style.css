@@ -152,11 +152,9 @@ a:visited{
     outline-offset: 2px; /* Sposta leggermente il bordo verso l'esterno */
 }
 table {
-    width: 100%;
-    max-width: 800px;
+    width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
-    overflow-x: auto;
 }
 th, td {
     border: 1px solid #000000; /* Colore nero per i bordi */
@@ -388,7 +386,7 @@ input[type="file"] {
 
     }
     table {
-        max-width: 355px;
+        width: 100%;
         margin: 10px 0;
     }
     th, td {

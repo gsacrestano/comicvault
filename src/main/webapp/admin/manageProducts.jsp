@@ -20,7 +20,7 @@
 <button class="btn" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
 
 
-<!-- Tabella per visualizzare, aggiornare e cancellare prodotti esistenti -->
+<div style="overflow-x: auto">
 <table>
     <thead>
     <tr>
@@ -65,6 +65,7 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 
 <br>
 <a class="aManage" href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>
