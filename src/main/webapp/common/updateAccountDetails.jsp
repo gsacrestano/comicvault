@@ -16,15 +16,22 @@
 <h1>Modifica Dati Personali</h1>
 <form id="updateProduct" action="${pageContext.request.contextPath}/common/UpdateAccountServlet" method="post">
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" value="<%= utente.getNome() %>" onblur="validateNome('updateProduct')"><br><br>
+    <input type="text" id="nome" name="nome" value="<%= utente.getNome() %>" onblur="validateNome('updateProduct')">
+    <br><br>
     <span id="errorName"></span>
+    <br><br>
     <label for="cognome">Cognome:</label>
-    <input type="text" id="cognome" name="cognome" value="<%= utente.getCognome() %>" onblur="validateCognome('updateProduct')"><br><br>
+    <input type="text" id="cognome" name="cognome" value="<%= utente.getCognome() %>" onblur="validateCognome('updateProduct')">
+    <br><br>
     <span id="errorLastname"></span>
+    <br><br>
     <label for="phone">Telefono:</label>
-    <input type="text" id="phone" name="phone" value="<%= utente.getTelefono() %>" onblur="validatePhone('updateProduct')"><br><br>
-    <input type="submit" value="Aggiorna">
+    <input type="text" id="phone" name="phone" value="<%= utente.getTelefono() %>" onblur="validatePhone('updateProduct')">
+    <br><br>
     <span id="errorPhone"></span>
+    <br><br>
+    <input type="submit" value="Aggiorna">
+
 </form>
 <jsp:include page="/jsp/footer.jsp"/>
 </body>

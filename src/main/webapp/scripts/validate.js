@@ -59,18 +59,20 @@ function validateMail(str) {
 function validatePhone(str) {
     let valid = true;
     let form = document.getElementById(str);
+    let spanPhone = document.getElementById("errorPhone");
+    let phoneElement = document.getElementById("phone");
+    let phoneValue = phoneElement.value.toString();
 
-        let spanPhone = document.getElementById("errorPhone");
+    console.log(phoneValue);
 
-
-        console.log(document.getElementById("phone").value );
-        if (!validateFormElem(document.getElementById("phone"), phonePattern, spanPhone, numberErrorMessage) && document.getElementById("phone").value == null){
-                valid = false;
-            }
-
+    // Verifica se il campo del telefono è vuoto o se non passa la validazione del pattern
+    if (phoneValue!=="" && phoneValue !== "null" && !validateFormElem(phoneElement, phonePattern, spanPhone, numberErrorMessage)) {
+        valid = false;
+    }
 
     return valid;
 }
+
 
 function removeSpecial (){
     document.getElementById("nome").value = escapeHtml(   document.getElementById("nome").value );
