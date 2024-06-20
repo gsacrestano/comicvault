@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
 
-    private static final String TABLE_NAME = "Prodotti";
+    private static final String TABLE_NAME = "Utenti_Indirizzi";
     private DataSource ds;
 
     public UtenteIndirizzoDao(DataSource ds) {
@@ -52,21 +52,20 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
         }
     }
 
-    public boolean doDelete(UtenteIndirizzoBean bean) throws SQLException {
+    public boolean doDelete(int idIndirizzo) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
         int result = 0;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idUtente = ? AND idIndirizzo = ?;";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idIndirizzo = ?;";
 
         try
         {
             conn = ds.getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, bean.getIdUtente());
-            ps.setInt(2, bean.getIdIndirizzo());
+            ps.setInt(1, idIndirizzo);
 
             result = ps.executeUpdate();
         }
@@ -87,12 +86,6 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
     }
 
     @Override
-    public boolean doDelete(int id) throws SQLException {
-        System.err.println("ATTENZIONE: Richiamare il metodo doDelete(ProdottoCategoriaBean bean)");
-        return false;
-    }
-
-    @Override
     public UtenteIndirizzoBean doRetrieveByKey(int id) throws SQLException {
         System.err.println("ATTENZIONE: Richiamare il metodo doRetrieveAll(int idUtente, String order)");
         return null;
@@ -104,7 +97,7 @@ public class UtenteIndirizzoDao implements IBeanDAO<UtenteIndirizzoBean> {
 
         Collection<UtenteIndirizzoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ?;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ? ";
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";

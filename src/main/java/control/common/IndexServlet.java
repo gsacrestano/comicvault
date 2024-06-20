@@ -21,32 +21,46 @@ public class IndexServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-
         DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
         prodottoDao = new ProdottoDao(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Recupera i dati per le sezioni della pagina (novità, più venduti, prossime uscite)
-            List<ProdottoBean> latestProducts = (List<ProdottoBean>) prodottoDao.doRetrieveLatest(3);
-            List<ProdottoBean> bestSellingProducts = (List<ProdottoBean>) prodottoDao.doRetrieveBestSelling(3);
-            List<ProdottoBean> upcomingProducts = (List<ProdottoBean>) prodottoDao.doRetrieveLatest(3);
+        try
+        {
+            // Recupera i dati per le sezioni della pagina
+            List<ProdottoBean> latestProducts = fetchLatestProducts();
+            List<ProdottoBean> bestSellingProducts = fetchBestSellingProducts();
+            List<ProdottoBean> upcomingProducts = fetchUpcomingProducts();
 
             // Passa i dati recuperati come attributi alla richiesta
-            request.setAttribute("latestProducts", latestProducts);
-            request.setAttribute("bestSellingProducts", bestSellingProducts);
-            request.setAttribute("upcomingProducts", upcomingProducts);
-
-            System.out.println(latestProducts.toString());
-            System.out.println(bestSellingProducts.toString());
-            System.out.println(upcomingProducts.toString());
+            setRequestAttributes(request, latestProducts, bestSellingProducts, upcomingProducts);
 
             // Inoltra la richiesta alla JSP per la visualizzazione dei dati
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new ServletException("Errore durante il recupero dei dati dal database", e);
         }
+    }
+
+    private List<ProdottoBean> fetchLatestProducts() throws SQLException {
+        return (List<ProdottoBean>) prodottoDao.doRetrieveLatest(3);
+    }
+
+    private List<ProdottoBean> fetchBestSellingProducts() throws SQLException {
+        return (List<ProdottoBean>) prodottoDao.doRetrieveBestSelling(3);
+    }
+
+    private List<ProdottoBean> fetchUpcomingProducts() throws SQLException {
+        return (List<ProdottoBean>) prodottoDao.doRetrieveLatest(3);  // Assuming doRetrieveUpcoming is a method in ProdottoDao
+    }
+
+    private void setRequestAttributes(HttpServletRequest request, List<ProdottoBean> latestProducts, List<ProdottoBean> bestSellingProducts, List<ProdottoBean> upcomingProducts) {
+        request.setAttribute("latestProducts", latestProducts);
+        request.setAttribute("bestSellingProducts", bestSellingProducts);
+        request.setAttribute("upcomingProducts", upcomingProducts);
     }
 }

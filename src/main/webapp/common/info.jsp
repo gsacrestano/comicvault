@@ -12,11 +12,11 @@
 </head>
 <body>
 <jsp:include page="/jsp/header.jsp"/>
-<div style="width: 50%; margin-right: 50%">
-<h1> Chi siamo ? </h1>
-<p style="text-align: left; margin-left: 10px">Benvenuti su ComicVault, il tuo punto di riferimento per i fumetti! Siamo un gruppo di appassionati che vive e respira storie a fumetti, impegnati a portarti il meglio del mondo dei comics, manga e graphic novels. La nostra missione è condividere con te la magia delle tavole disegnate, scoprire nuovi talenti e riscoprire i grandi classici. Che tu sia un veterano del genere o un nuovo lettore, qui troverai recensioni, anteprime esclusive e consigli personalizzati per ogni gusto. Unisciti a noi in questa avventura tra eroi, antieroi e mondi fantastici. Buona lettura!</p>
+<div style="width: 50%; margin: 0 auto; text-align: left;">
+<h1> Chi siamo? </h1>
+<p>Benvenuti su ComicVault, il tuo punto di riferimento per i fumetti! Siamo un gruppo di appassionati che vive e respira storie a fumetti, impegnati a portarti il meglio del mondo dei comics, manga e graphic novels. La nostra missione è condividere con te la magia delle tavole disegnate, scoprire nuovi talenti e riscoprire i grandi classici. Che tu sia un veterano del genere o un nuovo lettore, qui troverai recensioni, anteprime esclusive e consigli personalizzati per ogni gusto. Unisciti a noi in questa avventura tra eroi, antieroi e mondi fantastici. Buona lettura!</p>
     <h1> Spedizioni </h1>
-    <p style="text-align: left; margin-left: 10px">Le nostre spedizioni vengono effettuate da GLS Espresso al prezzo standard di 5,50€ e vengono consegnate in 24/48 ore lavorative, dal momento in cui ricevi l'avviso di consegna in corso.
+    <p>Le nostre spedizioni vengono effettuate da GLS Espresso al prezzo standard di 5,50€ e vengono consegnate in 24/48 ore lavorative, dal momento in cui ricevi l'avviso di consegna in corso.
 
         Nel prezzo di spedizione è incluso il servizio Protezione Perfetta che prevede un imballaggio sicuro: ogni volume è imbustato singolarmente con una bustina protettiva in regalo!
         Le spedizioni saranno Gratuite con un ordine pari o superiore a 39,00€.

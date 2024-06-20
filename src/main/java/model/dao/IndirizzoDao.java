@@ -141,7 +141,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
 
         Collection<IndirizzoBean> beans = new LinkedList<>();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE deleted_at IS NULL;";
+        String sql = "SELECT * FROM " + TABLE_NAME;
 
         if (order != null && !order.isEmpty())
             sql += " ORDER BY ?";
@@ -183,5 +183,35 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
             }
         }
         return beans;
+    }
+
+    public synchronized void doUpdate(IndirizzoBean updatedAddress) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE " + TABLE_NAME + " SET Via = ?, Citta = ?, Provincia = ?, Cap = ?, Nazione = ? WHERE id = ?";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, updatedAddress.getVia());
+            ps.setString(2, updatedAddress.getCitta());
+            ps.setString(3, updatedAddress.getProvincia());
+            ps.setString(4, updatedAddress.getCap());
+            ps.setString(5, updatedAddress.getNazione());
+            ps.setInt(6, updatedAddress.getId());
+
+            ps.executeUpdate();
+        } finally
+        {
+            if (ps != null)
+                ps.close();
+
+            if (conn != null)
+                conn.close();
+        }
     }
 }

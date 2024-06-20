@@ -26,7 +26,7 @@ create table Indirizzi (
 	id int not null auto_increment,
 	Via varchar(128) not null,
 	Citta varchar(64) not null,
-	Provincia varchar(64) not null unique,
+	Provincia varchar(64) not null,
 	Cap varchar(5) not null,
 	Nazione varchar(64) not null,
 	created_at TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,

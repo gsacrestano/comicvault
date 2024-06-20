@@ -23,8 +23,8 @@
         <div class="form-group">
             <button type="submit">Login</button>
         </div>
-        <a style="text-align: center" href="index.jsp">Home</a>
-        <a  style="text-align: center" href="common/registration.jsp">Nuovo cliente?</a>
+        <a href="index.jsp">Home</a>
+        <a  style="margin-right: 0" href="common/registration.jsp">Nuovo cliente?</a>
     </form>
     <div id="errorMessages">
         <%

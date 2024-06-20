@@ -116,7 +116,7 @@ footer {
 .footer-nav li a {
     color: #fff;
     text-decoration: none;
-    font-size: 16px; /* Dimensione ridotta per adattabilità */
+    font-size: 180%; /* Dimensione ridotta per adattabilità */
 }
 
 .footer-nav li a:hover {
