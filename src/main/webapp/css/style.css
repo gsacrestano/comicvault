@@ -279,16 +279,16 @@ input[type="file"] {
 }
 .aAdminPage {
     text-align: center;
-    font-size: 100%;
-    width: 100%;
-    display: block;
-    padding: 1%;
+    font-size: 150%;
+    width: 30%;
+    display: inline;
+    padding: 3% 1%;
     background-color: #F23A29;
     color: #fff;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     margin: 1%;
 }
 .aAdminPage:hover {
@@ -359,6 +359,12 @@ input[type="file"] {
     font-weight: bold;
     color: #D93D3D;
 }
+#buttonHomepage {
+    width: 90%;
+    margin: 5% auto;
+    display: flex;
+}
+
 @media (max-width: 600px) {
     .checkbox-inline {
         display: block;
