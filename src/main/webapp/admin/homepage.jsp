@@ -11,12 +11,13 @@
 <jsp:include page="../jsp/header.jsp"/>
 <h1>Benvenuto, ${account.nome}!</h1>
 
-<div style="width: 70%; margin: 0 15%">
+<div id="buttonHomepage">
     <a href="<%=request.getContextPath()%>/admin/ManageOrdersServlet" class="aAdminPage">Lista Ordini</a>
     <a href="<%=request.getContextPath()%>/admin/RetrieveProductsServlet" class="aAdminPage">Gestisci Prodotti</a>
     <a href="<%=request.getContextPath()%>/admin/ManageUsersServlet" class="aAdminPage">Lista Utenti</a>
-    <a href="<%=request.getContextPath()%>/common/Logout" class="aAdminPage">Logout</a>
+
 </div>
+<a href="<%=request.getContextPath()%>/common/Logout" class="btn">Logout</a>
 <jsp:include page="../jsp/footer.jsp"/>
 </body>
 </html>
