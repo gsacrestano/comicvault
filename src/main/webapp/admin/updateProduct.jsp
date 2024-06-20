@@ -9,9 +9,11 @@
     <title>Modifica Prodotto</title>
 </head>
 <body>
+<jsp:include page="/jsp/header.jsp"/>
 <h2>Modifica Prodotto</h2>
-
-<form action="${pageContext.request.contextPath}/admin/UpdateProductServlet" method="post">
+<script src="scripts/validate.js"></script>
+<div id="updateProduct">
+<form action="${pageContext.request.contextPath}/admin/UpdateProductServlet" method="post" onsubmit="removeSpecial()">
     <input type="hidden" name="id" value="${param.id}" />
 
     <label for="nome">Nome:</label>
@@ -34,6 +36,8 @@
 
     <input type="submit" value="Aggiorna Prodotto" />
 </form>
+</div>
 
+<jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
