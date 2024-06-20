@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
 
@@ -55,20 +56,25 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
     }
 
     @Override
-    public synchronized boolean doDelete(int id) throws SQLException {
+    public boolean doDelete(int id) throws SQLException {
+        return false;
+    }
+
+    public synchronized boolean doDelete(int idCarrello, int idProdotto) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
         int result = 0;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?;";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE idCarrello = ? AND idProdotto = ?;";
 
         try
         {
             conn = ds.getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, id);
+            ps.setInt(1, idCarrello);
+            ps.setInt(2, idProdotto);
 
             result = ps.executeUpdate();
         }
@@ -209,6 +215,53 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
                 if (ps != null)
                     ps.close();
             } finally {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+    }
+
+    public synchronized List<ProdottoCarrelloBean> doRetrieveAllByCartKey(int idCarrello) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idCarrello = ?;";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, idCarrello);
+
+            ResultSet rs = ps.executeQuery();
+
+            List<ProdottoCarrelloBean> beans = new LinkedList<>();
+
+            while (rs.next())
+            {
+                ProdottoCarrelloBean bean = new ProdottoCarrelloBean();
+
+                bean.setId(rs.getInt("id"));
+                bean.setIdCarrello(rs.getInt("idCarrello"));
+                bean.setIdProdotto(rs.getInt("idProdotto"));
+                bean.setPrezzo(rs.getFloat("Prezzo"));
+                bean.setQuantita(rs.getInt("Quantita"));
+
+                beans.add(bean);
+            }
+
+            return beans;
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
                 if (conn != null)
                     conn.close();
             }

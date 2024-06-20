@@ -68,9 +68,6 @@ public class AddToCartServlet extends HttpServlet {
             ProdottoCarrelloBean existingItem = prodottoCarrelloDao.doRetrieveByKey(carrello.getId(), productId);
 
             if (existingItem != null) {
-
-                System.out.println("Prodotto già nel carrello");
-
                 // Se il prodotto è già nel carrello, incrementa la quantità
                 existingItem.setQuantita(existingItem.getQuantita() + quantity);
                 prodottoCarrelloDao.doUpdate(existingItem);
@@ -84,8 +81,6 @@ public class AddToCartServlet extends HttpServlet {
                 newItem.setQuantita(quantity);
 
                 prodottoCarrelloDao.doSave(newItem);
-
-                System.out.println("Salvataggio effettuato");
             }
 
             // Aggiorna la quantità disponibile nel magazzino
@@ -93,7 +88,7 @@ public class AddToCartServlet extends HttpServlet {
             prodottoDao.doUpdate(product);
 
             // Reindirizza alla pagina di conferma aggiunta al carrello
-            response.sendRedirect(request.getContextPath() + "/common/cart.jsp");
+            response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountCartServlet");
 
         } catch (SQLException e) {
             // Gestione dell'errore SQL

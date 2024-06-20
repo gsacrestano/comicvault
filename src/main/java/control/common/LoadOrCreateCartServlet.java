@@ -49,6 +49,7 @@ public class LoadOrCreateCartServlet extends HttpServlet {
 
             // Salva il carrello nella sessione
             request.getSession().setAttribute("cart", carrello);
+            request.getSession().setAttribute("cartId", carrello.getId());
 
             // Redirect alla homepage dopo aver caricato/creato il carrello
             response.sendRedirect(request.getContextPath() + "/common/homepage.jsp");
