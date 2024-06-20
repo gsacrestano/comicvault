@@ -1,9 +1,9 @@
 const nameOrLastnamePattern = /^[A-Za-z]+$/;
 const emailPattern = /^\S+@\S+\.\S+$/;
 const phonePattern = /^([0-9]{3}-[0-9]{7})$/;
-const nameErrorMessage = "A valid name should contain only letters";
-const lastnameErrorMessage = "A valid lastname should contain only letters";
-const emailErrorMessage = "A valid email should be in the form username@domain.ext";
+const nameErrorMessage = "Il nome deve avere solo lettere";
+const lastnameErrorMessage = "Il cognome deve avere solo lettere";
+const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext";
 const numberErrorMessage = "A valid number should be in the form ###-#######";
 let count = 1;
 
