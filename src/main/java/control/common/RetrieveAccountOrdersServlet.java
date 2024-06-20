@@ -1,4 +1,4 @@
-package control.admin;
+package control.common;
 
 import model.bean.IndirizzoBean;
 import model.bean.UtenteBean;
@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-@WebServlet("/admin/ManageOrdersServlet")
-public class ManageOrdersServlet extends HttpServlet {
+@WebServlet("/common/RetrieveAccountOrdersServlet")
+public class RetrieveAccountOrdersServlet extends HttpServlet {
 
     private OrdineDao ordineDao;
     private ProdottoOrdineDao prodottoOrdineDao;
@@ -38,11 +38,11 @@ public class ManageOrdersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try
         {
-            List<OrdineCompletoBean> ordiniCompleti = retrieveCompleteOrders();
+            List<OrdineCompletoBean> ordiniCompleti = retrieveCompleteOrders(request);
 
             request.setAttribute("orders", ordiniCompleti);
 
-            request.getRequestDispatcher("/admin/manageOrders.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/manageOrders.jsp").forward(request, response);
         }
         catch (SQLException e)
         {
@@ -51,13 +51,15 @@ public class ManageOrdersServlet extends HttpServlet {
         }
     }
 
-    private List<OrdineCompletoBean> retrieveCompleteOrders() throws SQLException {
-        List<OrdineBean> ordini = (List<OrdineBean>) ordineDao.doRetrieveAll("id");
+    private List<OrdineCompletoBean> retrieveCompleteOrders(HttpServletRequest request) throws SQLException {
+
+        UtenteBean utente = (UtenteBean) request.getSession().getAttribute("account");
+
+        List<OrdineBean> ordini = (List<OrdineBean>) ordineDao.doRetrieveByUserKey(utente.getId());
 
         List<OrdineCompletoBean> ordiniCompleti = new LinkedList<>();
 
         for (OrdineBean ordine : ordini) {
-            UtenteBean utente = retrieveUser(ordine.getIdUtente());
             IndirizzoBean indirizzo = retrieveAddress(ordine.getIdIndirizzo());
 
             OrdineCompletoBean ordineCompleto = new OrdineCompletoBean();

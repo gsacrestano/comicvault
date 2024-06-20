@@ -14,7 +14,7 @@
 <div id="buttonHomepage">
     <a href="<%=request.getContextPath()%>/common/updateAccountDetails.jsp" class="aAdminPage">Dati Personali</a>
     <a href="<%=request.getContextPath()%>/common/RetrieveAccountAddresses" class="aAdminPage">Gestione Indirizzi</a>
-    <a href="<%=request.getContextPath()%>/common/ordersHistory.jsp" class="aAdminPage">Cronologia Ordini</a>
+    <a href="<%=request.getContextPath()%>/common/RetrieveAccountOrdersServlet" class="aAdminPage">Cronologia Ordini</a>
 
 </div>
 <a href="<%=request.getContextPath()%>/common/Logout" class="btn">Logout</a>

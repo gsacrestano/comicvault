@@ -193,4 +193,50 @@ public class OrdineDao implements IBeanDAO<OrdineBean> {
         }
         return beans;
     }
+
+    public synchronized Collection<OrdineBean> doRetrieveByUserKey(int idUtente) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        Collection<OrdineBean> beans = new LinkedList<>();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idUtente = ? AND deleted_at IS NULL;";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, idUtente);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                OrdineBean bean = new OrdineBean();
+
+                bean.setId(rs.getInt("id"));
+                bean.setIdUtente(rs.getInt("idUtente"));
+                bean.setIdIndirizzo(rs.getInt("idIndirizzo"));
+                bean.setData(rs.getString("Data"));
+                bean.setTotale(rs.getFloat("Totale"));
+
+                beans.add(bean);
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+        return beans;
+    }
 }
