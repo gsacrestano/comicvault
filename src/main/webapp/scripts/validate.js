@@ -1,10 +1,10 @@
 const nameOrLastnamePattern = /^[A-Za-z]+$/;
 const emailPattern = /^\S+@\S+\.\S+$/;
-const phonePattern = /^([0-9]{3}-[0-9]{7})$/;
+const phonePattern = /^([0-9]{10})$/;
 const nameErrorMessage = "Il nome deve avere solo lettere";
 const lastnameErrorMessage = "Il cognome deve avere solo lettere";
 const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext";
-const numberErrorMessage = "A valid number should be in the form ###-#######";
+const numberErrorMessage = "Un numero valido ha 10 cifre";
 let count = 1;
 
 
@@ -21,9 +21,9 @@ function validateFormElem(formElem, pattern, span, message) {
     return false;
 }
 
-function validateNome() {
+function validateNome(str) {
     let valid = true;
-    let form = document.getElementById("regForm");
+    let form = document.getElementById(str);
 
     let spanName = document.getElementById("errorName");
     if (!validateFormElem(form.nome, nameOrLastnamePattern, spanName, nameErrorMessage)) {
@@ -32,9 +32,9 @@ function validateNome() {
         return valid;
     }
 }
-function validateCognome() {
+function validateCognome(str) {
     let valid = true;
-    let form = document.getElementById("regForm");
+    let form = document.getElementById(str);
 
     let spanLastname = document.getElementById("errorLastname");
     if (!validateFormElem(form.cognome, nameOrLastnamePattern, spanLastname, lastnameErrorMessage)) {
@@ -45,14 +45,29 @@ function validateCognome() {
 
     return valid;
 }
-function validateMail() {
+function validateMail(str) {
     let valid = true;
-    let form = document.getElementById("regForm");
+    let form = document.getElementById(str);
 
     let spanEmail = document.getElementById("errorEmail");
     if (!validateFormElem(form.email, emailPattern, spanEmail, emailErrorMessage)){
         valid = false;
     }
+
+    return valid;
+}
+function validatePhone(str) {
+    let valid = true;
+    let form = document.getElementById(str);
+
+        let spanPhone = document.getElementById("errorPhone");
+
+
+        console.log(document.getElementById("phone").value );
+        if (!validateFormElem(document.getElementById("phone"), phonePattern, spanPhone, numberErrorMessage) && document.getElementById("phone").value == null){
+                valid = false;
+            }
+
 
     return valid;
 }
