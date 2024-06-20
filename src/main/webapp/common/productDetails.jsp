@@ -28,8 +28,9 @@
                 </c:when>
 
                 <c:otherwise>
-                    <form action="${pageContext.request.contextPath}/carrello" method="post">
+                    <form action="${pageContext.request.contextPath}/common/AddToCartServlet" method="post">
                         <input type="hidden" name="productId" value="${product.id}">
+                        <input type="hidden" name="quantity" value="1">
                         <button class="btn" type="submit">Aggiungi al carrello</button>
                     </form>
                 </c:otherwise>

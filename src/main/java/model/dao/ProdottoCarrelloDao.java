@@ -35,7 +35,7 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
             ps.setInt(1, bean.getIdCarrello());
             ps.setInt(2, bean.getIdProdotto());
             ps.setDouble(3, bean.getPrezzo());
-            ps.setDouble(4, bean.getQuantita());
+            ps.setInt(4, bean.getQuantita());
 
             ps.executeUpdate();
         }
@@ -89,26 +89,32 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
     }
 
     @Override
-    public synchronized ProdottoCarrelloBean doRetrieveByKey(int id) throws SQLException {
+    public ProdottoCarrelloBean doRetrieveByKey(int id) throws SQLException {
+        return null;
+    }
+
+    public synchronized ProdottoCarrelloBean doRetrieveByKey(int idCarrello, int idProdotto) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        ProdottoCarrelloBean bean = new ProdottoCarrelloBean();
+        ProdottoCarrelloBean bean = null;
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?;";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE idCarrello = ? AND idProdotto = ?;";
 
         try
         {
             conn = ds.getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, id);
+            ps.setInt(1, idCarrello);
+            ps.setInt(2, idProdotto);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next())
             {
-                bean.setId(id);
+                bean = new ProdottoCarrelloBean();
+                bean.setId(rs.getInt("id"));
                 bean.setIdCarrello(rs.getInt("idCarrello"));
                 bean.setIdProdotto(rs.getInt("idProdotto"));
                 bean.setPrezzo(rs.getFloat("Prezzo"));
@@ -180,4 +186,33 @@ public class ProdottoCarrelloDao implements IBeanDAO<ProdottoCarrelloBean> {
         }
         return beans;
     }
+
+    public synchronized void doUpdate(ProdottoCarrelloBean bean) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String sql = "UPDATE " + TABLE_NAME + " SET Quantita = ?, Prezzo = ? WHERE idCarrello = ? AND idProdotto = ?;";
+
+        try {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, bean.getQuantita());
+            ps.setDouble(2, bean.getPrezzo());
+            ps.setInt(3, bean.getIdCarrello());
+            ps.setInt(4, bean.getIdProdotto());
+
+            ps.executeUpdate();
+
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } finally {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+    }
+
 }

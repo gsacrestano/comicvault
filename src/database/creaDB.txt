@@ -107,7 +107,7 @@ create table Prodotti_Carrelli (
 	idCarrello int not null,
 	idProdotto int not null,
 	Prezzo FLOAT(10,2) not null,
-	Quantità int not null,
+	Quantita int not null,
 	PRIMARY KEY (id),
 	FOREIGN KEY (idCarrello) REFERENCES Carrelli (id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (idProdotto) REFERENCES Prodotti (id) ON UPDATE CASCADE ON DELETE CASCADE

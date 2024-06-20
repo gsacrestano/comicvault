@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.bean.ProdottoBean;
 import model.bean.ProdottoOrdineBean;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ProdottoOrdineDao implements IBeanDAO<ProdottoOrdineBean> {
 
@@ -179,5 +181,54 @@ public class ProdottoOrdineDao implements IBeanDAO<ProdottoOrdineBean> {
             }
         }
         return beans;
+    }
+
+    public List<ProdottoBean> doRetrieveProductsByOrderId(int orderId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        List<ProdottoBean> ordini = new LinkedList<>();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " PO INNER JOIN Prodotti P ON PO.idProdotto = P.id where PO.idOrdine = ?";
+
+        try
+        {
+            conn = ds.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, orderId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                ProdottoBean ordine = new ProdottoBean();
+
+                ordine.setId(rs.getInt("idProdotto"));
+                ordine.setNome(rs.getString("Nome"));
+                ordine.setDescrizione(rs.getString("Descrizione"));
+                ordine.setIsbn(rs.getString("Isbn"));
+                ordine.setPrezzo(rs.getFloat("Prezzo"));
+                ordine.setQuantita(rs.getInt("Quantita"));
+                ordine.setImage_path(rs.getString("image_path"));
+
+                ordini.add(ordine);
+            }
+        }
+        finally
+        {
+            try
+            {
+                if (ps != null)
+                    ps.close();
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.close();
+            }
+        }
+
+        return ordini;
     }
 }
