@@ -11,6 +11,8 @@
 </head>
 <body>
 
+<jsp:include page="/jsp/header.jsp"/>
+
 <h2>Lista Ordini</h2>
 
 <table border="1">
@@ -30,7 +32,7 @@
             <td>${order.emailUtente}</td>
             <td>${order.data}</td>
             <td>${order.totale}</td>
-            <td><a href="#" onclick="mostraDettagli(${order.id});">Dettagli</a></td>
+            <td><button onclick="mostraDettagli(${order.id});">Dettaglio</button></td>
         </tr>
         <tr id="dettagli-${order.id}" style="display: none;">
             <td colspan="5">
@@ -81,5 +83,7 @@
         }
     }
 </script>
+
+<jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
