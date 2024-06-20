@@ -33,6 +33,7 @@
     <input type="submit" value="Aggiorna">
 
 </form>
+
 <jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
