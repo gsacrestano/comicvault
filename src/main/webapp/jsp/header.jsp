@@ -45,7 +45,7 @@
             </c:otherwise>
         </c:choose>
 
-        <a href="${pageContext.request.contextPath}/index.jsp">Carrello</a>
+        <a href="${pageContext.request.contextPath}/common/cart.jsp">Carrello</a>
     </div>
 </div>
 
