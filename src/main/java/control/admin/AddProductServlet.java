@@ -86,6 +86,6 @@ public class AddProductServlet extends HttpServlet {
     }
 
     private void redirectToCatalogPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/common/catalog.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() +"/common/CatalogServlet");
     }
 }
