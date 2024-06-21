@@ -37,7 +37,7 @@
     <span id = "errorCap"></span>
     <br>
     <label for="nazione">Nazione:</label>
-    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}" onblur="validateNaz('updateAddressForm')" /><br/>
+    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}" onblur="validateNaz('updateAddressForm' , 'updateAddressButton')" /><br/>
     <span id = "errorNaz"></span>
     <br>
     <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo">

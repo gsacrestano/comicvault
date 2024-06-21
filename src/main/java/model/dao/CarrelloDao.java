@@ -3,10 +3,7 @@ package model.dao;
 import model.bean.CarrelloBean;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -20,9 +17,10 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
     }
 
     @Override
-    public synchronized void doSave(CarrelloBean bean) throws SQLException {
+    public synchronized int doSave(CarrelloBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + " (idUtente) VALUES (?);";
 
@@ -30,11 +28,23 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
         {
             conn = ds.getConnection();
 
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, bean.getIdUtente());
 
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating order failed, no rows affected.");
+            }
+
+            generatedKeys = ps.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating order failed, no ID obtained.");
+            }
         }
         finally
         {
@@ -47,6 +57,9 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
             {
                 if (conn != null)
                     conn.close();
+
+                if (generatedKeys != null)
+                    generatedKeys.close();
             }
         }
     }
@@ -108,6 +121,8 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
                 bean.setId(rs.getInt("id"));
                 bean.setIdUtente(rs.getInt("idUtente"));
             }
+
+            return bean;
         }
         finally
         {
@@ -122,7 +137,6 @@ public class CarrelloDao implements IBeanDAO<CarrelloBean> {
                     conn.close();
             }
         }
-        return bean;
     }
 
     @Override

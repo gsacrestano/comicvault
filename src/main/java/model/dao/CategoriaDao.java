@@ -17,7 +17,7 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
     }
 
     @Override
-    public synchronized void doSave(CategoriaBean bean) throws SQLException {
+    public synchronized int doSave(CategoriaBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -47,6 +47,7 @@ public class CategoriaDao implements IBeanDAO<CategoriaBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     @Override

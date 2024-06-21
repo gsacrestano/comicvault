@@ -20,7 +20,7 @@ public class ProdottoCategoriaDao implements IBeanDAO<ProdottoCategoriaBean> {
     }
 
     @Override
-    public synchronized void doSave(ProdottoCategoriaBean bean) throws SQLException {
+    public synchronized int doSave(ProdottoCategoriaBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -50,6 +50,7 @@ public class ProdottoCategoriaDao implements IBeanDAO<ProdottoCategoriaBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     public synchronized boolean doDelete(ProdottoCategoriaBean bean) throws SQLException {

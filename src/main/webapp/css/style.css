@@ -413,6 +413,9 @@ input[type="file"] {
 #updateProduct input[type="submit"]:hover {
     background-color: #b83232; /* Darker shade of primary color */
 }
+#updateProduct input[type="submit"]:disabled {
+    background-color: #ff9e81; /* Darker shade of primary color */
+}
 
 @media (max-width: 768px) {
     #updateProduct {

@@ -72,7 +72,7 @@ public class UpdateAccountServlet extends HttpServlet {
     private void updateUserData(HttpServletRequest request, UtenteBean utente) {
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
-        String telefono = request.getParameter("telefono");
+        String telefono = request.getParameter("phone");
 
         utente.setNome(nome);
         utente.setCognome(cognome);

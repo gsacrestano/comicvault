@@ -28,7 +28,6 @@
                 <tr>
                     <td>${items[status.index].nome}</td> <!-- Nome del prodotto -->
                     <td>${items[status.index].prezzo}&euro;</td> <!-- Prezzo del prodotto -->
-                    <!-- <td>${prodottoCarrello.quantita}</td> -->
                     <td>
                         <form action="${pageContext.request.contextPath}/common/UpdateCartItemServlet" method="post">
                             <input type="hidden" name="action" value="update">
@@ -53,8 +52,15 @@
     <c:if test="${empty prodottiCarrello}">
         <p>Il tuo carrello è vuoto.</p>
     </c:if>
-
 </div>
+
+<h3>Totale: ${total}&euro;</h3>
+
+<form action="${pageContext.request.contextPath}/common/RetrieveAccountAddresses" method="post">
+    <input type="hidden" name="fromCart" value="true">
+    <input type="hidden" name="total" value="${total}">
+    <button type="submit" class="btn">Continua</button>
+</form>
 
 <jsp:include page="../jsp/footer.jsp"/>
 

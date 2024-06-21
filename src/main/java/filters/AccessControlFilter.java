@@ -63,6 +63,11 @@ public class AccessControlFilter implements Filter {
             return ;
         }
 
+        if(path.equals("/common/NumProductServlet")){
+            chain.doFilter(request, response);
+            return ;
+        }
+
         //Consentire sempre accesso alla pagina index
         if (path.equals("/common/IndexServlet")) {
             chain.doFilter(request, response);

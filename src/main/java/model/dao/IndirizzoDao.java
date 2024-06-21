@@ -20,7 +20,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
     }
 
     @Override
-    public synchronized void doSave(IndirizzoBean bean) throws SQLException {
+    public synchronized int doSave(IndirizzoBean bean) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -53,6 +53,7 @@ public class IndirizzoDao implements IBeanDAO<IndirizzoBean> {
                     conn.close();
             }
         }
+        return 0;
     }
 
     @Override
