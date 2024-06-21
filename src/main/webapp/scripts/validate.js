@@ -30,7 +30,7 @@ function validateFormElem(formElem, pattern, span, message) {
     return false;
 }
 
-function validateAll(str , btn){
+function validateAddress(str , btn){
     let valid =  validateAddress(str , btn) && validateCitta(str ,btn) && validateProv(str, btn) && validateCap(str, btn) && validateNaz(str,btn);
     const butt = document.getElementById(btn);
     butt.disabled = !valid;
@@ -38,6 +38,7 @@ function validateAll(str , btn){
 function validateNome(str) {
     let valid = true;
     let form = document.getElementById(str);
+
     let spanName = document.getElementById("errorName");
     if (!validateFormElem(form.nome, nameOrLastnamePattern, spanName, nameErrorMessage)) {
         valid = false;

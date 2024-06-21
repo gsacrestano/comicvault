@@ -13,7 +13,7 @@
 <h2>Modifica Prodotto</h2>
 <script src="scripts/validate.js"></script>
 <div id="updateProduct">
-    <form action="${pageContext.request.contextPath}/admin/UpdateProductServlet" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/admin/UpdateProductServlet" method="post" enctype="multipart/form-data" onsubmit="removeSpecial()">
         <input type="hidden" name="id" value="${param.id}" />
 
         <label for="nome">Nome:</label>

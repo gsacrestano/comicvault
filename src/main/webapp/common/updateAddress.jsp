@@ -40,7 +40,7 @@
     <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}"><br/>
     <span id = "errorNaz"></span>
     <br>
-    <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo" onmouseover="validateAll('updateAddressForm' , 'updateAddressButton')">
+    <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo" onmouseover="validateAddress('updateAddressForm' , 'updateAddressButton')">
 </form>
 </div>
 <jsp:include page="/jsp/footer.jsp"/>
