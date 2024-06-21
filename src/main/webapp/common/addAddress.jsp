@@ -27,7 +27,7 @@
     <label for="nazione">Nazione:</label>
     <input class="addAddressInput" type="text" id="nazione" name="nazione" required>
 
-    <button id="addProductButton" type="submit">Aggiungi Indirizzo</button>
+    <button id="addProductButton" type="submit" onmouseover="validateAllAddress('addAddressForm' , 'addProductButton')">Aggiungi Indirizzo</button>
 </form>
     </div>
 

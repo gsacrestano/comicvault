@@ -30,7 +30,7 @@ function validateFormElem(formElem, pattern, span, message) {
     return false;
 }
 
-function validateAddress(str , btn){
+function validateAllAddress(str , btn){
     let valid =  validateAddress(str , btn) && validateCitta(str ,btn) && validateProv(str, btn) && validateCap(str, btn) && validateNaz(str,btn);
     const butt = document.getElementById(btn);
     butt.disabled = !valid;
