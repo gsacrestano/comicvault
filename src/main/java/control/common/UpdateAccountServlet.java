@@ -39,7 +39,7 @@ public class UpdateAccountServlet extends HttpServlet {
         if (utente == null)
         {
             redirectToLogin(response, request);
-            return;
+            return ;
         }
 
         updateUserData(request, utente);

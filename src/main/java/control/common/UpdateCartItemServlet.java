@@ -23,9 +23,9 @@ public class UpdateCartItemServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        prodottoCarrelloDao = new ProdottoCarrelloDao(ds);
-        prodottoDao = new ProdottoDao(ds);
+        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+        prodottoCarrelloDao = new ProdottoCarrelloDao(dataSource);
+        prodottoDao = new ProdottoDao(dataSource);
     }
 
     @Override
@@ -38,23 +38,22 @@ public class UpdateCartItemServlet extends HttpServlet {
         {
             // Recupera il prodotto dal database
             ProdottoBean product = prodottoDao.doRetrieveByKey(productId);
+            ProdottoCarrelloBean cartProduct = prodottoCarrelloDao.doRetrieveByKey(cartId, productId);
 
-            ProdottoCarrelloBean prodottoCarrello = prodottoCarrelloDao.doRetrieveByKey(cartId, productId);
+            // Ripristina la quantità in magazzino
+            product.setQuantita(product.getQuantita() + cartProduct.getQuantita());
 
-            //Ripristinare quantità in magazzino
-            product.setQuantita(product.getQuantita() + prodottoCarrello.getQuantita());
-
-            if (quantity <= 0 || quantity > product.getQuantita())
-            {
-                response.sendRedirect(request.getContextPath() + "/productNotAvailable.jsp");
-                return;
+            // Controlla se la quantità richiesta è valida
+            if (quantity <= 0 || quantity > product.getQuantita()) {
+                response.sendRedirect(request.getContextPath() + "/errors/404.jsp?error=" + "Quantità non valida");
+                return ;
             }
 
-            if (prodottoCarrello != null) {
-                prodottoCarrello.setQuantita(quantity);
-                prodottoCarrelloDao.doUpdate(prodottoCarrello);
+            // Aggiorna il prodotto nel carrello
+            if (cartProduct != null) {
+                cartProduct.setQuantita(quantity);
+                prodottoCarrelloDao.doUpdate(cartProduct);
             }
-
 
             // Aggiorna la quantità disponibile nel magazzino
             product.setQuantita(product.getQuantita() - quantity);
@@ -62,11 +61,10 @@ public class UpdateCartItemServlet extends HttpServlet {
         }
         catch (SQLException e)
         {
-            throw new ServletException(e);
+            throw new ServletException("Database error while updating cart item", e);
         }
 
         // Reindirizza alla pagina del carrello dopo l'aggiornamento
         response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountCartServlet");
     }
 }
-
