@@ -125,16 +125,19 @@ function validateCap(str) {
         return valid;
     }
 }
-function validateNaz(str) {
+function validateNaz(str, btn) {
     let valid = true;
     let form = document.getElementById(str);
+    const butt = document.getElementById(btn);
 
     let spanName = document.getElementById("errorNaz");
     if (!validateFormElem(form.nazione, nameOrLastnamePattern, spanName, nazioneError)) {
         valid = false;
 
-        return valid;
     }
+    butt.disabled = !valid;
+    return valid;
+
 }
 
 
