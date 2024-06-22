@@ -30,7 +30,7 @@
     <br><br>
     <span id="errorPhone"></span>
     <br><br>
-    <input type="submit" value="Aggiorna">
+    <input  id="updateAccountButton" type="submit" value="Aggiorna" onmouseover="validateAllName('updateProduct' , 'updateAccountButton')">
 
 </form>
 

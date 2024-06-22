@@ -35,6 +35,11 @@ function validateAllAddress(str , btn){
     const butt = document.getElementById(btn);
     butt.disabled = !valid;
 }
+function  validateAllName(str  , btn){
+    let valid = validateNome(str) && validateCognome(str) && validatePhone(str);
+    const butt = document.getElementById(btn);
+    butt.disabled = !valid;
+}
 function validateNome(str) {
     let valid = true;
     let form = document.getElementById(str);
