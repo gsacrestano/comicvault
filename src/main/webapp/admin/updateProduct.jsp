@@ -20,7 +20,7 @@
         <input type="text" id="nome" name="nome" value="${fn:escapeXml(param.nome)}" /><br/>
 
         <label for="descrizione">Descrizione:</label><br/>
-        <textarea id="descrizione" name="descrizione" rows="4" cols="50">${fn:escapeXml(param.descrizione)}</textarea><br/>
+        <textarea style="resize: none" id="descrizione" name="descrizione" rows="4" cols="50" >${fn:escapeXml(param.descrizione)}</textarea><br/>
 
         <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" value="${param.isbn}" /><br/>
