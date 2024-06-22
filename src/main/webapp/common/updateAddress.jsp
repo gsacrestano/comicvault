@@ -33,7 +33,8 @@
     <span id = "errorProv"></span>
     <br>
     <label for="cap">Cap:</label>
-    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}"/><br/>
+    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}"/>
+    <br/>
     <span id = "errorCap"></span>
     <br>
     <label for="nazione">Nazione:</label>
