@@ -20,27 +20,28 @@
     <input type="hidden" name="id" value="${param.id}" />
 
     <label id="updateAddressLabel" for="via">Via:</label>
-    <input type="text" id="via" name="via" value="${fn:escapeXml(param.via)}"  onblur="validateAddress('updateAddressForm')"/><br/>
+    <input type="text" id="via" name="via" value="${fn:escapeXml(param.via)}" /><br/>
     <span id = "errorAddress"></span>
     <br>
 
     <label for="citta">Citta:</label>
-    <input type="text" id="citta" name="citta" value="${fn:escapeXml(param.citta)}" onblur="validateCitta('updateAddressForm')" /><br/>
+    <input type="text" id="citta" name="citta" value="${fn:escapeXml(param.citta)}"  /><br/>
     <span id = "errorCitta"></span>
     <br>
     <label for="provincia">Provincia:</label>
-    <input type="text" id="provincia" name="provincia" value="${fn:escapeXml(param.provincia)}" onblur="validateProv('updateAddressForm')"/><br/>
+    <input type="text" id="provincia" name="provincia" value="${fn:escapeXml(param.provincia)}"/><br/>
     <span id = "errorProv"></span>
     <br>
     <label for="cap">Cap:</label>
-    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}"  onblur="validateCap('updateAddressForm')"/><br/>
+    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}"/>
+    <br/>
     <span id = "errorCap"></span>
     <br>
     <label for="nazione">Nazione:</label>
-    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}" onblur="validateNaz('updateAddressForm' , 'updateAddressButton')" /><br/>
+    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}"><br/>
     <span id = "errorNaz"></span>
     <br>
-    <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo">
+    <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo" onmouseover="validateAllAddress('updateAddressForm' , 'updateAddressButton')">
 </form>
 </div>
 <jsp:include page="/jsp/footer.jsp"/>

@@ -15,7 +15,19 @@
 
 <h2>Lista Ordini</h2>
 
-<table border="1">
+<!-- Filtri -->
+<div>
+    <label for="email-filter">Email:</label>
+    <input type="text" id="email-filter" onkeyup="filterTable()">
+
+    <label for="start-date-filter">Data Inizio:</label>
+    <input type="date" id="start-date-filter" onchange="filterTable()">
+
+    <label for="end-date-filter">Data Fine:</label>
+    <input type="date" id="end-date-filter" onchange="filterTable()">
+</div>
+
+<table id="orders-table" border="1">
     <thead>
     <tr>
         <th>ID Ordine</th>
@@ -83,6 +95,57 @@
         }
     }
 </script>
+
+<!-- Script Javascript per il filtraggio della tabella -->
+<script>
+    function filterTable() {
+        // Recupera i valori dei filtri
+        var emailFilter = document.getElementById("email-filter").value.toLowerCase();
+        var startDateFilter = document.getElementById("start-date-filter").value;
+        var endDateFilter = document.getElementById("end-date-filter").value;
+
+        // Recupera tutte le righe della tabella
+        var table = document.getElementById("orders-table");
+        var tr = table.getElementsByTagName("tr");
+
+        // Itera su tutte le righe della tabella
+        for (var i = 1; i < tr.length; i++) {
+
+            // Recupera le celle della riga corrente
+            var tdEmail = tr[i].getElementsByTagName("td")[1];
+            var tdDate = tr[i].getElementsByTagName("td")[2];
+
+            if (tdEmail || tdDate) {
+                var emailValue = tdEmail.textContent || tdEmail.innerText;
+                var dateValue = tdDate.textContent || tdDate.innerText;
+
+                // Determina se la riga deve essere mostrata
+                var showRow = true;
+
+                if (emailFilter && emailValue.toLowerCase().indexOf(emailFilter) === -1) {
+                    showRow = false;
+                }
+
+                if (startDateFilter && new Date(dateValue) < new Date(startDateFilter)) {
+                    showRow = false;
+                }
+
+                if (endDateFilter && new Date(dateValue) > new Date(endDateFilter)) {
+                    showRow = false;
+                }
+
+
+                if (showRow) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+
+                }
+            }
+        }
+    }
+</script>
+
 
 <jsp:include page="/jsp/footer.jsp"/>
 </body>

@@ -44,7 +44,6 @@ public class RemoveCartItemServlet extends HttpServlet {
             product.setQuantita(product.getQuantita() + prodottoCarrello.getQuantita());
             prodottoDao.doUpdate(product);
 
-
             prodottoCarrelloDao.doDelete(cartId, productId);
         } catch (SQLException e) {
             throw new ServletException(e);
@@ -54,4 +53,3 @@ public class RemoveCartItemServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/common/RetrieveAccountCartServlet");
     }
 }
-

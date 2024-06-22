@@ -25,40 +25,52 @@ public class RetrieveAccountCartServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        prodottoCarrelloDao = new ProdottoCarrelloDao(ds);
-        prodottoDao = new ProdottoDao(ds);
+        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+        prodottoCarrelloDao = new ProdottoCarrelloDao(dataSource);
+        prodottoDao = new ProdottoDao(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cartId = (int) request.getSession().getAttribute("cartId");
 
-        try {
-            List<ProdottoCarrelloBean> prodottiCarrello = prodottoCarrelloDao.doRetrieveAllByCartKey(cartId);
-            List<ProdottoBean> prodotti = new LinkedList<>();
-            float totale = 0;
+        try
+        {
+            List<ProdottoCarrelloBean> cartProducts = prodottoCarrelloDao.doRetrieveAllByCartKey(cartId);
+            List<ProdottoBean> productDetails = getProductDetails(cartProducts);
+            float total = calculateTotal(cartProducts);
 
-            // Aggiungi le informazioni dettagliate di ciascun prodotto
-            for (ProdottoCarrelloBean prodottoCarrello : prodottiCarrello) {
-                ProdottoBean prodotto = prodottoDao.doRetrieveByKey(prodottoCarrello.getIdProdotto());
-                prodotti.add(prodotto);
-                totale += prodottoCarrello.getQuantita() * prodottoCarrello.getPrezzo();
-            }
+            request.setAttribute("prodottiCarrello", cartProducts);
+            request.setAttribute("items", productDetails);
+            request.setAttribute("total", total);
 
-            request.setAttribute("prodottiCarrello", prodottiCarrello);
-            request.setAttribute("items", prodotti);
-            request.setAttribute("total", totale);
-
-        } catch (SQLException e) {
-            throw new ServletException(e);
+            request.getRequestDispatcher("/common/cart.jsp").forward(request, response);
         }
-
-        request.getRequestDispatcher("/common/cart.jsp").forward(request, response);
+        catch (SQLException e)
+        {
+            throw new ServletException("Database error while retrieving cart items", e);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Implementazione se necessario per aggiornare o rimuovere prodotti dal carrello
+        doGet(request, response);
+    }
+
+    private List<ProdottoBean> getProductDetails(List<ProdottoCarrelloBean> cartProducts) throws SQLException {
+        List<ProdottoBean> productDetails = new LinkedList<>();
+        for (ProdottoCarrelloBean cartProduct : cartProducts) {
+            ProdottoBean product = prodottoDao.doRetrieveByKey(cartProduct.getIdProdotto());
+            productDetails.add(product);
+        }
+        return productDetails;
+    }
+
+    private float calculateTotal(List<ProdottoCarrelloBean> cartProducts) {
+        float total = 0;
+        for (ProdottoCarrelloBean cartProduct : cartProducts) {
+            total += cartProduct.getQuantita() * cartProduct.getPrezzo();
+        }
+        return total;
     }
 }

@@ -275,6 +275,9 @@ input[type="file"] {
 #addProductButton:hover {
     background-color: #F23A29;
 }
+#addProductButton:disabled {
+    background-color: #ff9e81;
+}
 .aAdminPage {
     text-align: center;
     font-size: 150%;

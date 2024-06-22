@@ -40,7 +40,6 @@ public class DeleteProductServlet extends HttpServlet {
                 redirectToProductsPageWithError(request, response, "deletionFailed");
 
             redirectToProductsPage(request, response);
-
         }
         catch (NumberFormatException e)
         {
@@ -65,6 +64,6 @@ public class DeleteProductServlet extends HttpServlet {
     }
 
     private void redirectToProductsPageWithError(HttpServletRequest request, HttpServletResponse response, String error) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/admin/RetrieveProductsServlet?error=" + error);
+        response.sendRedirect(request.getContextPath() + "/errors/404.jsp?error=" + error);
     }
 }

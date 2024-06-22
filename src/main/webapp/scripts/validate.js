@@ -30,6 +30,16 @@ function validateFormElem(formElem, pattern, span, message) {
     return false;
 }
 
+function validateAllAddress(str , btn){
+    let valid =  validateAddress(str , btn) && validateCitta(str ,btn) && validateProv(str, btn) && validateCap(str, btn) && validateNaz(str,btn);
+    const butt = document.getElementById(btn);
+    butt.disabled = !valid;
+}
+function  validateAllName(str  , btn){
+    let valid = validateNome(str) && validateCognome(str) && validatePhone(str);
+    const butt = document.getElementById(btn);
+    butt.disabled = !valid;
+}
 function validateNome(str) {
     let valid = true;
     let form = document.getElementById(str);
@@ -37,9 +47,8 @@ function validateNome(str) {
     let spanName = document.getElementById("errorName");
     if (!validateFormElem(form.nome, nameOrLastnamePattern, spanName, nameErrorMessage)) {
         valid = false;
-
-        return valid;
     }
+    return valid;
 }
 function validateCognome(str) {
     let valid = true;
@@ -49,9 +58,6 @@ function validateCognome(str) {
     if (!validateFormElem(form.cognome, nameOrLastnamePattern, spanLastname, lastnameErrorMessage)) {
         valid = false;
     }
-
-
-
     return valid;
 }
 function validateMail(str) {
@@ -62,7 +68,6 @@ function validateMail(str) {
     if (!validateFormElem(form.email, emailPattern, spanEmail, emailErrorMessage)){
         valid = false;
     }
-
     return valid;
 }
 function validatePhone(str) {
@@ -72,13 +77,10 @@ function validatePhone(str) {
     let phoneElement = document.getElementById("phone");
     let phoneValue = phoneElement.value.toString();
 
-    console.log(phoneValue);
-
     // Verifica se il campo del telefono è vuoto o se non passa la validazione del pattern
     if (phoneValue!=="" && phoneValue !== "null" && !validateFormElem(phoneElement, phonePattern, spanPhone, numberErrorMessage)) {
         valid = false;
     }
-
     return valid;
 }
 function validateAddress(str) {
@@ -88,9 +90,8 @@ function validateAddress(str) {
     let spanName = document.getElementById("errorAddress");
     if (!validateFormElem(form.via, addressPattern, spanName, addressError)) {
         valid = false;
-
-        return valid;
     }
+    return valid;
 }
 function validateCitta(str) {
     let valid = true;
@@ -99,20 +100,20 @@ function validateCitta(str) {
     let spanName = document.getElementById("errorCitta");
     if (!validateFormElem(form.citta, nameOrLastnamePattern, spanName, cittaError)) {
         valid = false;
-
-        return valid;
     }
+    return valid;
 }
 function validateProv(str) {
     let valid = true;
     let form = document.getElementById(str);
 
+
     let spanName = document.getElementById("errorProv");
     if (!validateFormElem(form.provincia, provPattern, spanName, provError)) {
         valid = false;
-
-        return valid;
     }
+
+    return valid;
 }
 function validateCap(str) {
     let valid = true;
@@ -122,23 +123,30 @@ function validateCap(str) {
     if (!validateFormElem(form.cap, capPattern, spanName, capError)) {
         valid = false;
 
-        return valid;
     }
+
+    return valid;
 }
-function validateNaz(str, btn) {
+function validateNaz(str) {
     let valid = true;
     let form = document.getElementById(str);
-    const butt = document.getElementById(btn);
+
 
     let spanName = document.getElementById("errorNaz");
     if (!validateFormElem(form.nazione, nameOrLastnamePattern, spanName, nazioneError)) {
         valid = false;
 
     }
-    butt.disabled = !valid;
     return valid;
 
 }
+
+
+
+
+
+
+
 
 
 function removeSpecial (){
