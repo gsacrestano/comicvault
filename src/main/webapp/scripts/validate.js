@@ -34,6 +34,12 @@ function validateAllAddress(str , btn){
     const butt = document.getElementById(btn);
     butt.disabled = !valid;
 }
+function validateReg(str, btn){
+    let valid = validateNome(str) && validateCognome(str) && validateMail(str);
+    const butt = document.getElementById(btn);
+    butt.disabled = !valid;
+    console.log("Festa");
+}
 function  validateAllName(str  , btn){
     let valid = validateNome(str) && validateCognome(str) && validatePhone(str);
     const butt = document.getElementById(btn);

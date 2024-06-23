@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <title>Navbar con Logo</title>
+    <script src="scripts/ajaxScript.js">
+    </script>
 </head>
 <body>
 
@@ -23,29 +25,12 @@
     <div class="search-container">
         <form action="">
             <label>
-                <input id="search" type="text" placeholder="Cerca.." name="name" oninput="sendSliderValue()">
+                <input id="search" type="text" placeholder="Cerca.." name="name" oninput="sendSliderValue('${pageContext.request.contextPath}')">
             </label>
             <span class="fa fa-search" style="color: white; margin-right: 10px" id ="num"> 0 </span>
         </form>
     </div>
-<script>
-    function sendSliderValue() {
-        const xhr = new XMLHttpRequest();
-        const timestamp = new Date().getTime(); // Aggiungi un timestamp per evitare il caching
-        const searchValue = document.getElementById('search').value; // Assumi che ci sia un input con id="search"
-        const str = `${pageContext.request.contextPath}/common/NumProductServlet?name=` + searchValue;
-        xhr.open('GET', str, true);
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById('num').innerHTML = xhr.responseText;
-            }
-        };
-
-        xhr.send();
-    }
-
-</script>
     <div class="links">
 
         <!-- Scelta pulsante a seconda se loggato (e tipo di permessi)-->

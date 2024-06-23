@@ -419,6 +419,10 @@ input[type="file"] {
 #updateProduct input[type="submit"]:disabled {
     background-color: #ff9e81; /* Darker shade of primary color */
 }
+#buttonReg:disabled{
+    background-color: #ff9e81; /* Darker shade of primary color */
+
+}
 
 @media (max-width: 768px) {
     #updateProduct {
