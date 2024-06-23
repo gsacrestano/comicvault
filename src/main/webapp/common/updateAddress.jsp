@@ -25,20 +25,20 @@
     <br>
 
     <label for="citta">Citta:</label>
-    <input type="text" id="citta" name="citta" value="${fn:escapeXml(param.citta)}"  /><br/>
+    <input type="text" id="citta" name="citta" value="${fn:escapeXml(param.citta)}" oninput="validateCitta('updateAddressForm')" /><br/>
     <span id = "errorCitta"></span>
     <br>
     <label for="provincia">Provincia:</label>
-    <input type="text" id="provincia" name="provincia" value="${fn:escapeXml(param.provincia)}"/><br/>
+    <input type="text" id="provincia" name="provincia" value="${fn:escapeXml(param.provincia)}" oninput="validateProv('updateAddressForm')"/><br/>
     <span id = "errorProv"></span>
     <br>
     <label for="cap">Cap:</label>
-    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}"/>
+    <input type="text" id="cap" name="cap" value="${fn:escapeXml(param.cap)}" oninput="validateCap('updateAddressForm')"/>
     <br/>
     <span id = "errorCap"></span>
     <br>
     <label for="nazione">Nazione:</label>
-    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}"><br/>
+    <input type="text" id="nazione" name="nazione" value="${fn:escapeXml(param.nazione)}" oninput="validateNaz('updateAddressForm')"><br/>
     <span id = "errorNaz"></span>
     <br>
     <input id="updateAddressButton" type="submit" value="Aggiorna Indirizzo" onmouseover="validateAllAddress('updateAddressForm' , 'updateAddressButton')">

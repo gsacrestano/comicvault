@@ -7,7 +7,7 @@ const provPattern = /^[A-Z]{2}$/
 
 const nameErrorMessage = "Il nome deve avere solo lettere";
 const lastnameErrorMessage = "Il cognome deve avere solo lettere";
-const cittaError = "La città deve avere solo lettere"
+const cittaError = "La citt&agrave deve avere solo lettere"
 const nazioneError = "La nazione deve avere solo lettere"
 const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext";
 const numberErrorMessage = "Un numero valido ha 10 cifre";
