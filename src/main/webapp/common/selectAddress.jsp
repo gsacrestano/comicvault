@@ -14,7 +14,7 @@
     <form action="${pageContext.request.contextPath}/common/FinalizeOrderServlet" method="post">
         <c:forEach var="address" items="${addresses}">
             <div class="addressItem">
-                <input type="radio" name="addressId" value="${address.id}" required>
+                <%--@declare id="addressid"--%><input type="radio" name="addressId" value="${address.id}" required>
                 <label for="addressId">${address.via}, ${address.citta}, ${address.provincia}, ${address.cap}, ${address.nazione}</label>
             </div>
         </c:forEach>
