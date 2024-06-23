@@ -15,21 +15,27 @@
     <input class="addProductInput" type="text" id="nome" name="nome" required>
 
     <label for="descrizione">Descrizione:</label>
-    <textarea id="descrizione" name="descrizione" required></textarea>
+    <textarea style="resize: none" id="descrizione" name="descrizione" required></textarea>
 
     <label for="isbn">ISBN:</label>
     <input  class="addProductInput" type="text" id="isbn" name="isbn" required>
 
     <label for="prezzo">Prezzo:</label>
-    <input class="addProductInput" type="number" step="0.01" id="prezzo" name="prezzo" required>
+    <input class="addProductInput" type="number" step="0.01" id="prezzo" name="prezzo" required  oninput="validatePrice('prezzo' , 'spanPrezzo')">
+    <br>
+    <span style="color: #bd2130" id = "spanPrezzo"></span>
+    <br>
 
     <label for="quantita">Quantit&agrave:</label>
-    <input class="addProductInput" type="number" id="quantita" name="quantita" required>
+    <input class="addProductInput" type="number" id="quantita" name="quantita" required oninput="validatePrice('quantita' , 'spanQuantita')">
+    <br>
+    <span style="color: #bd2130" id = "spanQuantita"></span>
+    <br>
 
     <label for="image_path">Carica Immagine:</label>
     <input class="addProductInput"  type="file" id="image_path" name="image_path" accept="image/*" required>
 
-    <button id="addProductButton" type="submit">Aggiungi Prodotto</button>
+    <button id="addProductButton" type="submit" onmouseover="validateQuantPrice('prezzo' , 'quantita' , 'addProductButton')">Aggiungi Prodotto</button>
 </form>
 <jsp:include page="/jsp/footer.jsp"/>
 </body>

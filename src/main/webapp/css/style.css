@@ -388,7 +388,7 @@ input[type="file"] {
     width: 80%;
     padding: 10px;
   margin: 10px auto;
-    border: 1px solid #D93D3D; /* Primary color for borders */
+    border: 1px solid black; /* Primary color for borders */
     border-radius: 4px;
     background-color: white; /* Darker background for input fields */
     color: black; /* White text */
