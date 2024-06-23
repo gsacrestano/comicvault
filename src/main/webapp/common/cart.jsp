@@ -33,14 +33,14 @@
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="productId" value="${prodottoCarrello.idProdotto}">
                             <input type="number" name="quantity" min="1" value="${prodottoCarrello.quantita}">
-                            <button class="btn" type="submit">Modifica</button>
+                            <button  class="btn" style="width: 80%; margin: 10px auto" type="submit">Modifica</button>
                         </form>
                     </td>
                     <td>
                         <form action="${pageContext.request.contextPath}/common/RemoveCartItemServlet" method="post">
                             <input type="hidden" name="action" value="remove">
                             <input type="hidden" name="productId" value="${prodottoCarrello.idProdotto}">
-                            <button class="btn" type="submit">Rimuovi</button>
+                            <button class="btn"  type="submit">Rimuovi</button>
                         </form>
                     </td>
                 </tr>
@@ -59,7 +59,10 @@
 <form action="${pageContext.request.contextPath}/common/RetrieveAccountAddresses" method="post">
     <input type="hidden" name="fromCart" value="true">
     <input type="hidden" name="total" value="${total}">
-    <button type="submit" class="btn">Continua</button>
+    <c:if test="${!empty prodottiCarrello}">
+        <button type="submit" class="btn" style="width: 40%; margin: 0 auto">Continua</button>
+    </c:if>
+
 </form>
 
 <jsp:include page="../jsp/footer.jsp"/>

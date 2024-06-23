@@ -13,7 +13,7 @@ const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext"
 const numberErrorMessage = "Un numero valido ha 10 cifre";
 const addressError = "Indirizzo non valido deve Iniziare con Via/Corso... ";
 const capError = "Un cap è fatto solo di 5 cifre";
-const provError = "Un provincia è formata solo da due lettere maiuscole come NA"
+const provError = "Un provincia &egrave formata solo da due lettere maiuscole come NA"
 let count = 1;
 
 
