@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli Ordine</title>
-    <!-- Includi i tuoi stili CSS e script JavaScript qui -->
 </head>
 <body>
 <h2>Dettagli Ordine</h2>

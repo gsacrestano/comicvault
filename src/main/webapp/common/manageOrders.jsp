@@ -70,18 +70,7 @@
 
 <br>
 <a style="color: #0d0d0d" href="${pageContext.request.contextPath}/admin/homepage.jsp">Torna alla Home Admin</a>
-
-<!-- Script JavaScript per mostrare/nascondere i dettagli -->
-<script>
-    function mostraDettagli(idOrdine) {
-        var dettagliElement = document.getElementById("dettagli-" + idOrdine);
-        if (dettagliElement.style.display === "none") {
-            dettagliElement.style.display = "block";
-        } else {
-            dettagliElement.style.display = "none";
-        }
-    }
-</script>
+<script src="scripts/manageOrderScript.js"></script>
 <jsp:include page="../jsp/footer.jsp"/>
 </body>
 </html>

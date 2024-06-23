@@ -22,11 +22,10 @@
 
     <div class="search-container">
         <form action="">
-            <span style="color: white; margin-right: 10px" id ="num"> 1 </span>
             <label>
                 <input id="search" type="text" placeholder="Cerca.." name="name" oninput="sendSliderValue()">
             </label>
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <span class="fa fa-search" style="color: white; margin-right: 10px" id ="num"> 0 </span>
         </form>
     </div>
 <script>
