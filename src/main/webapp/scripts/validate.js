@@ -7,13 +7,13 @@ const provPattern = /^[A-Z]{2}$/
 
 const nameErrorMessage = "Il nome deve avere solo lettere";
 const lastnameErrorMessage = "Il cognome deve avere solo lettere";
-const cittaError = "La città deve avere solo lettere"
+const cittaError = "La citt&agrave deve avere solo lettere"
 const nazioneError = "La nazione deve avere solo lettere"
 const emailErrorMessage = "La mail dovrebbe essere del tipo username@domain.ext";
 const numberErrorMessage = "Un numero valido ha 10 cifre";
 const addressError = "Indirizzo non valido deve Iniziare con Via/Corso... ";
 const capError = "Un cap è fatto solo di 5 cifre";
-const provError = "Un provincia è formata solo da due lettere maiuscole come NA"
+const provError = "Un provincia &egrave formata solo da due lettere maiuscole come NA"
 let count = 1;
 
 
@@ -29,7 +29,6 @@ function validateFormElem(formElem, pattern, span, message) {
     span.style.color = "red";
     return false;
 }
-
 function validateAllAddress(str , btn){
     let valid =  validateAddress(str , btn) && validateCitta(str ,btn) && validateProv(str, btn) && validateCap(str, btn) && validateNaz(str,btn);
     const butt = document.getElementById(btn);
@@ -140,15 +139,30 @@ function validateNaz(str) {
     return valid;
 
 }
+function  validatePrice(id , spanName){
 
 
+    const input = document.getElementById(id).value;
+    if(Number.parseFloat(input) <=  0)
+        document.getElementById(spanName).innerHTML = "Inserisci un numero maggiore di 0"
+    else
+        document.getElementById(spanName).innerHTML = ""
 
 
+    return Number.parseFloat(input) <=  0;
+
+}
+function validateQuantPrice(id1 , id2 , btn )
+{
+
+    const input1 = document.getElementById(id1).value;
+    const input2 = document.getElementById(id2).value;
+    const butt = document.getElementById(btn)
+    let val = Number.parseFloat(input1) <=  0 || Number.parseFloat(input2) <=  0;
+    butt.disabled = val;
 
 
-
-
-
+}
 function removeSpecial (){
     document.getElementById("nome").value = escapeHtml(   document.getElementById("nome").value );
     document.getElementById("descrizione").value = escapeHtml(   document.getElementById("descrizione").value );

@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <meta charset="UTF-8">
     <title>Lista Ordini</title>
-    <!-- Includi i tuoi stili CSS e script JavaScript qui -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<jsp:include page="../jsp/header.jsp"/>
 
 <h2>Lista Ordini</h2>
 
@@ -30,7 +31,7 @@
             <td>${order.emailUtente}</td>
             <td>${order.data}</td>
             <td>${order.totale}</td>
-            <td><a href="#" onclick="mostraDettagli(${order.id});">Dettagli</a></td>
+            <td><a style="color: #0d0d0d;" onclick="mostraDettagli(${order.id});">Dettagli</a></td>
         </tr>
         <tr id="dettagli-${order.id}" style="display: none;">
             <td colspan="5">
@@ -68,7 +69,7 @@
 </table>
 
 <br>
-<a href="${pageContext.request.contextPath}/admin/homepage.jsp">Torna alla Home Admin</a>
+<a style="color: #0d0d0d" href="${pageContext.request.contextPath}/admin/homepage.jsp">Torna alla Home Admin</a>
 
 <!-- Script JavaScript per mostrare/nascondere i dettagli -->
 <script>
@@ -81,5 +82,6 @@
         }
     }
 </script>
+<jsp:include page="../jsp/footer.jsp"/>
 </body>
 </html>

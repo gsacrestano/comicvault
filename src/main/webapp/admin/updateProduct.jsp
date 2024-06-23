@@ -20,21 +20,26 @@
         <input type="text" id="nome" name="nome" value="${fn:escapeXml(param.nome)}" /><br/>
 
         <label for="descrizione">Descrizione:</label><br/>
-        <textarea id="descrizione" name="descrizione" rows="4" cols="50">${fn:escapeXml(param.descrizione)}</textarea><br/>
+        <textarea style="resize: none" id="descrizione" name="descrizione" rows="4" cols="50" >${fn:escapeXml(param.descrizione)}</textarea><br/>
 
         <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" value="${param.isbn}" /><br/>
 
         <label for="prezzo">Prezzo:</label>
-        <input type="number" id="prezzo" name="prezzo" value="${param.prezzo}" /><br/>
+        <input type="number" id="prezzo" name="prezzo" value="${param.prezzo}" oninput="validatePrice('prezzo' , 'spanPrezzo' )" /><br/>
+        <span style="color: #bd2130" id = "spanPrezzo"></span>
+        <br>
 
         <label for="quantita">Quantità:</label>
-        <input type="number" id="quantita" name="quantita" value="${param.quantita}" /><br/>
+        <input type="number" id="quantita" name="quantita" value="${param.quantita}"  oninput="validatePrice('quantita' , 'spanQuantita' )"/><br/>
+        <span  style="color: #bd2130" id = "spanQuantita"></span>
+
+        <br>
 
         <label for="image_path">Immagine:</label>
         <input type="file" id="image_path" name="image_path" value="${param.image_path}" accept="image/*">
 
-        <input type="submit" value="Aggiorna Prodotto" />
+        <input id="buttonUpdate" type="submit" value="Aggiorna Prodotto" onmouseover="validateQuantPrice('prezzo' , 'quantita' , 'buttonUpdate' )" />
     </form>
 </div>
 
