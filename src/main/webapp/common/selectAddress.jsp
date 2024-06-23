@@ -20,7 +20,7 @@
         </c:forEach>
         <h3>Totale: ${total}&euro;</h3>
         <input type="hidden" name="total" value="${total}">
-        <button type="submit" class="btn">Continua</button>
+        <button type="submit" class="btn" style="width: 40%">Continua</button>
     </form>
 </div>
 

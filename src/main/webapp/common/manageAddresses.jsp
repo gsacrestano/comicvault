@@ -17,7 +17,7 @@
 
 <!--Collegamento per aggiungere un nuovo indirizzo -->
 
-<button class="btn" style="width: 20%" onclick="location.href='${pageContext.request.contextPath}/common/addAddress.jsp'">Nuovo Indirizzo</button>
+<button  class="btn" style="width: 30%; font-size: 80%" onclick="location.href='${pageContext.request.contextPath}/common/addAddress.jsp'">Nuovo Indirizzo</button>
 
 <div class="viewer">
     <c:forEach var="address" items="${addresses}">

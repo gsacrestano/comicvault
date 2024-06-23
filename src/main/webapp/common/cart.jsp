@@ -14,6 +14,7 @@
     <h1>Il tuo carrello</h1>
 
     <c:if test="${not empty prodottiCarrello}">
+    <div style="overflow-x: auto">
         <table>
             <thead>
             <tr>
@@ -48,6 +49,7 @@
             </tbody>
         </table>
     </c:if>
+        <div style="overflow-x: auto">
 
     <c:if test="${empty prodottiCarrello}">
         <p>Il tuo carrello è vuoto.</p>
