@@ -36,7 +36,7 @@
             <input type="password" id="password" name="password" required onfocus="validate()">
         </div>
         <div class="form-group">
-            <button type="submit">Continua</button>
+            <button id="buttonReg" type="submit" onmouseover="validateReg('regForm' ,'buttonReg' )">Continua</button>
         </div>
         <a  href="index.jsp">Home</a>
         <a  style="margin-right: 0" href="common/login.jsp">Login</a>
