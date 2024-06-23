@@ -14,7 +14,7 @@
 <jsp:include page="/jsp/header.jsp"/>
 
 <h1>Gestione degli Utenti</h1>
-
+<div style="overflow-x: auto">
 <table border="1">
     <thead>
     <tr>
@@ -37,6 +37,7 @@
     </c:forEach>
     </tbody>
 </table>
+</div>
 
 <br>
 <a class="aManage" href="<%=request.getContextPath()%>/admin/homepage.jsp">Home</a>

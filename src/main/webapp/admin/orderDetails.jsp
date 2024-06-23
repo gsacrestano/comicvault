@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>Dettagli Ordine</h2>
-
+<div style="overflow-x: auto">
 <table>
     <tr>
         <th>ID Ordine:</th>
@@ -60,6 +60,7 @@
 </table>
 
 <br>
+</div>
 <a href="${pageContext.request.contextPath}/admin/ManageOrdersServlet">Torna alla lista degli ordini</a>
 </body>
 </html>

@@ -17,7 +17,7 @@
 
 <!--Collegamento per aggiungere un nuovo prodotto -->
 
-<button class="btn" style="width: 20%" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
+<button class="btn" style="width: 30%; font-size: 80%" onclick="location.href='${pageContext.request.contextPath}/admin/addProduct.jsp'">Nuovo Prodotto</button>
 
 
 <div style="overflow-x: auto">

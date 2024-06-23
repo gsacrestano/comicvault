@@ -14,6 +14,7 @@
 <jsp:include page="/jsp/header.jsp"/>
 
 <h2>Lista Ordini</h2>
+<div style="overflow-x: auto">
 
 <!-- Filtri -->
 <div>
@@ -85,9 +86,7 @@
 <a href="${pageContext.request.contextPath}/admin/homepage.jsp">Torna alla Home Admin</a>
 
 <script src="scripts/manageOrderScript.js"></script>
-
-
-
+</div>
 <jsp:include page="/jsp/footer.jsp"/>
 </body>
 </html>
