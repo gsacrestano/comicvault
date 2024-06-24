@@ -48,6 +48,7 @@
             </c:forEach>
             </tbody>
         </table>
+    </div>
     </c:if>
         <div style="overflow-x: auto">
 
@@ -66,6 +67,7 @@
     </c:if>
 
 </form>
+</div>
 
 <jsp:include page="../jsp/footer.jsp"/>
 
