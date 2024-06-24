@@ -13,7 +13,7 @@
 <jsp:include page="../jsp/header.jsp"/>
 
 <h2>Lista Ordini</h2>
-
+<div style="overflow-x: auto">
 <table border="1">
     <thead>
     <tr>
@@ -66,7 +66,9 @@
         </tr>
     </c:forEach>
     </tbody>
+
 </table>
+</div>
 
 <br>
 <a style="color: #0d0d0d" href="${pageContext.request.contextPath}/admin/homepage.jsp">Torna alla Home Admin</a>
